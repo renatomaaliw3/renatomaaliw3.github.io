@@ -128,6 +128,12 @@ ol.black > li {
 
 }
 
+.ls-decimal > li {
+
+	list-style: decimal;
+
+}
+
 ol.ls-none > li {
 
 	list-style: none;
@@ -263,10 +269,20 @@ ol > li {
 
 }
 
-ul > li > span {
+ul > li > span, ol > li > span, ul > li > strong {
 
 	display: inline-block;
 	margin-right: 5px;
+	font-size:  1.15rem;
+
+}
+
+
+.ppp-sections {
+
+	padding: 10px 15px;
+	margin: 10px;
+	border: 1px dashed black;
 
 }
 
