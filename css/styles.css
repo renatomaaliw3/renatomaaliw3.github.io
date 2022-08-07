@@ -88,6 +88,11 @@ ol.black > li {
 
 }
 
+.ppp-sections h3, .bg-green {
+
+	background: #138373 !important;
+}
+
 .danger {
 
 	background: red !important;
