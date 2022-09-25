@@ -25761,3 +25761,17 @@ readers do not read off random characters that represent icons */
 
 .fa, .fas {
   font-weight: 900; }
+
+  /* Custom */
+
+a.request:link, a.request:visited {
+
+  color: #e90b86 !important;
+
+}
+
+a.request:hover, a.request:active {
+
+  color: #fb3f06 !important;
+
+}
