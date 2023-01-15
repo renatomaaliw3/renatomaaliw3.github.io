@@ -62751,3 +62751,16 @@ article > p {
   text-align: justify;
   
 }
+
+ol.research-list {
+
+  padding-left: 1em;
+
+}
+
+ol.research-list > li {
+
+  position: relative;
+  padding-left: 0.25em;
+
+}
