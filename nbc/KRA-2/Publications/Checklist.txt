@@ -1,19 +1,20 @@
-1. Personalized VLE (IJRTE) - 50
-2. Licensure (IEEE) - 10
-3. P-VLE Models (IEEE) - 10
-4. TS-Stacked (IEEE) - 4
-5. TS-Ensemble (IEEE) - 2.5
-6. RSSI (IEEE) - 1
-7. Employability (IEEE) - 4
-8. Grit (IEEE) - 4
-9. Retinopathy (IEEE) - 4
-10. Cataract (IEEE) - 5
-11. Scoliosis (IEEE) - 5
+1. Personalized VLE (IJRTE) - Printed
+2. Licensure (IEEE) - Printed
+3. P-VLE Models (IEEE) - Printed
+4. TS-Stacked (IEEE) - Printed
+5. TS-Ensemble (IEEE) - Printed
+6. RSSI (IEEE) - Printed
+7. Employability (IEEE) - Printed
+8. Grit (IEEE) - Printed
+9. Retinopathy (IEEE) - Printed
+10. Cataract (IEEE) - Printed
+11. Scoliosis (IEEE) - Printed
+11.1 Leukemia (IEEE) - Printed
 
 With Missing Signatures (Conference Papers)
 
-12. Circuit Design (Febus Redj) - 1
-13. Barrier-Free (Palamarith & Al Mahri) - 2.5
+12. Circuit Design (Febus Redj) - 1 Signature Missing (Febus)
+13. Barrier-Free (Palamarith & Al Mahri) - 2 Signatures Missing
 
 No Files (Conference Papers)
 
@@ -33,6 +34,7 @@ No Files (Conference Papers)
 27. Sociodemographic (IEEE) - Garcia
 28. Golden Apple Snail (IEEE) - Mabunga
 29. Virtual Dietitian (IEEE) - Garcia
+
 30. Artery (IEEE) - Wahid
 31. Constructor (IEEE) - Bin Naeem
 32. Intelligent 4-Way (IEEE) - Bin Naeem
@@ -43,4 +45,4 @@ No Files (Journal)
 34. Scenario-Based (MDPI) - De Leon - For Signature
 35. Sensing Function (Elsevier) - Saadh - For Signature
 36. Spatio-Temporal (Springer) - Babu
-37. Narrowband IOT (IET) - Keshta - For Signature
+37. Narrowband IOT (IET) - Keshta - Printed
