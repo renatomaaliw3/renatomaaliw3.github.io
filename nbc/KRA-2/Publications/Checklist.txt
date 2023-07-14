@@ -20,12 +20,16 @@ No Files (Conference Papers)
 
 14. Web-Based (IEEE) - Alfonso
 15. Exponential Smoothing (IEEE) - Quioc
-16. Salted Egg (IEEE) - E. Villaverde
+
+16. Salted Egg (IEEE) - Ok but not yet printed
+
 17. Forgery Detection (IEEE) - R. Reyes
 18. Safety Gear (IEEE) - R. Reyes
 19. Cotton & Leaf (IEEE) - Susa
 20. Helmet (IEEE) - Susa
-21. Control Switch (IEEE) - E. Villaverde
+
+21. Control Switch (IEEE) - Ok but not yet printed
+
 22. Population Estimation (IEEE) - Mabunga
 23. Face Mask Wear (IEEE) - Dellosa
 24. Zookeeper (IEEE) - Alon
@@ -41,8 +45,8 @@ No Files (Conference Papers)
 
 No Files (Journal)
 
-33. Policy Conflict (Elsevier) - Tripathy - For Signature
+33. Policy Conflict (Elsevier) - Tripathy - Ok but not yet printed
 34. Scenario-Based (MDPI) - De Leon - For Signature
-35. Sensing Function (Elsevier) - Saadh - For Signature
-36. Spatio-Temporal (Springer) - Babu
+35. Sensing Function (Elsevier) - Saadh - Ok but not yet printed
+36. Spatio-Temporal (Springer) - Missing Signatures
 37. Narrowband IOT (IET) - Keshta - Printed
