@@ -6,10 +6,10 @@ $(document).ready(function() {
       var booksCount = $("ol#books > li").length;
       var researchCount = $("#researchArticles > ol.research-list > li").length;
             
-      $("#patentsCount").text("Published Patents " + "(" + patentCount + ")");
-      $("#industrialDesignCount").text("REGISTERED INDUSTRIAL DESIGN " + "(" + industrialDesignCount + ")");
-      $("#booksCount").text("Books " + "(" + booksCount + ")");
-      $("#researchArticlesCount").text("Research Articles " + "(" + researchCount + ")");
+      $("#patentsCount").text("(" + patentCount + ")");
+      $("#industrialDesignCount").text("(" + industrialDesignCount + ")");
+      $("#booksCount").text("(" + booksCount + ")");
+      $("#researchArticlesCount").text("(" + researchCount + ")");
 
 
 });
