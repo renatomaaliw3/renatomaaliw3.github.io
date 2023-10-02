@@ -71,13 +71,13 @@
 			<div class="RM3-CV-SECTIONS-HEADER">
 
 				<h3 class="d-lg-flex justify-content-between mb-3 align-items-center h4">
-					<span class="d-block font-size-xl font-weight-boldest "> Published Patents </span>
+					<span class="d-block font-size-xl font-weight-boldest" id="patentsCount"></span> <!-- Published Patents -->
 				</h3>
 			</div>
 
 			<div class="RM3-CV-SECTIONS-BODY">
 
-				<ol class="research-list">
+				<ol class="research-list" id="patents">
 
 					<li>
 
@@ -180,12 +180,12 @@
 		<!------------------ INDUSTRIAL DESIGN ------------------>
 
 		<div id="RM3-CV-INDUSTRIAL-DESIGN-TITLE">
-			<h2 class="text-uppercase font-weight-boldest mt-5 py-5 border-top"> REGISTERED INDUSTRIAL DESIGN</h2>
+			<h2 class="text-uppercase font-weight-boldest mt-5 py-5 border-top" id="industrialDesignCount"></h2> <!-- REGISTERED INDUSTRIAL DESIGN -->
 		</div>
 
 		<div id="RM3-CV-SECTIONS-BODY">
 
-			<ol class="research-list">
+			<ol class="research-list" id="industrialDesign">
 
 				<li>
 
@@ -223,14 +223,14 @@
 			<div class="RM3-CV-SECTIONS-HEADER">
 
 				<h3 class="d-lg-flex justify-content-between mb-3 align-items-center h4">
-					<span class="d-block font-size-xl font-weight-boldest"> Books </span>
+					<span class="d-block font-size-xl font-weight-boldest" id="booksCount"></span> <!-- Books -->
 				</h3>
 
 			</div>
 
 			<div class="RM3-CV-SECTIONS-BODY">
 
-				<ol class="research-list">
+				<ol class="research-list" id="books">
 
 					<li>
 
@@ -304,13 +304,13 @@
 			<div class="RM3-CV-SECTIONS-HEADER">
 
 				<h3 class="d-lg-flex justify-content-between mb-3 align-items-center h4">
-					<span class="d-block font-size-xl font-weight-boldest"> Research Articles </span>
+					<span class="d-block font-size-xl font-weight-boldest" id="researchArticlesCount"></span> <!-- Research Article -->
 				</h3>
 
 			</div>
 
 			<!-- 2023 -->
-			<div class="RM3-CV-SECTIONS-BODY">
+			<div class="RM3-CV-SECTIONS-BODY" id="researchArticles">
 
 				<!-- OCTOBER 2023 -->
 
@@ -1227,12 +1227,7 @@
 
 				</ol>
 
-			</div>
-
-
-			<!-- 2022 -->
-
-			<div class="RM3-CV-SECTIONS-BODY">
+				<!-- 2022 -->
 
 				<!-- DECEMBER 2022 -->
 
@@ -1755,11 +1750,7 @@
 
 				</ol>
 
-			</div>
-
-			<!-- 2021 -->
-
-			<div class="RM3-CV-SECTIONS-BODY">
+				<!-- 2021 -->
 
 				<!-- DECEMBER 2021 -->
 
@@ -2019,11 +2010,7 @@
 
 				</ol>
 
-			</div>
-
-			<!-- 2020 -->
-
-			<div class="RM3-CV-SECTIONS-BODY">
+				<!-- 2020 -->
 
 				<!-- MARCH 2020 -->
 
@@ -2061,11 +2048,7 @@
 
 				</ol>
 
-			</div>
-
-			<!-- 2019 -->
-
-			<div class="RM3-CV-SECTIONS-BODY">
+				<!-- 2019 -->
 
 				<!-- OCTOBER 2019 -->
 
@@ -2395,4 +2378,7 @@
 
 	<p class="py-8 text-center">Last Updated: <span class="font-weight-boldest"> September 25, 2023 </span></p>
 </body>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jsPDF.debug.js"></script>
+<script src="js/publication.js"></script>
 </html>
