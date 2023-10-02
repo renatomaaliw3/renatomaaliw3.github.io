@@ -186,13 +186,13 @@
 			<div class="RM3-CV-SECTIONS-HEADER">
 
 				<h3 class="d-lg-flex justify-content-between mb-3 align-items-center h4">
-					<span class="d-block font-size-xl font-weight-boldest "> Published Patents </span>
+					<span class="d-block font-size-xl font-weight-boldest "> Published Patents <em id="patentsCount"></em></span>
 				</h3>
 			</div>
 
 			<div class="RM3-CV-SECTIONS-BODY">
 
-				<ol class="research-list">
+				<ol class="research-list" id="patents">
 
 					<li>
 
@@ -296,12 +296,12 @@
 		<!------------------ INDUSTRIAL DESIGN ------------------>
 
 		<div id="RM3-CV-INDUSTRIAL-DESIGN-TITLE">
-			<h2 class="text-uppercase font-weight-boldest mt-5 py-5 border-top">INDUSTRIAL DESIGN</h2>
+			<h2 class="text-uppercase font-weight-boldest mt-5 py-5 border-top">INDUSTRIAL DESIGN <em id="industrialDesignCount"></em></h2>
 		</div>
 
 		<div id="RM3-CV-SECTIONS-BODY">
 
-			<ol class="research-list">
+			<ol class="research-list" id="industrialDesign">
 
 				<li>
 
@@ -335,14 +335,14 @@
 			<div class="RM3-CV-SECTIONS-HEADER">
 
 				<h3 class="d-lg-flex justify-content-between mb-3 align-items-center h4">
-					<span class="d-block font-size-xl font-weight-boldest"> Books </span>
+					<span class="d-block font-size-xl font-weight-boldest"> Books <em id="booksCount"></em></span>
 				</h3>
 
 			</div>
 
 			<div class="RM3-CV-SECTIONS-BODY">
 
-				<ol class="research-list">
+				<ol class="research-list" id="books">
 
 					<li>
 
@@ -416,12 +416,12 @@
 			<div class="RM3-CV-SECTIONS-HEADER">
 
 				<h3 class="d-lg-flex justify-content-between mb-3 align-items-center h4">
-					<span class="d-block font-size-xl font-weight-boldest"> Journal Articles </span>
+					<span class="d-block font-size-xl font-weight-boldest"> Journal Articles <em id="researchArticlesCount"></em></span>
 				</h3>
 
 			</div>
 
-			<div class="RM3-CV-SECTIONS-BODY">
+			<div class="RM3-CV-SECTIONS-BODY" id="researchArticles">
 
 				<ol class="research-list">
 
@@ -679,14 +679,14 @@
 			<div class="RM3-CV-SECTIONS-HEADER">
 
 				<h3 class="d-lg-flex justify-content-between mb-3 align-items-center h4">
-					<span class="d-block font-size-xl font-weight-boldest"> Book Chapters </span>
+					<span class="d-block font-size-xl font-weight-boldest"> Book Chapters <em id="bookChapterCount"></em></span>
 				</h3>
 
 			</div>
 
 			<div class="RM3-CV-SECTIONS-BODY">
 
-				<ol class="research-list">
+				<ol class="research-list" id="bookChapters">
 
 					<li>
 
@@ -743,14 +743,14 @@
 			<div class="RM3-CV-SECTIONS-HEADER">
 
 				<h3 class="d-lg-flex justify-content-between mb-3 align-items-center h4">
-					<span class="d-block font-size-xl font-weight-boldest"> Conference Papers </span>
+					<span class="d-block font-size-xl font-weight-boldest"> Conference Papers <em id="conferencePaperCount"></em></span>
 				</h3>
 				
 			</div>
 
 			<div class="RM3-CV-SECTIONS-BODY">
 
-				<ol class="research-list">
+				<ol class="research-list" id="conferencePaper">
 
 					<li>
 
@@ -2955,6 +2955,9 @@
 		
 	</div>
 
-	<p class="py-8 text-center">Last Updated: <span class="font-weight-boldest"> September 25, 2023 </span></p>
+	<p class="py-8 text-center">Last Updated: <span class="font-weight-boldest"> October 1, 2023 </span></p>
 </body>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jsPDF.debug.js"></script>
+<script src="js/publication2.js"></script>
 </html>

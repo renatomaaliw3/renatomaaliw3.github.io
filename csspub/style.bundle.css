@@ -62764,3 +62764,12 @@ ol.research-list > li {
   padding-left: 0.25em;
 
 }
+
+h2 > span > em,
+h3 > span > em {
+
+  font-size: 0.80em;
+  font-style: normal;
+
+}
+
