@@ -1,0 +1,74 @@
+- - - - P2 - - - -
+
+40. Adaptive VLE (139 - 148)
+39. Licensure (131 -138)
+38. RSSI-SVM (125 - 130)
+37. LSTM-COVID-19 (117 - 124)
+36. Ensemble-COVID-19 (108 - 116)
+35. Sensor Amplifier (101 - 107)
+34. P-VLE (92 - 100)
+33. Employability (84 - 91)
+32. Exponential Smoothing (75 - 83)
+31. Rule-Based Algo (68 - 74)
+30. Salted Egg (62 - 67)
+29. Grit (54 - 61)
+28. Scoliosis (46 - 53)
+27. Signature Forgery (39 - 45)
+26. Safety Gear (32 - 38)
+25. Cotton (25 - 31)
+24. Helmet (19 - 24)
+23. Cataract (10 - 18)
+22. Leukemia (1 - 9)
+
+- - - - P1 - - - -
+
+21. Capacitive Switch (197 - 203)
+20. Barrier-Free (191 - 196)
+19. Population Estimation (184 - 190)
+18. ZooKeeper (177 - 183)
+17. Face Mask Wear (171 - 176)
+16. OClean (165 - 170)
+15. Sensing Function (153 - 164)
+14. Location Routing Model (119 - 152)
+13. Narrowband IOT (104 - 118)
+12. Diabetic Retinopathy (95 - 103)
+11. Technology Acceptance (88 - 94)
+10. Virtual Diet (82 - 87)
+09. I-Respond (76 - 81)
+08. Golden Snail (70 - 75)
+07. Policy-Conflict (56 - 69)
+06. Coronary (49 - 55)
+05. Constructor (42 - 48)
+04. 4-Way (35 - 41)
+03. Rainfall (28 - 34)
+02. AWFCNET (18 - 27)
+01. Spatio-Temporal (3 - 17)
+00. Diploma (1 - 2)
+
+
+-- ALL RANGES ---
+
+P2
+
+90 - 148 (WIFI)
+65 - 89 (OFFLINE)
+50 - 64 (WIFI)
+25 - 49 (WIFI)
+1 - 24 (OFFLINE)
+
+P1
+
+175 - 203 (WIFI)
+147 - 174 (OFFLINE)
+119 - 146 (WIFI)
+
+91 - 118 (WIFI)
+63 - 90 (OFFLINE)
+
+35 - 62 (WIFI)
+
+7 - 34 (OFFLINE)
+1 - 6
+
+
+
