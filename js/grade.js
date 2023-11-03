@@ -85,7 +85,7 @@ const jsonScores = 'checkpoint/csvjson.json';
 
                                     } else {
 
-                                        contents += '<th>' + item[key] + '</th>'; 
+                                        contents += '<td>' + item[key] + '</td>'; 
 
                                     }
 
