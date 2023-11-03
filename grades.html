@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	
+<title> Simple Grade Viewer </title>
+
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+<meta name="robots" content="index, follow">
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+<link rel="icon" type="image/png" href="mediapub/s-favicon.ico">
+<link rel=canonical href=http://renatomaaliw3.github.io/>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />  
+<meta name="author" content="SLSU College of Engineering" />
+<meta name="description" content="CEN Publications">  
+<meta property=og:locale content="en_US">
+<meta property=og:type content="website">
+<meta property=og:title content="CEN Publications">
+<meta property=og:description content="CEN Publications">
+<meta property=og:url content="http://renatomaaliw3.github.io/">
+<meta property=og:site_name content="CEN Publications">
+
+<meta name=twitter:card content="summary_large_image">
+<meta name=twitter:description content="CEN Publications">
+<meta name=twitter:title content="CEN Publications">
+<meta name=twitter:site content="@renatomaaliw3">
+<meta name=twitter:creator content="@renatomaaliw3">
+
+<link rel=canonical href=http://renatomaaliw3.github.io/>
+
+<!--begin::Fonts-->
+<!--link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/-->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!--end::Fonts-->
+
+<!--begin::Global Theme Styles(used by all pages)-->
+<link href="csspub/plugins.bundle.css" rel="stylesheet" type="text/css"/>
+<link href="csspub/style.bundle.css" rel="stylesheet" type="text/css"/>
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+<!--end::Global Theme Styles-->
+
+<!--begin::Layout Themes(used by all pages)-->
+
+<!--end::Layout Themes-->	<style>
+		body { font-size: 14px!important; color: #111; }
+		.text-break {white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+	</style>
+</head>
+<body class="bg-secondary p-md-10">
+
+
+	<div class="bg-white mx-auto w-100 p-5 p-md-10" style="max-width: 1000px">
+
+		<!------------------ HEADER ------------------>
+		<div id="MBG-CV-BIO-HEADER" class="text-left text-md-center">
+
+			<h1 class="mb-0 display-4">
+				<span class="font-weight-boldest"> Just a Simple Grade Viewer </span>
+			</h1><br>
+
+			<form id="gradeForm" class="form-group">
+				
+				<div class="form-group">
+            		<label for="emailInput"> Enter Your Email: </label>
+            		<input type="text" class="form-control" id="emailInput" placeholder="Enter your email">
+        		</div>
+    			
+    			<div id="searchResult"></div>
+
+			</form>
+
+		</div>
+
+
+	</div>
+
+	<p class="py-8 text-center">Last Updated: <span class="font-weight-boldest"> November 3, 2023 </span></p>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+<script src="js/jsPDF.debug.js"></script>
+<script src="js/grade.js"></script>
+</html>
