@@ -5,6 +5,7 @@ let typingTimer;
 const doneTypingInterval = 1500; // 1 second delay
  
  // You can replace the URL with your external JSON file's location
+const jsonScores = 'checkpoint/csvjson.json';
 
  $(document).ready(function() {
 
@@ -12,26 +13,25 @@ const doneTypingInterval = 1500; // 1 second delay
 
             const searchTerm = $('#emailInput').val();
 
-            const jsonScores = 'checkpoint/csvjson.json';
-
             $.getJSON(jsonScores, function(data) {
 
-                var exactMatch = data.find(item => item['Email'] == searchTerm);
+                var exactMatch = data.find(item => item['Email'] == searchTerm); // find a match between input and data (JSON)
 
                 if (exactMatch) {
 
-                    constructTable(exactMatch);
+                     constructTable(data, exactMatch, searchTerm);
 
                 } else {
 
                     $('#searchResult').html('<h3 class="text-danger text-md">Email not found</h3>');
+
                 }
 
             });
 
         }
 
-        function constructTable(exactMatch) {
+        function constructTable(data, exactMatch, searchTerm) {
 
             var contents =  '<h1 class="text-primary font-weight-bold">' + exactMatch['First Name'] + ' ' + exactMatch['Last Name'] + '</h1>';
             contents +=     '<table class="table table-bordered table-responsive">' + 
@@ -67,29 +67,36 @@ const doneTypingInterval = 1500; // 1 second delay
             contents +=         '</thead>';
 
             contents +=         '<tbody>';
-            contents +=             '<tr id="scoreData">';
+                 
+                                    
+                        data.forEach(function(item) {
 
-                    for (var key in exactMatch) {
+                            var email = item['Email'].toLowerCase();
 
-                        if (exactMatch.hasOwnProperty(key)) {
+                            if (email == searchTerm) {
 
-                            if (key == 'Email' || key == 'Course' || key == 'Section' || key == 'Last Name' || key == 'First Name' || key == 'No.') {
+                                contents += '<tr id="scoreData">';
+
+                                for (key in exactMatch) {
+
+                                     if (key == 'Email' || key == 'Course' || key == 'Section' || key == 'Last Name' || key == 'First Name' || key == 'No.') {
                                 
-                                continue;
+                                        continue;
 
-                            } else {
+                                    } else {
 
-                                var value = exactMatch[key]
+                                        contents += '<th>' + item[key] + '</th>'; 
 
-                                contents += '<td>' + value + '</td>';
+                                    }
 
-                            } 
+                                }
 
-                        }
+                                contents += '</tr>';
 
-                    }
+                            }
 
-            contents +=             '</tr>';
+                        });
+
             contents +=         '</tbody>';
 
             $('#searchResult').html(contents);
