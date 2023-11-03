@@ -62782,13 +62782,26 @@ h3 > span > em {
 
 }
 
+#searchResult table {
+
+  border: none;
+
+}
+
 #searchResult tr th,
 #searchResult tr td {
 
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   padding: 0.5rem;
   vertical-align: middle;
   border: 1px solid black;
+
+}
+
+#scoreData > td:last-child {
+
+  background: #00d0ff;
+  font-weight: bold;
 
 }
 
