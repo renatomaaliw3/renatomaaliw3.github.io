@@ -2,16 +2,28 @@
 al variables */
 
 let typingTimer;
-const doneTypingInterval = 1500; // 1 second delay
+const doneTypingInterval = 1350; // 1 second delay
  
- // You can replace the URL with your external JSON file's location
-const jsonScores = 'checkpoint/csvjson.json';
-
  $(document).ready(function() {
+
+         // You can replace the URL with your external JSON file's location
+         var jsonScores = '';
 
         function performSearch() {
 
             const searchTerm = $('#emailInput').val();
+            const dropDown = $('#courseMenu').val();
+
+            if (dropDown == 'CPE15') {
+
+                //You can replace the URL with your external JSON file's location
+                jsonScores = 'checkpoint/csvjson.json';
+
+            } else {
+
+                jsonScores = 'checkpoint/csvjson2.json';
+
+            }
 
             $.getJSON(jsonScores, function(data) {
 
@@ -110,5 +122,12 @@ const jsonScores = 'checkpoint/csvjson.json';
                 typingTimer = setTimeout(performSearch, doneTypingInterval);
                 
         });
+
+        $('#courseMenu').on('change', function() {
+
+                performSearch();
+                
+        });
+
 
 });
