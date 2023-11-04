@@ -6,8 +6,11 @@ const doneTypingInterval = 1350; // 1 second delay
  
  $(document).ready(function() {
 
-         // You can replace the URL with your external JSON file's location
-         var jsonScores = '';
+        const searchTerm = $('#emailInput').val();
+        const dropDown = $('#courseMenu').val();
+
+        // You can replace the URL with your external JSON file's location
+        var jsonScores = '';
 
         function performSearch() {
 
@@ -31,11 +34,19 @@ const doneTypingInterval = 1350; // 1 second delay
 
                 if (exactMatch) {
 
-                     constructTable(data, exactMatch, searchTerm);
+                    if (searchTerm == '') {
+
+                        emailNotFound();
+
+                    } else {
+
+                        constructTable(data, exactMatch, searchTerm);
+
+                    }
 
                 } else {
 
-                    $('#searchResult').html('<h3 class="text-danger text-md">Email not found</h3>');
+                    emailNotFound();
 
                 }
 
@@ -128,6 +139,12 @@ const doneTypingInterval = 1350; // 1 second delay
                 performSearch();
                 
         });
+
+        function emailNotFound() {
+
+            $('#searchResult').html('<h3 class="text-danger text-md">Email not found</h3>');
+
+        }
 
 
 });
