@@ -62775,10 +62775,18 @@ h3 > span > em {
 
 /* SEARCH RESULTS */
 
+#gradeTable {
+
+  color: #000;
+
+}
+
+
 #searchResult {
 
   padding: 0;
   margin: 0;
+  color: #000;
 
 }
 
@@ -62802,6 +62810,19 @@ h3 > span > em {
 
   background: #00d0ff;
   font-weight: bold;
+
+}
+
+#scoreData > td:nth-last-child(2) {
+
+  background: #76ff95;
+
+}
+
+.info {
+
+  font-size: 0.72rem;
+  color: #231616;
 
 }
 
