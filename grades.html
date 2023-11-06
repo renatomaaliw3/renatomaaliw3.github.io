@@ -38,6 +38,7 @@
 <!--end::Fonts-->
 
 <!--begin::Global Theme Styles(used by all pages)-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <link href="csspub/plugins.bundle.css" rel="stylesheet" type="text/css"/>
 <link href="csspub/style.bundle.css" rel="stylesheet" type="text/css"/>
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
@@ -50,10 +51,10 @@
 		.text-break {white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 	</style>
 </head>
-<body class="bg-secondary p-md-10">
+<body class="bg-secondary p-md-5">
 
 
-	<div class="bg-white mx-auto w-100 p-5 p-md-10" style="max-width: 98%">
+	<div class="bg-white mx-auto w-100 p-5 p-md-8" style="max-width: 100%">
 
 		<!------------------ HEADER ------------------>
 		<div id="MBG-CV-BIO-HEADER" class="text-left text-md-center">
@@ -70,7 +71,7 @@
 
 					<label for="courseMenu"> Select Course: </label>
 
-            		<select id="courseMenu" class="form-control">
+            		<select id="courseMenu" class="form-select form-control" aria-label="Default select example">
             			<option value="CPE15"> CPE15 - Professional Elective 1 </option>
             			<option value="CPE28"> CPE28 - Professional Elective 3 </option>
             		</select>
