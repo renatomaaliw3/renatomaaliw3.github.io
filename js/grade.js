@@ -68,17 +68,19 @@ const doneTypingInterval = 1350; // 1 second delay
             contents +=         '<thead>'
             contents +=             '<tr id="headerLabels" class="bg-secondary">';
 
-                    for (var key in exactMatch) {
+                    for (var key in exactMatch) { // get JSON keys
 
-                        if (exactMatch.hasOwnProperty(key)) {
+                        //console.log(key)
+
+                        if (exactMatch.hasOwnProperty(key)) { 
 
                             if (key == 'Email' || key == 'Course' || key == 'Section' || key == 'Last Name' || key == 'First Name' || key == 'No.') {
                                 
-                                continue;
+                                continue; //skip this keys as headers
 
                             } else {
 
-                                contents += '<th>' + key + '</th>';
+                                contents += '<th>' + key + '</th>'; // if not skipped (keys), display it as headers
 
                             }
 
@@ -100,15 +102,15 @@ const doneTypingInterval = 1350; // 1 second delay
 
                                 contents += '<tr id="scoreData">';
 
-                                for (key in exactMatch) {
+                                for (var key in exactMatch) {
 
                                      if (key == 'Email' || key == 'Course' || key == 'Section' || key == 'Last Name' || key == 'First Name' || key == 'No.') {
                                 
-                                        continue;
+                                        continue; // skip this values
 
                                     } else {
 
-                                        contents += '<td>' + decimal_places(item[key]) + '</td>'; 
+                                        contents += '<td>' + decimal_places(item[key]) + '</td>'; //display with specific decimal points (values)
 
                                     }
 

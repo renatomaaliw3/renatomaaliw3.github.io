@@ -62815,6 +62815,7 @@ h3 > span > em {
 
 #scoreData > td:nth-last-child(2) {
 
+  font-weight: bold;
   background: #8cf2ea;
 
 }
