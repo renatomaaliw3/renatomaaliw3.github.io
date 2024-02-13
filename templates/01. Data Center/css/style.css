@@ -1,0 +1,207 @@
+/* GLOBAL STYLES */
+
+*, *::before, *::after {
+
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+
+}
+
+.clear {
+
+	clear: both;
+
+}
+
+.clearfix::after,
+.clearfix::before {
+
+	content: "";
+	display: block;
+	clear: both;
+
+}
+
+body {
+
+	background: #ededed;
+
+}
+
+ul > li,
+ol > li {
+
+	list-style: none;
+
+}
+
+/* HEADER */
+
+#header-container {
+
+	width: 100%;
+	height: 100px;
+	margin-top: 50px;
+	background: #474747;
+
+}
+
+.header-inner-container {
+
+	width: 60%;
+	margin: 0 auto;
+
+
+}
+
+.header-inner-container > * {
+
+	float: left;
+
+}
+
+.header-tagline {
+
+	width: 60%;
+	background: #474747;
+	height: 100px;
+	color: white;
+	padding: 25px 0 0 12px;
+	
+}
+
+.header-logo {
+
+	width: 40%;
+	height: 130px;
+	background: #2f549b;
+	margin-top: -15px;
+	padding: 25px;
+
+}
+
+.header-logo > h1 {
+
+	font-weight: bold;
+	font-size: 48px;
+	color: white;
+	margin-left: 35px;
+	padding-top: 10px;
+	margin-right: 30px;
+
+}
+
+.header-logo > p {
+
+	padding-top: 18px;
+	font-size: 20px;
+	color: #a4abbc;
+}
+
+
+
+.header-logo > * {
+
+	float: left;
+
+}
+
+/* BODY WRAPPER */
+
+#body-wrapper {
+
+	width: 60%;
+	margin: 50px auto;
+
+}
+
+/* PANELS */
+
+#panel-container {
+
+	/* background: red; */
+
+}
+
+.panel-box > li {
+
+	float: left;
+	width: 24.1725%;
+	text-align: center;
+	background: white;
+	padding: 10px 15px 20px 10px;
+	border: 1px solid #4b4a4a;
+	margin-right: 10px;
+
+}
+
+.panel-box > li:last-child {
+
+	margin-right: 0;
+
+}
+
+.panel-box .panel-title {
+
+	font-size: 25px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+
+}
+
+.panel-box .panel-subtitle {
+
+	padding-bottom: 30px;
+	
+}
+
+.panel-box .panel-description {
+
+	padding-top: 20px;
+	margin-bottom: 20px;
+	
+}
+
+.panel-box hr {
+
+	border: 0;
+	height: 1px;
+	width: 80px;
+	background: rgb(218, 218, 218);
+	margin: 0 auto;
+
+}
+
+/* FOOTER */
+
+.footer-container {
+
+	text-align: center;
+	margin-top: 60px;
+	background: #c6c6c6;
+	border-top: 2px solid #9a9a9a;
+
+}
+
+.footer-title {
+
+	padding: 10px 20px;
+	color: white;
+	background: #2f549b;
+	width: 200px;
+	margin: 0 auto;
+	position: relative;
+	top: -20px;
+	
+
+}
+
+
+.footer-icons > li {
+
+	float: left;
+	width: calc(100% / 6);
+	padding-bottom: 28px;
+
+}
