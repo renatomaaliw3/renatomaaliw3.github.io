@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
 /* GLOBAL STYLES */
 
 *, *::before, *::after {
@@ -26,6 +29,7 @@
 body {
 
 	background: #ededed;
+	font-family: 'Roboto';
 
 }
 
@@ -40,7 +44,6 @@ ol > li {
 
 #header-container {
 
-	width: 100%;
 	height: 100px;
 	margin-top: 50px;
 	background: #474747;
@@ -49,7 +52,7 @@ ol > li {
 
 .header-inner-container {
 
-	width: 60%;
+	width: 960px;
 	margin: 0 auto;
 
 
@@ -63,21 +66,21 @@ ol > li {
 
 .header-tagline {
 
-	width: 60%;
+	width: 540px;
 	background: #474747;
 	height: 100px;
 	color: white;
-	padding: 25px 0 0 12px;
+	padding: 25px 40px 0 12px;
 	
 }
 
 .header-logo {
 
-	width: 40%;
+	width: 420px;
 	height: 130px;
 	background: #2f549b;
 	margin-top: -15px;
-	padding: 25px;
+	padding: 25px 15px 25px 55px;
 
 }
 
@@ -94,7 +97,7 @@ ol > li {
 
 .header-logo > p {
 
-	padding-top: 18px;
+	padding-top: 16px;
 	font-size: 20px;
 	color: #a4abbc;
 }
@@ -111,7 +114,7 @@ ol > li {
 
 #body-wrapper {
 
-	width: 60%;
+	width: 960px;
 	margin: 50px auto;
 
 }
@@ -127,14 +130,31 @@ ol > li {
 .panel-box > li {
 
 	float: left;
-	width: 24.1725%;
+	width: 221px;
 	text-align: center;
 	background: white;
-	padding: 10px 15px 20px 10px;
-	border: 1px solid #4b4a4a;
-	margin-right: 10px;
+	padding: 20px 20px 20px 20px;
+	box-shadow: 1px 1px 5px rgba(192, 192, 192, 0.85);
+	margin-right: 25px;
 
 }
+
+.panel-box > li:hover {
+
+	background: blue;
+
+}
+
+.panel-box > li:hover .panel-title,
+.panel-box > li:hover .panel-subtitle,
+.panel-box > li:hover .panel-description,
+.panel-box > li:hover a:link {
+
+	color: white;
+
+}
+
+
 
 .panel-box > li:last-child {
 
@@ -144,15 +164,18 @@ ol > li {
 
 .panel-box .panel-title {
 
-	font-size: 25px;
+	font-size: 28px;
 	margin-top: 15px;
 	margin-bottom: 15px;
+	color: blue;
 
 }
 
 .panel-box .panel-subtitle {
 
-	padding-bottom: 30px;
+	margin-bottom: 30px;
+	font-size: 12px;
+	color: blue;
 	
 }
 
@@ -160,6 +183,7 @@ ol > li {
 
 	padding-top: 20px;
 	margin-bottom: 20px;
+	font-size: 13px;
 	
 }
 
@@ -173,6 +197,12 @@ ol > li {
 
 }
 
+.panel-box a {
+
+	font-size: 13px;
+
+}
+
 /* FOOTER */
 
 .footer-container {
@@ -181,27 +211,77 @@ ol > li {
 	margin-top: 60px;
 	background: #c6c6c6;
 	border-top: 2px solid #9a9a9a;
+	padding: 0 15px 15px 15px;
 
 }
 
 .footer-title {
 
-	padding: 10px 20px;
+	padding: 18px 20px;
 	color: white;
 	background: #2f549b;
 	width: 200px;
-	margin: 0 auto;
+	margin: -5px auto 0 auto;
 	position: relative;
-	top: -20px;
+	top: -25px;
 	
+}
+
+.footer-title::after {
+
+	content: "";
+	display: block;
+	position: absolute;
+	right: -24px;
+	bottom: 0;
+	width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 30px 24px 0 0;
+  border-color: #1e355f transparent transparent transparent;
 
 }
 
+
+.footer-title::before {
+
+	content: "";
+	display: block;
+	position: absolute;
+	left: -24px;
+	bottom: 0;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 24px 30px 0;
+	border-color: transparent #1e355f transparent transparent;
+
+}
 
 .footer-icons > li {
 
 	float: left;
 	width: calc(100% / 6);
-	padding-bottom: 28px;
+	padding: 8px 28px;
+
+}
+
+.footer-container h5 {
+
+	font-size: 11px;
+	color: #7b7b7b;
+	margin-top: 5px;
+
+}
+
+.footer-icons > li:hover {
+
+	background: blue;
+
+}
+
+.footer-icons > li:hover h5 {
+
+	color: white;
 
 }
