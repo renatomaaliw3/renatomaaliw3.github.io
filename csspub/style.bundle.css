@@ -62765,6 +62765,12 @@ ol.research-list > li {
 
 }
 
+ol.research-list > li:last-child > .sdgs {
+
+  border: 0;
+
+}
+
 h2 > span > em,
 h3 > span > em {
 
@@ -62827,3 +62833,49 @@ h3 > span > em {
 
 }
 
+/* SDGS */
+
+.sdgs {
+
+  margin-bottom: 0.75rem;
+  border-bottom: 1px dashed #dadada;
+  padding-bottom: 1rem;
+
+}
+
+.sdgs h6 {
+
+  font-size: 0.765rem;
+  font-weight: normal;
+
+}
+
+.sdgs-icons {
+
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  
+
+}
+
+.sdgs-icons > li {
+
+  list-style: none;
+  flex: 0 1 80px;
+  
+}
+
+.sdgs-icons > li > img {
+
+  width: 80px;
+
+}
+
+.no-border {
+
+  border: 0;
+
+}
