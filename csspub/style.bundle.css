@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @charset "UTF-8";
 /*!
  * Bootstrap v4.5.0 (https://getbootstrap.com/)
@@ -44,9 +45,11 @@
 *::after {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
+  margin: 0;
+  padding: 0;
 
 html {
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
@@ -56,16 +59,16 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
   margin: 0;
-  font-family: Poppins, Helvetica, "sans-serif";
+  /* font-family: 'Roboto', Poppins, Helvetica, "sans-serif"; */
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #3F4254;
+  color: #000; /* #3F4254; */
   text-align: left;
   background-color: #ffffff; }
 
 .font-secondary{
-  font-family: ''Source Serif Pro'', serif;
+  font-family: 'Source Serif Pro', serif;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -6095,7 +6098,7 @@ button.bg-white:focus {
   border: 1px solid #EBEDF3 !important; }
 
 .border-top {
-  border-top: 1px solid #EBEDF3 !important; }
+  border-top: 1px solid #7f19191f !important; } /* modified to fit */
 
 .border-right {
   border-right: 1px solid #EBEDF3 !important; }
@@ -33905,7 +33908,7 @@ a.text-hover-muted,
     font-size: 2.25rem !important; } }
 
 .font-weight-boldest {
-  font-weight: 700; }
+  font-weight: 900; }
 
 .line-height-0 {
   line-height: 0; }
@@ -59980,7 +59983,7 @@ body {
   padding: 0px;
   font-size: 18px !important;
   font-weight: 400;
-  font-family: Poppins, Helvetica, "sans-serif";
+  font-family: 'Roboto', Poppins, Helvetica, "sans-serif";
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
@@ -62746,6 +62749,27 @@ input[type=number] {
 
 /* CUSTOM */
 
+.main-title {
+
+  color: #0c3a1e; /* SLSU Green */
+
+}
+
+.main-header {
+
+  /* background: red;
+  text-align: center; */ 
+  color: #7f1919; /* CEN marroon */
+
+}
+
+.sub-header {
+
+  font-size: 1.55rem;
+  color: #000;
+
+}
+
 article > p {
 
   text-align: justify;
@@ -62837,16 +62861,20 @@ h3 > span > em {
 
 .sdgs {
 
-  margin-bottom: 0.75rem;
-  border-bottom: 1px dashed #dadada;
-  padding-bottom: 1rem;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px dashed #7f19192e;
+  padding-bottom: 1.75rem;
+  /* display: flex; *
+  /* justify-content: flex-start; */
 
 }
 
 .sdgs h6 {
 
-  font-size: 0.765rem;
+  font-size: 1rem;
   font-weight: normal;
+  /* flex: 0 1 50px; */
+  margin-bottom: 1rem;
 
 }
 
@@ -62864,13 +62892,13 @@ h3 > span > em {
 .sdgs-icons > li {
 
   list-style: none;
-  flex: 0 1 80px;
+  flex: 0 1 auto;
   
 }
 
 .sdgs-icons > li > img {
 
-  width: 80px;
+  width: 100px;
 
 }
 
