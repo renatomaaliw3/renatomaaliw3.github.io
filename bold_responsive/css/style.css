@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* GLOBAL STYLES */
 
@@ -105,7 +105,8 @@ ul > li {
 
 }
 
-.navigation-links > li > a:link {
+.navigation-links > li > a:link,
+.navigation-links > li > a:visited {
 
 	text-decoration: none;
 	font-weight: 900;
@@ -179,6 +180,12 @@ ul > li {
 .sliders-links a:active {
 	
 	color: gray;
+
+}
+
+.sliders-links > li {
+
+	position:  relative;
 
 }
 
@@ -543,18 +550,25 @@ form input[type='button'] {
 @media (max-width: 768px) {
 
   .recent-posts-panel,
-	.footer-panel, 
-	.portfolio-thumbnails {
+	.footer-panel {
 
 		flex-direction: column;
 
 	}
 
-	.portfolio-thumbnails > li {
+	.portfolio-thumbnails {
 
-		width: 55%;
+		/* flex-direction: column; */
+		flex-wrap: wrap;
 
 	}
+
+	.portfolio-thumbnails > li {
+
+		flex: 1 0 25%;
+
+	}
+
 
 	.portfolio-thumbnails > li > img {
 
@@ -586,10 +600,16 @@ form input[type='button'] {
 
 	}
 
-	.navigation-links > li {
+	.navigation-links > li,
+	.navigation-links a {
 
 		display: block;
-		background: black;
+
+	}
+
+	.navigation-links > li:hover {
+
+		border-top:  2px solid transparent;
 
 	}
 
@@ -597,8 +617,6 @@ form input[type='button'] {
 
 		max-width: 100%;
 		height: auto;
-
-
 
 	}
 
@@ -608,6 +626,17 @@ form input[type='button'] {
 
 	}
 
+	.portfolio-thumbnails {
+
+		flex-direction: column
+
+	}
+
+	.portfolio-thumbnails > li {
+
+		width: 100%;
+
+	}
 
 
 }
