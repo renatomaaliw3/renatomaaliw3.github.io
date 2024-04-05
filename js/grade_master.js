@@ -22,10 +22,10 @@ const doneTypingInterval = 1350; // 1 second delay
             
             var optionalTerm = $('#firstName').val()
 
-            if (dropDown == 'CPE15') {
+            if (dropDown == 'CPE06') {
 
                 //You can replace the URL with your external JSON file's location
-                jsonScores = 'checkpoint/csvjson.json';
+                jsonScores = 'checkpoint/cpe06.json';
 
             } else {
 
