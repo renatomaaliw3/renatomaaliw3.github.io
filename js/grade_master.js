@@ -25,11 +25,11 @@ const doneTypingInterval = 1350; // 1 second delay
             if (dropDown == 'CPE06') {
 
                 //You can replace the URL with your external JSON file's location
-                jsonScores = 'checkpoint/cpe06.json';
+                jsonScores = 'checkpoint/cpe06-23-24.json';
 
             } else {
 
-                jsonScores = 'checkpoint/csvjson2.json';
+                jsonScores = 'checkpoint/cpe28-23-24.json';
 
             }
 
