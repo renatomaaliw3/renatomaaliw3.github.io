@@ -24,7 +24,7 @@ const doneTypingInterval = 1350; // 1 second delay
 
             } else {
 
-                jsonScores = 'checkpoint/cpe28-23-24.json';
+                jsonScores = 'checkpoint/cpe21-23-24.json';
 
             }
 
