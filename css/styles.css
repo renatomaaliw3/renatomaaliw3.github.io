@@ -325,47 +325,4 @@ ul > li > span, ol > li > span, ul > li > strong {
 
 }
 
-.navigation {
-
-	position: fixed;
-	right: 0;
-	bottom: 0;
-
-	background: rgba(27, 99, 3, 0.9);
-	padding: 8px 10px;
-	width: 120px;
-	display: none;
-
-}
-
-.navigation ol > li {
-
-	margin: 0;
-	font-size: 13px;
-
-}
-
-.navigation li {
-	
-	float: left;
-	list-style: none;
-	margin: 0;
-	width: 100%;
-	text-align: center;
-
-}
-
-.navigation a:link,
-.navigation a:visited {
-
-	color: yellow;
-
-}
-
-.navigation a:hover,
-.navigation a:active {
-
-	color: orange;
-
-}
 

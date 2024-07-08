@@ -18,4 +18,23 @@ $(document).ready(function() {
       $("#acceptedArticlesCount").text("(" + acceptedArticlesCount + ")");
       $("#submittedArticlesCount").text("(" + submittedArticlesCount + ")");
 
+      var nav = $('.navigation');
+      var top_distance_threshold = 1000;
+      
+	$(window).on('scroll', function() {
+
+		var scroll_top_d = $(this).scrollTop();
+
+		if (scroll_top_d >= top_distance_threshold) {
+
+			nav.fadeIn();
+
+		} else {
+
+			nav.fadeOut();
+
+		}
+
+	});
+
 });
