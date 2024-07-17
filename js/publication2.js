@@ -8,6 +8,9 @@ $(document).ready(function() {
       var conferencePaperCount = $("#conferencePaper > li").length;
       var acceptedArticlesCount = $("#acceptedArticles > li").length;
       var submittedArticlesCount = $("#submittedArticles > li").length;
+
+      var indexingCount = $("span.indexed").length;
+
             
       $("#patentsCount").text("(" + patentCount + ")");
       $("#industrialDesignCount").text("(" + industrialDesignCount + ")");
@@ -17,6 +20,7 @@ $(document).ready(function() {
       $("#conferencePaperCount").text("(" + conferencePaperCount + ")")
       $("#acceptedArticlesCount").text("(" + acceptedArticlesCount + ")");
       $("#submittedArticlesCount").text("(" + submittedArticlesCount + ")");
+      $("#indexing").text("Scopus or WOS indexed publications: " + indexingCount + "");
 
       var nav = $('.navigation');
       var top_distance_threshold = 1000;
