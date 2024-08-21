@@ -62798,7 +62798,7 @@ ol.research-list > li:last-child > .sdgs {
 h2 > span > em,
 h3 > span > em {
 
-  font-size: 0.80em;
+  font-size: 0.925em;
   font-style: normal;
 
 }
@@ -62954,5 +62954,14 @@ h3 > span > em {
   padding: 0;
   display: flex;
   flex-direction: column;
+
+}
+
+.per-date-count {
+
+  font-style: italic;
+  font-size: 0.925em;
+  vertical-align: top;
+  color: #5b5b5b;
 
 }

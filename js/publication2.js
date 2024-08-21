@@ -24,6 +24,15 @@ $(document).ready(function() {
 
       var nav = $('.navigation');
       var top_distance_threshold = 1000;
+
+      // Per Date Count
+
+      $('.d-date').each(function() {
+            
+            var count = $(this).next('.research-list').children('li').length;
+            $(this).find('.per-date-count').text('(' + count + ')');
+
+      });
       
 	$(window).on('scroll', function() {
 
