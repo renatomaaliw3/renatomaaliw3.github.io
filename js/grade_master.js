@@ -1,176 +1,103 @@
-/* glob
-al variables */
+/* global variables */
 
 let typingTimer;
 const doneTypingInterval = 1350; // 1 second delay
  
- $(document).ready(function() {
+$(document).ready(function() {
+
+    var dropDown = $('#courseMenu').val();
+    var searchTerm = $('#lastName').val();
+    var optionalTerm = $('#firstName').val();
+
+    var jsonScores = '';
+
+    function performSearch() {
 
         var dropDown = $('#courseMenu').val();
-        var searchTerm = $('#lastName').val();
+        var searchTerm = $('#lastName').val().toLowerCase(); // Convert to lowercase for case-insensitive search
+        var optionalTerm = $('#firstName').val().toLowerCase(); // Convert to lowercase for case-insensitive search
 
-        var optionalTerm = $('#firstName').val()
-        
+        if (dropDown == 'CPE15') {
+            jsonScores = 'checkpoint/cpe15-24-25.json';
+        } else {
+            jsonScores = 'checkpoint/cpe28-24-25.json';
+        }
 
-        // You can replace the URL with your external JSON file's location
-        var jsonScores = '';
+        $.getJSON(jsonScores, function(data) {
 
-        function performSearch() {
-
-            var dropDown = $('#courseMenu').val();
-            var searchTerm = $('#lastName').val();
-            
-            var optionalTerm = $('#firstName').val()
-
-            if (dropDown == 'CPE15') {
-
-                //You can replace the URL with your external JSON file's location
-                jsonScores = 'checkpoint/cpe15-24-25.json';
-
-            } else {
-
-                jsonScores = 'checkpoint/cpe28-24-25.json';
-
-            }
-
-            $.getJSON(jsonScores, function(data) {
-
-                // find a match between input and data (JSON)
-
-                var exactMatch = data.find(item => item['Last Name'] == searchTerm); 
-
-                if (exactMatch) {
-
-                    if (searchTerm == '') {
-
-                        NotFound();
-
-                    } else {
-
-                        constructTable(data, exactMatch, searchTerm);
-
-                    }
-
-                } else {
-
-                    NotFound();
-
-                }
-
+            // Modify the search to perform partial matching using 'includes'
+            var matches = data.filter(item => {
+                var lastNameMatch = item['Last Name'].toLowerCase().includes(searchTerm);
+                var firstNameMatch = optionalTerm ? item['First Name'].toLowerCase().includes(optionalTerm) : true; // If optional term exists, check, otherwise ignore
+                return lastNameMatch && firstNameMatch;
             });
 
-        }
-
-        function constructTable(data, exactMatch, searchTerm) {
-
-            //var contents =  '<h1 class="text-primary font-weight-bold">' + exactMatch['First Name'] + ' ' + exactMatch['Last Name'] + '</h1>';
-            
-            var contents =     '<table class="table table-bordered" id="gradeTable">'; // class removed table-responsive
-            contents +=             '<thead>';
-            contents +=                 '<tr id="headerLabels" class="bg-secondary">';
-            
-            //var first_item = exactMatch[0] // Only the first item on the match
-
-            for (key in exactMatch) { // Get the keys of the first item only
-
-                if (exactMatch.hasOwnProperty(key)) {
-
-                    if (key == 'Term' || key == 'Last Name' || key == 'First Name' || key == 'Lecture Term Grade (E)' || key == 'Lab Term Grade (E)'){
-
-                        contents +=          '<th>' + key + '</th>';
-
-                    } else {
-
-                        continue;
-
-                    }
-
-                }
-
-            }
-
-            contents +=                '</tr>';
-            contents +=         '   </thead>';
-
-            contents +=         '<tbody>';
-                
-                        data.forEach(function(item) {
-
-                            var lastName = item['Last Name'];
-
-                            if (lastName == searchTerm) {
-
-                                contents += '<tr id="scoreData">';
-
-                                for (var key in exactMatch) {
-
-                                    if (key == 'Term' || key == 'Last Name' || key == 'First Name' || key == 'Lecture Term Grade (E)' || key == 'Lab Term Grade (E)'){
-                                
-                                        contents += '<td>' + decimal_places(item[key]) + '</td>'; //display with specific decimal points (values)
-
-                                    } else {
-
-                                        continue; // skip this values 
-
-                                    }
-
-                                }
-
-                                contents += '</tr>';
-
-                            }
-
-                        });
-
-            contents +=         '</tbody>';
-            contents +=         '</table>';
-            contents +=         '<h6 class="info mt-md-10"> As per SLSU University Code, Chapter 55 (Honors, Art. 443 - Computation of Grades), the rounding off of final grades shall not be allowed. </h6>';
-
-            $('#searchResult').html(contents);
-
-        }
-
-
-        $('#lastName').on('keyup', function() {
-
-                clearTimeout(typingTimer);
-                typingTimer = setTimeout(performSearch, doneTypingInterval);
-                
-        });
-
-
-        $('#firstName').on('keyup', function() {
-
-                clearTimeout(typingTimer);
-                typingTimer = setTimeout(performSearch, doneTypingInterval);
-                
-        });
-
-        $('#courseMenu').on('change', function() {
-
-                performSearch();
-                
-        });
-
-        function NotFound() {
-
-            $('#searchResult').html('<h3 class="text-danger text-md"> Last Name not Found</h3>');
-
-        }
-
-        function decimal_places(value) {
-
-            if (!isNaN(value)) {
-
-                return parseFloat(value).toFixed(2);
-
+            if (matches.length > 0) {
+                constructTable(data, matches, searchTerm);
             } else {
-
-                return value;
-
+                NotFound();
             }
 
-        }
+        });
 
+    }
+
+    function constructTable(data, matches, searchTerm) {
+
+        var contents = '<table class="table table-bordered" id="gradeTable">';
+        contents += '<thead>';
+        contents += '<tr id="headerLabels" class="bg-secondary">';
+
+        // Only include relevant columns
+        var keysToShow = ['Term', 'Last Name', 'First Name', 'Lecture Term Grade (E)', 'Lab Term Grade (E)'];
+        keysToShow.forEach(function(key) {
+            contents += '<th>' + key + '</th>';
+        });
+
+        contents += '</tr>';
+        contents += '</thead>';
+        contents += '<tbody>';
+        
+        // Loop through each match and display the relevant data
+        matches.forEach(function(item) {
+            contents += '<tr id="scoreData">';
+            keysToShow.forEach(function(key) {
+                contents += '<td>' + decimal_places(item[key]) + '</td>'; // Apply decimal formatting
+            });
+            contents += '</tr>';
+        });
+
+        contents += '</tbody>';
+        contents += '</table>';
+        contents += '<h6 class="info mt-md-10"> As per SLSU University Code, Chapter 55 (Honors, Art. 443 - Computation of Grades), the rounding off of final grades shall not be allowed. </h6>';
+
+        $('#searchResult').html(contents);
+    }
+
+    $('#lastName').on('keyup', function() {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(performSearch, doneTypingInterval);
+    });
+
+    $('#firstName').on('keyup', function() {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(performSearch, doneTypingInterval);
+    });
+
+    $('#courseMenu').on('change', function() {
+        performSearch();
+    });
+
+    function NotFound() {
+        $('#searchResult').html('<h3 class="text-danger text-md"> Name not found</h3>');
+    }
+
+    function decimal_places(value) {
+        if (!isNaN(value)) {
+            return parseFloat(value).toFixed(2);
+        } else {
+            return value;
+        }
+    }
 
 });
