@@ -5,24 +5,24 @@ const doneTypingInterval = 1350; // 1 second delay
  
 $(document).ready(function() {
 
+    $('#gradeForm').hide()
+
     var dropDown = $('#courseMenu').val();
     var searchTerm = $('#lastName').val();
     var optionalTerm = $('#firstName').val();
+    var direct = 'checkpoint/';
 
     var jsonScores = '';
 
     function performSearch() {
 
+
         var dropDown = $('#courseMenu').val();
         var searchTerm = $('#lastName').val().toLowerCase(); // Convert to lowercase for case-insensitive search
         var optionalTerm = $('#firstName').val().toLowerCase(); // Convert to lowercase for case-insensitive search
 
-        if (dropDown == 'CPE15') {
-            jsonScores = 'checkpoint/cpe15-24-25.json';
-        } else {
-            jsonScores = 'checkpoint/cpe28-24-25.json';
-        }
-
+        jsonScores = direct + dropDown;
+        
         $.getJSON(jsonScores, function(data) {
 
             // Modify the search to perform partial matching using 'includes'
@@ -49,7 +49,8 @@ $(document).ready(function() {
         contents += '<tr id="headerLabels" class="bg-secondary">';
 
         // Only include relevant columns
-        var keysToShow = ['Term', 'Last Name', 'First Name', 'Lecture Term Grade (E)', 'Lab Term Grade (E)'];
+        var keysToShow = ['Term', 'Last Name', 'First Name', 'Lecture Term Grade (60%)', 'Lab Term Grade (40%)', 'Lecture Term Grade (E)',
+                         'Lab Term Grade (E)'];
         keysToShow.forEach(function(key) {
             contents += '<th>' + key + '</th>';
         });
@@ -73,6 +74,12 @@ $(document).ready(function() {
 
         $('#searchResult').html(contents);
     }
+
+    $('#activate').on('click', function() {
+
+        $('#gradeForm').fadeToggle();
+
+    });
 
     $('#lastName').on('keyup', function() {
         clearTimeout(typingTimer);
