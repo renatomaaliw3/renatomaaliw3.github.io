@@ -86,7 +86,7 @@ $(document).ready(function() {
     function buildTermTable(term, data) {
 
         var contents = '<h4>' + term + '</h4>';
-        contents += '<table class="table table-bordered" id="gradeTable">';
+        contents += '<table class="table table-bordered table-responsive-sm" id="gradeTable">';
         contents += '<thead>';
         contents += '<tr id="headerLabels" class="bg-secondary">';
 
@@ -107,7 +107,18 @@ $(document).ready(function() {
 
             keysToShow.forEach(function(key) {
 
-                contents += '<td>' + decimal_places(item[key]) + '</td>';
+                // Check if the key is 'Lecture Term Grade (E)' or 'Lab Term Grade (E)'
+                if ((key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)') && (item[key] == 4.00 || item[key] == 5.00)) {
+
+                    // Apply red color if the value is 4.00 or 5.00
+                    contents += '<td style="color: red;">' + decimal_places(item[key]) + '</td>';
+
+                } else {
+
+                    // Default color for other values
+                    contents += '<td>' + decimal_places(item[key]) + '</td>';
+                    
+                }
 
             });
 

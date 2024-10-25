@@ -8,6 +8,7 @@ const doneTypingInterval = 1350; // 1 second delay
 
         const searchTerm = $('#emailInput').val();
         const dropDown = $('#courseMenu').val();
+        var direct = 'checkpoint/';
 
         // You can replace the URL with your external JSON file's location
         var jsonScores = '';
@@ -17,16 +18,7 @@ const doneTypingInterval = 1350; // 1 second delay
             const searchTerm = $('#emailInput').val();
             const dropDown = $('#courseMenu').val();
 
-            if (dropDown == 'CPE15') {
-
-                //You can replace the URL with your external JSON file's location
-                jsonScores = 'checkpoint/cpe15-24-25.json';
-
-            } else {
-
-                jsonScores = 'checkpoint/cpe28-24-25.json';
-
-            }
+            jsonScores = direct + dropDown;
 
             $.getJSON(jsonScores, function(data) {
 
@@ -110,7 +102,18 @@ const doneTypingInterval = 1350; // 1 second delay
 
                                     } else {
 
-                                        contents += '<td>' + decimal_places(item[key]) + '</td>'; //display with specific decimal points (values)
+                                         // Check if the key is 'Lecture Term Grade (E)' or 'Lab Term Grade (E)'
+                                        if ((key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)') && (item[key] == 4.00 || item[key] == 5.00)) {
+
+                                        // Apply red color if the value is 4.00 or 5.00
+                                        contents += '<td style="color: red;">' + decimal_places(item[key]) + '</td>';
+
+                                        } else {
+
+                                            // Default color for other values
+                                            contents += '<td>' + decimal_places(item[key]) + '</td>';
+
+                                        }
 
                                     }
 

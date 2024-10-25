@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	
-<title> Simple Grade Viewer </title>
+<title> Grade Viewer </title>
 
 <meta charset="utf-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
@@ -60,10 +60,12 @@
 		<div id="MBG-CV-BIO-HEADER" class="text-left text-md-center">
 
 			<h1 class="mb-0 display-4">
-				<span class="font-weight-boldest"> A Simple Grade Viewer </span>
+				<span class="font-weight-boldest"> Grade Viewer </span>
 			</h1>
 
-			<h6 class='text-muted mt-2 mb-4' style="font-size: 0.85rem"> By: Engr. Renato R. Maaliw III, DIT </h6>
+			<h6 class='text-muted mt-2' style="font-size: 0.75rem; margin-bottom: 0;"> Renato R. Maaliw III, DIT </h6>
+			<h6 class='text-muted ' style="font-size: 0.75rem; margin-bottom: 0;"><em> Engineer & Professor 1, College of Engineering </em></h6>
+			<h6 class='text-muted mb-4' style="font-size: 0.75rem;"><em> Southern Luzon State University </em></h6>
 
 			<form id="gradeForm">
 
@@ -72,8 +74,9 @@
 					<label for="courseMenu"> Select Course: </label>
 
             		<select id="courseMenu" class="form-select form-control" aria-label="Default select example">
-            			<option value="CPE15"> CPE15 - Professional Elective 1 </option>
-            			<option value="CPE28"> CPE28 - Professional Elective 3 </option>
+            			<option value="cpe15-24-25.json"> CPE15 - Professional Elective 1 </option>
+            			<option value="cpe28-24-25.json" disabled> CPE28 - Professional Elective 3 (Not yet available)</option>
+									<option value="ite32-24-25.json" disabled> ITE32 - Data Mining & Analytics (Not yet available)</option>
             		</select>
 
         		</div>
@@ -92,7 +95,7 @@
 
 	</div>
 
-	<p class="py-8 text-center">Last Updated: <span class="font-weight-boldest"> October 22, 2024 (7:30 PM) </span></p>
+	<p class="py-8 text-center">Last Updated: <span class="font-weight-boldest"> October 25, 2024 (7:30 PM) </span></p>
 	
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
