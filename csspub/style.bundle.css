@@ -62811,6 +62811,33 @@ h3 > span > em {
 
 }
 
+#gradeTable tr th:nth-child(n+2):nth-child(-n+7),
+#gradeTable tr td:nth-child(n+2):nth-child(-n+7) {
+
+  background: #8cf2ea;
+
+}
+
+#gradeTable tr th:nth-child(n+8):nth-child(-n+13), 
+#gradeTable tr td:nth-child(n+8):nth-child(-n+13) {
+
+  background: #a2ff8d;
+
+}
+
+#gradeTable tr th:nth-last-child(2) { /* Lecture Term Grade (E) */
+
+  background: #0e4944;
+  color: white;
+
+}
+
+#gradeTable tr th:last-child {
+
+  background: #145904;
+  color: white;
+
+}
 
 #searchResult {
 
@@ -62853,7 +62880,7 @@ h3 > span > em {
 .info {
 
   font-size: 0.75rem;
-  color: #8a8a8a;
+  color: #575757;
 
 }
 
@@ -62984,7 +63011,31 @@ option:disabled {
 
   width: 50%;
   border: 1px solid #e7e7e7 !important;
-  color: #7f7f7f;
+  color: #575757;
   padding: 0.25rem;
 
 }
+
+#btnDetails {
+
+  text-align: left;
+  font-size: 0.775rem;
+  background: #7f1919;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid #7f1919;
+  color: white;
+
+}
+
+#footer {
+
+  align-items: stretch;
+
+}
+
+body {
+
+  justify-content: space-evenly;
+
+} 
+
