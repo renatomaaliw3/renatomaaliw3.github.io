@@ -97,11 +97,11 @@ const doneTypingInterval = 1350; // 1 second delay
 
                             if (item[key] == 4.00) {
 
-                                contents += '<td class="text-warning">' + decimal_places(item[key]) + '</td>';
+                                contents += '<td data-color="orange" class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
 
                             } else if (item[key] == 5.00) {
 
-                                contents += '<td class="text-danger">' + decimal_places(item[key]) + '</td>';
+                                contents += '<td data-color="red" class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
 
                             } else {
 
@@ -128,11 +128,12 @@ const doneTypingInterval = 1350; // 1 second delay
             contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>';
         
             contents += '<table id="gradeLegend" style="display: none;">';
-            contents += '<tr><td colspan=2> Equivalent Rating </td></tr><tr><td> 1.00 </td><td> 98 - 100 </td></tr><tr><td> 1.25 </td><td> 95 - 97 </td></tr><tr><td> 1.50 </td><td> 92 - 94 </td></tr><tr><td> 1.75 </td><td> 89 - 91 </td></tr><tr><td> 2.00 </td><td> 86 - 88 </td></tr><tr><td> 2.25 </td><td> 83 - 85 </td></tr><tr><td> 2.50 </td><td> 80 - 82 </td></tr><tr><td> 2.75 </td><td> 77 - 79 </td></tr><tr><td> 3.00 </td><td> 75 - 79 </td></tr><tr><td class=text-warning> 4.00 </td><td class=text-warning> 70 - 74 </td></tr><tr><td class=text-danger> 5.00 </td><td class=text-danger> 50 - 69 </td></tr>';                         
+            contents += '<tr><td colspan=2> Equivalent Rating </td></tr><tr><td> 1.00 </td><td> 98 - 100 </td></tr><tr><td> 1.25 </td><td> 95 - 97 </td></tr><tr><td> 1.50 </td><td> 92 - 94 </td></tr><tr><td> 1.75 </td><td> 89 - 91 </td></tr><tr><td> 2.00 </td><td> 86 - 88 </td></tr><tr><td> 2.25 </td><td> 83 - 85 </td></tr><tr><td> 2.50 </td><td> 80 - 82 </td></tr><tr><td> 2.75 </td><td> 77 - 79 </td></tr><tr><td> 3.00 </td><td> 75 - 76 </td></tr><tr><td data-color="orange"> 4.00 </td><td data-color="orange"> 70 - 74 </td></tr><tr><td class="text-danger"> 5.00 </td><td class="text-danger"> 50 - 69 </td></tr>';                         
             contents += '</table>';
             contents += '<h6 class="info mt-5" style="font-size: 0.75rem;"> As per SLSU University Code, Chapter 55 (Honors, Art. 443 - Computation of Grades), the rounding off of final grades shall not be allowed. </h6>';
         
             $('#searchResult').html(contents);
+            highlight_na();
 
         }
         
@@ -157,7 +158,7 @@ const doneTypingInterval = 1350; // 1 second delay
 
                 button.val('Hide Details')
                 searchResult.find('th, td').show(); //Show all
-                $(this).parents('#searchResult').find('#gradeTable').css({'display': 'block'});
+                $(this).parents('#searchResult').find('#gradeTable').css({'display':'block'});
                 $(this).parents('#searchResult').find('#gradeLegend').show()
 
 
@@ -165,8 +166,8 @@ const doneTypingInterval = 1350; // 1 second delay
 
                 button.val('Show Details');
                 searchResult.find('#gradeTable th, #gradeTable td').not('.Term, .LectureTermGradeE, .LabTermGradeE').hide(); //Hide class except
-                $(this).parents('#searchResult').find('#gradeTable').css({'display': 'table'});
-                $(this).parents('#searchResult').find('#gradeLegend').css({'display': 'none'});
+                $(this).parents('#searchResult').find('#gradeTable').css({'display':'table'});
+                $(this).parents('#searchResult').find('#gradeLegend').css({'display':'none'});
                 
             }
 
@@ -198,6 +199,12 @@ const doneTypingInterval = 1350; // 1 second delay
             var the_key = value;
 
             return the_key.replace(/[\s()=%/]+/g,''); //remove spaces and characters (special)
+
+        }
+
+        function highlight_na() {
+
+            $("#searchResult td:contains('N/A')").attr("data-color", "muted");
 
         }
 

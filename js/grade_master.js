@@ -5,7 +5,8 @@ const doneTypingInterval = 1350; // 1 second delay
  
 $(document).ready(function() {
 
-    $('#gradeForm').hide()
+    const gradeTable = $('#gradeTable');
+    const searchResult = $('#searchResult')
 
     var dropDown = $('#courseMenu').val();
     var searchTerm = $('#lastName').val();
@@ -13,6 +14,8 @@ $(document).ready(function() {
     var direct = 'checkpoint/';
 
     var jsonScores = '';
+
+    $('#gradeForm').hide()
 
     function performSearch() {
 
@@ -78,6 +81,7 @@ $(document).ready(function() {
 
         // Append the contents to the searchResult div
         $('#searchResult').html(contents);
+        highlight_na();
 
     }
 
@@ -90,11 +94,27 @@ $(document).ready(function() {
         contents += '<thead>';
         contents += '<tr id="headerLabels" class="bg-secondary">';
 
-        var keysToShow = ['Last Name', 'First Name', 'Lecture Term Grade (60%)', 
-                         'Lab Term Grade (40%)', 'Lecture Term Grade (E)', 'Lab Term Grade (E)'];
+        var keysToShow = ['Last Name', 'First Name', 'Lecture Quiz', 'Lecture Quiz Points (max = 30%)',
+                        'Lecture Major Exam', 'Lecture Major Exam Points (max = 40%)',
+                        'Lecture Performance', 'Lecture Performance Points (max = 30%)',
+                        'Lab Activities', 'Lab Activities Points (max = 40%)',
+                        'Lab Major Exam','Lab Major Exam Points (max = 60%)',
+                        'Lecture Term Grade (60%)', 
+                        'Lab Term Grade (40%)', 'Lecture Term Grade (E)', 'Lab Term Grade (E)'];
         
         keysToShow.forEach(function(key) {
-            contents += '<th>' + key + '</th>';
+
+            if (key == 'Lecture Term Grade (E)' || key == 'Lab Term Grade (E)' 
+               || key == 'Last Name' || key == 'First Name') {
+
+                contents += '<th class="' + clean_key(key) + '">' + key + '</th>'; // display specified keys as headers
+
+            } else {
+
+                contents += '<th class="' + clean_key(key) + '"' + ' style="display: none;">' + key + '</th>'; // display specified keys as headers
+
+            }
+
         });
 
         contents += '</tr>';
@@ -103,22 +123,32 @@ $(document).ready(function() {
 
         data.forEach(function(item) {
 
-            contents += '<tr id="scoreData">';
+            contents += '<tr class="scoreData">';
 
             keysToShow.forEach(function(key) {
 
-                // Check if the key is 'Lecture Term Grade (E)' or 'Lab Term Grade (E)'
-                if ((key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)') && (item[key] == 4.00 || item[key] == 5.00)) {
+                if (key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)' || key === 'Last Name' || key === 'First Name') {
 
-                    // Apply red color if the value is 4.00 or 5.00
-                    contents += '<td style="color: red;">' + decimal_places(item[key]) + '</td>';
+                    if (item[key] == 4.00) {
+
+                        contents += '<td data-color="orange" class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
+
+                    } else if (item[key] == 5.00) {
+
+                        contents += '<td data-color="red" class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
+                    
+                    } else {
+
+                        contents += '<td class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
+
+                    }
 
                 } else {
 
-                    // Default color for other values
-                    contents += '<td>' + decimal_places(item[key]) + '</td>';
-                    
+                    contents += '<td class="' + clean_key(key) + '"' + ' style="display: none;">' + decimal_places(item[key]) + '</td>';
+
                 }
+
 
             });
 
@@ -128,6 +158,9 @@ $(document).ready(function() {
 
         contents += '</tbody>';
         contents += '</table>';
+
+        // Button for details
+        contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>';
 
         return contents;
 
@@ -153,16 +186,56 @@ $(document).ready(function() {
         performSearch();
     });
 
+    $('#searchResult').on('click', '#btnDetails', function() {
+
+        const button = $(this);
+
+        if (button.val() == 'Show Details') {
+
+            button.val('Hide Details')
+            searchResult.find('th, td').show(); //Show all
+            $(this).parents('#searchResult').find('#gradeTable').css({'display': 'block'});
+         
+
+        } else {
+
+            button.val('Show Details');
+            searchResult.find('#gradeTable th, #gradeTable td').not('.LectureTermGradeE, .LabTermGradeE, .LastName, .FirstName').hide(); //Hide class except
+            $(this).parents('#searchResult').find('#gradeTable').css({'display': 'table'});
+           
+        }
+
+    });
+
     function NotFound() {
         $('#searchResult').html('<h3 class="text-danger text-md"> Name not found</h3>');
     }
 
     function decimal_places(value) {
+
         if (!isNaN(value)) {
+
             return parseFloat(value).toFixed(2);
+
         } else {
+
             return value;
+
         }
+    }
+
+    function clean_key(value) {
+
+        var the_key = value;
+
+        return the_key.replace(/[\s()=%/]+/g,''); //remove spaces and characters (special)
+
+    }
+
+    function highlight_na() {
+
+        $("#searchResult td:contains('N/A')").attr("data-color", "muted");
+
     }
 
 });

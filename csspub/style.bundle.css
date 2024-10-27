@@ -62812,27 +62812,31 @@ h3 > span > em {
 }
 
 #gradeTable tr th:nth-child(n+2):nth-child(-n+7),
-#gradeTable tr td:nth-child(n+2):nth-child(-n+7) {
+#gradeTable tr td:nth-child(n+2):nth-child(-n+7),
+#gradeTable tr td:nth-last-child(4) {
 
   background: #8cf2ea;
 
 }
 
-#gradeTable tr th:nth-child(n+8):nth-child(-n+13), 
-#gradeTable tr td:nth-child(n+8):nth-child(-n+13) {
+#gradeTable tr th:nth-child(n+8):nth-child(-n+11), 
+#gradeTable tr td:nth-child(n+8):nth-child(-n+11), 
+#gradeTable tr td:nth-last-child(3) {
 
   background: #a2ff8d;
 
 }
 
-#gradeTable tr th:nth-last-child(2) { /* Lecture Term Grade (E) */
+#gradeTable tr th:nth-last-child(2), 
+#gradeTable tr th:nth-last-child(4) { /* Lecture Term Grade (E) */
 
   background: #0e4944;
   color: white;
 
 }
 
-#gradeTable tr th:last-child {
+#gradeTable tr th:last-child,
+#gradeTable tr th:nth-last-child(3) {
 
   background: #145904;
   color: white;
@@ -63035,7 +63039,51 @@ option:disabled {
 
 body {
 
-  justify-content: space-evenly;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
 
 } 
+
+/* Master */
+
+#searchResult[data-id="master"] #gradeTable tr th {
+
+  background: #d8db3e;
+  color: black;
+
+
+}
+
+#searchResult[data-id="master"] #gradeTable tr:nth-child(even) td {
+
+  background: #9b9b9b33 !important;
+
+}
+
+#searchResult[data-id="master"] #gradeTable tr:nth-child(odd) td {
+
+  background: white !important;
+
+}
+
+[data-color="red"] {
+
+  color: red !important;
+
+}
+
+[data-color="orange"] {
+
+  color: #ff5500 !important;
+
+}
+
+[data-color="muted"] {
+
+  color: gray !important;
+  
+}
+
 
