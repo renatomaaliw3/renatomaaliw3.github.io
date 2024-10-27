@@ -49,15 +49,9 @@ const doneTypingInterval = 1350; // 1 second delay
         function constructTable(data, exactMatch, searchTerm) {
 
             var contents =  '<h1 class="text-primary font-weight-bold">' + exactMatch['First Name'] + ' ' + exactMatch['Last Name'] + '</h1>';
-            contents +=     '<table class="table table-bordered table-responsive" id="gradeTable">' + 
+            contents +=     '<table class="table table-bordered table-responsive" id="gradeTable">';
 
-                                '<thead class="bg-dark text-white">' +
-
-                                    // '<th colspan = 14 class="h4">' + exactMatch['Term'] + '</th>' + 
-
-                                '</thead>';
-
-            contents +=         '<thead>'
+            contents +=         '<thead>';
             contents +=             '<tr id="headerLabels" class="bg-secondary">';
 
                     for (var key in exactMatch) { // get JSON keys
@@ -103,10 +97,15 @@ const doneTypingInterval = 1350; // 1 second delay
                                     } else {
 
                                          // Check if the key is 'Lecture Term Grade (E)' or 'Lab Term Grade (E)'
-                                        if ((key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)') && (item[key] == 4.00 || item[key] == 5.00)) {
+                                        if ((key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)') && (item[key] == 4.00)) {
 
-                                        // Apply red color if the value is 4.00 or 5.00
-                                        contents += '<td style="color: red;">' + decimal_places(item[key]) + '</td>';
+                                            // Apply warning color if the value is 4.00
+                                            contents += '<td class="text-warning">' + decimal_places(item[key]) + '</td>';
+
+                                        } else if ((key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)') && (item[key] == 5.00)) {
+
+                                             // Apply danger color if the value is 4.00
+                                            contents += '<td class="text-danger">' + decimal_places(item[key]) + '</td>';
 
                                         } else {
 
@@ -127,7 +126,13 @@ const doneTypingInterval = 1350; // 1 second delay
 
             contents +=         '</tbody>';
             contents +=         '</table>';
-            contents +=         '<h6 class="info mt-md-10"> As per SLSU University Code, Chapter 55 (Honors, Art. 443 - Computation of Grades), the rounding off of final grades shall not be allowed. </h6>';
+
+            contents +=         '<table id="gradeLegend">';
+
+            contents +=             '<tr><td colspan=2> Equivalent Rating </td></tr><tr><td> 1.00 </td><td> 98 - 100 </td></tr><tr><td> 1.25 </td><td> 95 - 97 </td></tr><tr><td> 1.50 </td><td> 92 - 94 </td></tr><tr><td> 1.75 </td><td> 89 - 91 </td></tr><tr><td> 2.00 </td><td> 86 - 88 </td></tr><tr><td> 2.25 </td><td> 83 - 85 </td></tr><tr><td> 2.50 </td><td> 80 - 82 </td></tr><tr><td> 2.75 </td><td> 77 - 79 </td></tr><tr><td> 3.00 </td><td> 75 - 79 </td></tr><tr><td class=text-warning> 4.00 </td><td class=text-warning> 70 - 74 </td></tr><tr><td class=text-danger> 5.00 </td><td class=text-danger> 50 - 69 </td></tr>';                         
+                     
+            contents +=         '</table>';
+            contents +=         '<h6 class="info mt-5" style="font-size: 0.75rem;"> As per SLSU University Code, Chapter 55 (Honors, Art. 443 - Computation of Grades), the rounding off of final grades shall not be allowed. </h6>';
 
             $('#searchResult').html(contents);
 

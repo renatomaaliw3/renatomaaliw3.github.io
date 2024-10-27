@@ -62853,7 +62853,7 @@ h3 > span > em {
 .info {
 
   font-size: 0.75rem;
-  color: #231616;
+  color: #8a8a8a;
 
 }
 
@@ -62969,5 +62969,22 @@ h3 > span > em {
 option:disabled {
 
   color: rgb(192, 192, 192);
+
+}
+
+#gradeLegend {
+
+  margin: 2rem auto 3rem auto;
+  font-size: 0.45rem;
+  width: 100%;
+
+}
+
+#gradeLegend tr td {
+
+  width: 50%;
+  border: 1px solid #e7e7e7 !important;
+  color: #7f7f7f;
+  padding: 0.25rem;
 
 }
