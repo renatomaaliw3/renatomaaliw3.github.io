@@ -79,6 +79,8 @@ $(document).ready(function() {
 
         }
 
+        contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>' // Show Details button
+
         // Append the contents to the searchResult div
         $('#searchResult').html(contents);
         highlight_na();
@@ -160,7 +162,7 @@ $(document).ready(function() {
         contents += '</table>';
 
         // Button for details
-        contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>';
+        //contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>';
 
         return contents;
 
@@ -194,14 +196,14 @@ $(document).ready(function() {
 
             button.val('Hide Details')
             searchResult.find('th, td').show(); //Show all
-            $(this).parents('#searchResult').find('#gradeTable').css({'display': 'block'});
+            $(this).closest('#gradeTable').css({'display': 'block'});
          
 
         } else {
 
             button.val('Show Details');
             searchResult.find('#gradeTable th, #gradeTable td').not('.LectureTermGradeE, .LabTermGradeE, .LastName, .FirstName').hide(); //Hide class except
-            $(this).parents('#searchResult').find('#gradeTable').css({'display': 'table'});
+            $(this).closest('#gradeTable').css({'display': 'table'});
            
         }
 
