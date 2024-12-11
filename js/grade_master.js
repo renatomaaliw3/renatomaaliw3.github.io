@@ -91,7 +91,7 @@ $(document).ready(function() {
 
     function buildTermTable(term, data) {
 
-        var contents = '<h4>' + term + '</h4>';
+        var contents = '<h4 class="text-start">' + term + '</h4>';
         contents += '<table class="table table-bordered table-responsive-sm" id="gradeTable">';
         contents += '<thead>';
         contents += '<tr id="headerLabels" class="bg-secondary">';
