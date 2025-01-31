@@ -176,7 +176,7 @@ const doneTypingInterval = 1350; // 1 second delay
         // Functions
         function emailNotFound() {
 
-            $('#searchResult').html('<h3 class="text-danger text-md">Email not found</h3>');
+            $('#searchResult').html('<h3 class="text-danger text-md">Pass Key Not Found</h3>');
 
         }
 
