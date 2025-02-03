@@ -231,7 +231,7 @@ $(document).ready(function() {
             const tbody = $(this).find('tbody');
             const rows = tbody.find('tr.scoreData').get();
             
-            if (selectedSort === 'Sort Last Name (ASC)') {
+            if (selectedSort === 'Sort by Last Name (ASC)') {
 
                 rows.sort(function(a, b) {
 
@@ -245,7 +245,7 @@ $(document).ready(function() {
 
                 });
 
-            } else if (selectedSort === 'Sort Lecture Grade (DESC)') {
+            } else if (selectedSort === 'Sort by Lecture Grade (DESC)') {
 
                 rows.sort(function(a, b) {
 
