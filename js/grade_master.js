@@ -79,11 +79,16 @@ $(document).ready(function() {
 
         }
 
-        contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>' // Show Details button
+        contents += '<div style="display: flex; gap: 10px; margin-top: 1rem;">' +
+                        '<input type="button" value="Show Details" id="btnDetails">' +
+                    '</div>'; // Show Details button
 
         // Append the contents to the searchResult div
         $('#searchResult').html(contents);
         highlight_na();
+
+        // Call the new function to highlight the highest Lecture Term Grade (60%) cell(s)
+        highlightHighestLectureGrade();
 
     }
 
@@ -209,6 +214,59 @@ $(document).ready(function() {
 
     });
 
+    // *** New sort functionality ***
+    $('#gradeForm').on('change', '#drpSort', function() {
+
+        sortTables();
+
+    });
+
+    // The sortTables function loops over every table in the search result and sorts its rows.
+    function sortTables() {
+
+        const selectedSort = $('#drpSort option:selected').text().trim();
+
+        $('#searchResult table').each(function() {
+
+            const tbody = $(this).find('tbody');
+            const rows = tbody.find('tr.scoreData').get();
+            
+            if (selectedSort === 'Sort Last Name (ASC)') {
+
+                rows.sort(function(a, b) {
+
+                    const nameA = $(a).find('.LastName').text().toUpperCase();
+                    const nameB = $(b).find('.LastName').text().toUpperCase();
+
+                    if (nameA < nameB) return -1;
+                    if (nameA > nameB) return 1;
+
+                    return 0;
+
+                });
+
+            } else if (selectedSort === 'Sort Lecture Grade (DESC)') {
+
+                rows.sort(function(a, b) {
+
+                    const gradeA = parseFloat($(a).find('.LectureTermGrade60').text()) || 0;
+                    const gradeB = parseFloat($(b).find('.LectureTermGrade60').text()) || 0;
+                    
+                    return gradeB - gradeA;
+
+                });
+            }
+
+            // Re-append the sorted rows to the tbody.
+            $.each(rows, function(index, row) {
+
+                tbody.append(row);
+
+            });
+
+        });
+    }
+
     function NotFound() {
         $('#searchResult').html('<h3 class="text-danger text-md"> Name not found</h3>');
     }
@@ -239,5 +297,7 @@ $(document).ready(function() {
         $("#searchResult td:contains('N/A')").attr("data-color", "muted");
 
     }
+
+
 
 });

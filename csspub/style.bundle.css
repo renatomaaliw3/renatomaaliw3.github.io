@@ -62808,6 +62808,7 @@ h3 > span > em {
 #gradeTable {
 
   color: #000;
+  margin-bottom: 2.5rem;
 
 }
 
@@ -63024,10 +63025,13 @@ option:disabled {
 
   text-align: left;
   font-size: 0.775rem;
-  background: #7f1919;
-  padding: 0.2rem 0.4rem;
+  background: rgb(255,247,0, 0.85);
+  padding: 0.4rem 0.6rem;
   border: 1px solid #7f1919;
-  color: white;
+  color: black;
+  position: fixed; 
+  bottom: 10px; 
+  right: 10px;
 
 }
 
