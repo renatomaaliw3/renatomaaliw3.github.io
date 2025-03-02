@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+		<title> Web Scraping Demo </title>
+		<link rel="stylesheet" href="css/styles_demo.css">
+	</head>
+<body>
+
+	<div id="wrapper">
+
+		<h1 id="h1"> Table 1 </h1>
+		
+		<table id="table-1">
+			<tr>
+				<th class="name"> Name </th>
+				<th class="email"> Email </th>
+				<th class="country"> Country </th>
+				<th class="region"> Region </th>
+			</tr>
+			<tr>
+				<td class="vip">Geoffrey O'Donnell</td>
+				<td>vitae.semper@protonmail.org</td>
+				<td>Nigeria</td>
+				<td>Flevoland</td>
+			</tr>
+			<tr>
+				<td class="vip special">Justin Patrick</td>
+				<td>orci.ut.sagittis@outlook.com</td>
+				<td>Peru</td>
+				<td>Punjab</td>
+			</tr>
+			<tr>
+				<td data-occupation = 'ceo'>Ariel Buckner</td>
+				<td>nunc@google.net</td>
+				<td>Vietnam</td>
+				<td>North Chungcheong</td>
+			</tr>
+			<tr>
+				<td><span>Imani Faulkner</span></td>
+				<td>hendrerit@yahoo.com</td>
+				<td>Philippines</td>
+				<td>Bicol</td>
+			</tr>
+			<tr>
+				<td><em>Colorado Hampton</em></td>
+				<td>eros.nam@hotmail.couk</td>
+				<td>Brazil</td>
+				<td>Katsina</td>
+			</tr>
+		</table>
+
+		<h1 id="h2"> Table 2 </h1>
+
+		<table id="table-2">
+			<tr>
+				<th class="name">name</th>
+				<th class="email">email</th>
+				<th class="country">country</th>
+				<th class="region">region</th>
+			</tr>
+			<tr>
+				<td><span> Charity Ferguson </span></td>
+				<td>elementum.lorem.ut@icloud.edu</td>
+				<td>Brazil</td>
+				<td>Burgenland</td>
+			</tr>
+			<tr>
+				<td><em> Callum Waters </em></td>
+				<td>purus.duis@outlook.org</td>
+				<td>Russian Federation</td>
+				<td>Indiana</td>
+			</tr>
+			<tr>
+				<td>Galena Mccarthy</td>
+				<td>curabitur@yahoo.com</td>
+				<td>Belgium</td>
+				<td>Istanbul</td>
+			</tr>
+			<tr>
+				<td>Logan Mcdonald</td>
+				<td>odio.tristique.pharetra@hotmail.net</td>
+				<td>Singapore</td>
+				<td>Xīnán</td>
+			</tr>
+			<tr>
+				<td>Meredith Sanders</td>
+				<td>ridiculus.mus@outlook.ca</td>
+				<td>Austria</td>
+				<td>Western Australia</td>
+			</tr>
+		</table>
+
+		<h1> Nested Lists </h1>
+
+		<ol id="list-837" class="list level1">
+
+			<li id="item-592" class="entry alpha" data-code="X7Z3"><span class="link red"> LEVEL 1 </span>
+				
+				<ol class="list level2">
+
+					<li id="item-304" class="entry beta" data-code="A1B2"><span class="link blue"> Secondary Level 1.1 </span>
+						
+						<ol class="list level3">
+
+							<li id="item-867" class="entry gamma" data-code="C3D4">
+								<span class="link green"> Third Level A.1 </span>
+							</li>
+							<li id="item-145" class="entry delta" data-code="E5F6">
+								<span class="link purple"> Third Level A.2 </span>
+							</li>
+						</ol>
+					</li>
+
+					<li id="item-761" class="entry epsilon" data-code="G7H8">
+						<span class="link orange"> Secondary Level 1.2 </span>
+
+						<ol class="list level3">
+							<li id="item-428" class="entry zeta" data-code="I9J0">
+								<span class="link brown"> Third Level B.1 </span>
+							</li>
+						</ol>
+					</li>
+
+				</ol>
+
+			</li>
+
+			<li id="item-239" class="entry theta" data-code="K1L2">
+
+				<span class="link teal"> LEVEL 2 </span>
+
+				<ol class="list level2">
+
+					<li id="item-654" class="entry iota" data-code="M3N4">
+
+						<span class="link navy"> Secondary Level 2.1 </span>
+
+						<ol class="list level3">
+
+							<li id="item-891" class="entry kappa" data-code="O5P6">
+								<a href="https://example.com/891" class="link maroon"> Third Level A.1 </a>
+							</li>
+
+						</ol>
+
+					</li>
+
+				</ol>
+
+			</li>
+
+		</ol>
+
+	</div>
+
+</body>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/jsPDF.debug.js"></script>
+<script src="js/main.js"></script>
+</html>
