@@ -63018,6 +63018,7 @@ option:disabled {
   border: 1px solid #e7e7e7 !important;
   color: #575757;
   padding: 0.25rem;
+  text-align: center;
 
 }
 
@@ -63089,5 +63090,6 @@ body {
   color: gray !important;
   
 }
+
 
 
