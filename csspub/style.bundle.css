@@ -63022,6 +63022,19 @@ option:disabled {
 
 }
 
+#img-container {
+
+  display: flex;
+  justify-content: center;
+
+}
+
+#img-container img {
+
+  min-width: 100%;
+
+}
+
 #btnDetails {
 
   text-align: left;
@@ -63090,6 +63103,3 @@ body {
   color: gray !important;
   
 }
-
-
-

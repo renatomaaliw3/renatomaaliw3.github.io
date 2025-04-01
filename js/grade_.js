@@ -11,6 +11,7 @@ $(document).ready(function() {
     const searchTerm = $('#emailInput').val();
     const dropDown = $('#courseMenu').val();
     var direct = 'checkpoint/';
+    var graphs = 'checkpoint/graphs/';
 
     // You can replace the URL with your external JSON file's location
     var jsonScores = '';
@@ -21,6 +22,7 @@ $(document).ready(function() {
         const dropDown = $('#courseMenu').val();
 
         jsonScores = direct + dropDown;
+        jsonGraphs = graphs + dropDown;
 
         $.getJSON(jsonScores, function(data) {
 
@@ -44,6 +46,12 @@ $(document).ready(function() {
 
             }
  
+        });
+
+        $.getJSON(jsonGraphs, function(data) {
+
+            constructGraphMenu(data);
+
         });
 
     }
@@ -126,19 +134,32 @@ $(document).ready(function() {
         // Button for details
         contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>';
     
-        // PyScript
-        // contents += '<section class="pyscript">';
-        // 	contents += '<div id="grph"></div>';
-        // 	contents += '<script type="py" src="python/main.py" config="python/pyscript.toml"></script>';
-        // contents += '</section>';
-
-        // contents += '<table id="gradeLegend" style="display: none;">';
-        // contents += '<tr><td colspan=2> Equivalent Rating </td></tr><tr><td> 1.00 </td><td> 98 - 100 </td></tr><tr><td> 1.25 </td><td> 95 - 97 </td></tr><tr><td> 1.50 </td><td> 92 - 94 </td></tr><tr><td> 1.75 </td><td> 89 - 91 </td></tr><tr><td> 2.00 </td><td> 86 - 88 </td></tr><tr><td> 2.25 </td><td> 83 - 85 </td></tr><tr><td> 2.50 </td><td> 80 - 82 </td></tr><tr><td> 2.75 </td><td> 77 - 79 </td></tr><tr><td> 3.00 </td><td> 75 - 76 </td></tr><tr><td data-color="orange"> 4.00 </td><td data-color="orange"> 70 - 74 </td></tr><tr><td class="text-danger"> 5.00 </td><td class="text-danger"> 50 - 69 </td></tr>';                         
-        // contents += '</table>';
-        // contents += '<h6 class="info mt-5" style="font-size: 0.75rem;"> As per SLSU University Code, Chapter 55 (Honors, Art. 443 - Computation of Grades), the rounding off of final grades shall not be allowed. </h6>';
-    
         $('#searchResult').html(contents);
         highlight_na();
+
+    }
+
+    function constructGraphMenu(data) {
+
+        var contents = '<form id="graphForm" class="form-group">';
+
+                contents += '<label for="graphOption"> Select Term Statistics: </label>';
+                contents += '<select id="graphOption" class="form-select form-control">';
+
+                data.forEach(function(item){
+
+                   var term = item['Term'];
+                   var graph = item['Graphs'];
+
+                   contents += '<option value="' + graph + '">' + term  + '</option>';
+
+                });
+                    
+                contents += '</select>';
+
+            contents += '</form>';
+
+        $('#graphs').html(contents);
 
     }
 
@@ -165,7 +186,8 @@ $(document).ready(function() {
             searchResult.find('th, td').show(); //Show all
             $('#gradeTable').css({'display':'block'});
             $('#gradeLegend').css({'display':'table'});
-            $('#grph').show();
+            $('#graphs').show();
+
 
         } else {
 
@@ -173,10 +195,35 @@ $(document).ready(function() {
             searchResult.find('#gradeTable th, #gradeTable td').not('.Term, .LectureTermGradeE, .LabTermGradeE').hide(); //Hide class except
             $('#gradeTable').css({'display':'table'});
             $('#gradeLegend').css({'display':'none'});
-            $('#grph').hide();
+            $('#graphs').hide();
+            $('#img-container').html('');
             
         }
 
+    });
+
+    $('#graphs').on('change', '#graphOption', function() {
+
+        const optx = $(this);
+
+        var the_image = graphs + optx.val();
+        var img = new Image();
+
+        img.onload = function() {
+
+            $('#img-container').html('<img src="' + the_image + '">');
+
+        };
+
+        img.onerror = function() {
+
+            $('#img-container').html('<h6 style="text-align: center;" class="text-danger"> Not yet available </h6>');
+
+        };
+
+        // Start loading the image
+        img.src = the_image;
+        
     });
 
     // Functions
