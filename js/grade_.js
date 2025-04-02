@@ -145,6 +145,7 @@ $(document).ready(function() {
 
                 contents += '<label for="graphOption"> Select Term Statistics: </label>';
                 contents += '<select id="graphOption" class="form-select form-control">';
+                contents += '<option disabled selected> [Select Term] </option>';
 
                 data.forEach(function(item){
 
@@ -196,6 +197,7 @@ $(document).ready(function() {
             $('#gradeTable').css({'display':'table'});
             $('#gradeLegend').css({'display':'none'});
             $('#graphs').hide();
+            $('#graphOption option:first').prop('selected', true);
             $('#img-container').html('');
             
         }
@@ -230,6 +232,8 @@ $(document).ready(function() {
     function emailNotFound() {
 
         $('#searchResult').html('<h3 class="text-danger text-md">Pass Key Not Found</h3>');
+        $('#graphs').hide();
+        $('#img-container').html('');
 
     }
 
