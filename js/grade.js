@@ -122,17 +122,20 @@ $(document).ready(function() {
 
                     }
 
+
                 });
     
                 contents += '</tr>';
+           
             }
+
         });
     
         contents +=         '</tbody>';
         contents +=     '</table>';
-    
+
         // Button for details
-        contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>';
+        contents += '<div style="display: flex;"><input type="button" value="Show Detail" id="btnDetails"></div>';
     
         $('#searchResult').html(contents);
         highlight_na();

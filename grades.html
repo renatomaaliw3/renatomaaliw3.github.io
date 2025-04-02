@@ -62,7 +62,7 @@
 				<span class="font-weight-boldest"> Rating Viewer </span>
 			</h1>
 
-			<p class="text-muted mt-2 text-left" style="font-size: 0.75rem;"> Last Update: <span> March 27, 2025 (6:00 PM) </span></p>
+			<p class="text-muted mt-2 text-left" style="font-size: 0.75rem;"> Last Update: <span> April 02, 2025 (6:00 PM) </span></p>
 
 			<form id="gradeForm" class="mt-2 text-md-left">
 
@@ -86,11 +86,15 @@
         		</div>
     			
     			<div id="searchResult" style="max-width: 100%" class="text-md-center"></div>
-
+					
 			</form>
 
 			<div id="graphs"></div>
 			<div id="img-container"></div>
+			<table id="gradeLegend" style="font-size: 13px; display: none;">
+				<tr><td colspan = 2 style="text-align: center;"> Equivalent Rating </td></tr><tr><td> 1.00 </td><td> 98 - 100 </td></tr><tr><td> 1.25 </td><td> 95 - 97 </td></tr><tr><td> 1.50 </td><td> 92 - 94 </td></tr><tr><td> 1.75 </td><td> 89 - 91 </td></tr><tr><td> 2.00 </td><td> 86 - 88 </td></tr><tr><td> 2.25 </td><td> 83 - 85 </td></tr><tr><td> 2.50 </td><td> 80 - 82 </td></tr><tr><td> 2.75 </td><td> 77 - 79 </td></tr><tr><td> 3.00 </td><td> 75 - 76 </td></tr><tr><td data-color="orange"> 4.00 </td><td data-color="orange"> 70 - 74 </td></tr><tr><td class="text-danger"> 5.00 </td><td class="text-danger"> 50 - 69 </td></tr>
+				<tr><td colspan = 10 style="text-align: center;"> As per SLSU University Code, Chapter 55 (Honors, Art. 443 - Computation of Grades), the rounding off of final grades shall not be allowed. </td></tr>                         
+			</table>
 
 		</div>
 
@@ -105,7 +109,6 @@
 
 	</div>
 
-	
 </body>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>

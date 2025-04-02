@@ -70,7 +70,7 @@ $(document).ready(function() {
                         'Lab Activities', 'Lab Activities Points (max = 40%)',
                         'Lab Major Exam','Lab Major Exam Points (max = 60%)',
                         'Lecture Term Grade (60%)', 
-                        'Lab Term Grade (40%)', 'Lecture Term Grade (E)', 'Lab Term Grade (E)'];
+                        'Lab Term Grade (40%)', 'Lecture Term Grade (E)', 'Lab Term Grade (E)', 'Section Rank', 'Overall Rank'];
     
         keysToShow.forEach(function(key) {
 
@@ -129,7 +129,8 @@ $(document).ready(function() {
         });
     
         contents +=         '</tbody>';
-        contents +=     '</table>';
+        contents +=     '</table>';    
+        contents +=     '<p style="text-align: left; font-size: 14px; margin-bottom: 2rem;"><em> Section and Overall Ranks are Lecture Grades only </em></p>'; 
     
         // Button for details
         contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>';

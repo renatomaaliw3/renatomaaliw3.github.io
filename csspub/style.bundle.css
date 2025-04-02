@@ -62808,13 +62808,13 @@ h3 > span > em {
 #gradeTable {
 
   color: #000;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.5rem;
 
 }
 
-#gradeTable tr th:nth-child(n+2):nth-child(-n+7),
+#gradeTable tr th:nth-child(n+2):nth-child(-n+8),
 #gradeTable tr td:nth-child(n+2):nth-child(-n+7),
-#gradeTable tr td:nth-last-child(4) {
+#gradeTable tr td:nth-last-child(6) {
 
   background: #8cf2ea;
 
@@ -62822,13 +62822,13 @@ h3 > span > em {
 
 #gradeTable tr th:nth-child(n+8):nth-child(-n+11), 
 #gradeTable tr td:nth-child(n+8):nth-child(-n+11), 
-#gradeTable tr td:nth-last-child(3) {
+#gradeTable tr td:nth-last-child(5) {
 
   background: #a2ff8d;
 
 }
 
-#gradeTable tr th:nth-last-child(2), 
+#gradeTable tr th:nth-last-child(6), 
 #gradeTable tr th:nth-last-child(4) { /* Lecture Term Grade (E) */
 
   background: #0e4944;
@@ -62836,8 +62836,8 @@ h3 > span > em {
 
 }
 
-#gradeTable tr th:last-child,
-#gradeTable tr th:nth-last-child(3) {
+#gradeTable tr th:nth-last-child(3),
+#gradeTable tr th:nth-last-child(5) {
 
   background: #145904;
   color: white;
@@ -62868,14 +62868,14 @@ h3 > span > em {
 
 }
 
-#scoreData > td:last-child {
+#scoreData > td:nth-last-child(3) {
 
   background: #a2ff8d;
   font-weight: bold;
 
 }
 
-#scoreData > td:nth-last-child(2) {
+#scoreData > td:nth-last-child(4) {
 
   font-weight: bold;
   background: #8cf2ea;
