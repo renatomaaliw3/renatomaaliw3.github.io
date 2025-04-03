@@ -97,11 +97,11 @@ $(document).ready(function() {
     function buildTermTable(term, data) {
 
         var contents = '<h4 class="text-start">' + term + '</h4>';
-        contents += '<table class="table table-bordered table-responsive-sm" id="gradeTable">';
+        contents += '<table class="table table-bordered" id="gradeTable" style="display: table; overflow: auto;">';
         contents += '<thead>';
         contents += '<tr id="headerLabels" class="bg-secondary">';
 
-        var keysToShow = ['Last Name', 'First Name', 'Lecture Quiz', 'Lecture Quiz Points (max = 30%)',
+        var keysToShow = ['Overall Rank','Email', 'Last Name', 'First Name', 'Lecture Quiz', 'Lecture Quiz Points (max = 30%)',
                         'Lecture Major Exam', 'Lecture Major Exam Points (max = 40%)',
                         'Lecture Performance', 'Lecture Performance Points (max = 30%)',
                         'Lab Activities', 'Lab Activities Points (max = 40%)',
@@ -112,13 +112,13 @@ $(document).ready(function() {
         keysToShow.forEach(function(key) {
 
             if (key == 'Lecture Term Grade (E)' || key == 'Lab Term Grade (E)' 
-               || key == 'Last Name' || key == 'First Name') {
+               || key == 'Last Name' || key == 'First Name' || key == 'Overall Rank' || key == 'Email') {
 
                 contents += '<th class="' + clean_key(key) + '">' + key + '</th>'; // display specified keys as headers
 
             } else {
 
-                contents += '<th class="' + clean_key(key) + '"' + ' style="display: none;">' + key + '</th>'; // display specified keys as headers
+                contents += '<th class="' + clean_key(key) + '"' + ' style="display: none;">' + key + '</th>'; // not displayed headers
 
             }
 
@@ -134,13 +134,13 @@ $(document).ready(function() {
 
             keysToShow.forEach(function(key) {
 
-                if (key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)' || key === 'Last Name' || key === 'First Name') {
+                if (key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)' || key === 'Last Name' || key === 'First Name' || key === 'Overall Rank' || key === 'Email') {
 
-                    if (item[key] == 4.00) {
+                    if (item[key] == 4.00 && key != 'Overall Rank') {
 
                         contents += '<td data-color="orange" class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
 
-                    } else if (item[key] == 5.00) {
+                    } else if (item[key] == 5.00 && key != 'Overall Rank') {
 
                         contents += '<td data-color="red" class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
                     
@@ -199,15 +199,17 @@ $(document).ready(function() {
 
         if (button.val() == 'Show Details') {
 
-            button.val('Hide Details')
-            searchResult.find('th, td').show(); //Show all
+            button.val('Hide Details');
+            searchResult.find('th, td').show();
+            searchResult.find('.Email').hide(); //hide
             $(this).closest('#gradeTable').css({'display': 'block'});
          
 
         } else {
 
             button.val('Show Details');
-            searchResult.find('#gradeTable th, #gradeTable td').not('.LectureTermGradeE, .LabTermGradeE, .LastName, .FirstName').hide(); //Hide class except
+            searchResult.find('#gradeTable th, #gradeTable td').not('.LectureTermGradeE, .LabTermGradeE, .LastName, .FirstName, .OverallRank, .Email').hide(); //Hide class except
+            searchResult.find('.Email').show();
             $(this).closest('#gradeTable').css({'display': 'table'});
            
         }
@@ -255,6 +257,18 @@ $(document).ready(function() {
                     return gradeB - gradeA;
 
                 });
+
+            } else if (selectedSort === 'Sort by Overall Rank (DESC)') {
+
+                rows.sort(function(a, b) {
+
+                    const gradeA = parseFloat($(a).find('.OverallRank').text()) || 0;
+                    const gradeB = parseFloat($(b).find('.OverallRank').text()) || 0;
+                    
+                    return gradeA - gradeB;
+
+                });
+            
             }
 
             // Re-append the sorted rows to the tbody.

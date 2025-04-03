@@ -102,11 +102,11 @@ $(document).ready(function() {
 
                     if (key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)' || key === 'Term' || key == 'Section Rank' || key == 'Overall Rank') {
 
-                        if (item[key] == 4.00) {
+                        if (item[key] == 4.00 && (key != 'Section Rank' && key != 'Overall Rank'))  {
 
                             contents += '<td data-color="orange" class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
 
-                        } else if (item[key] == 5.00) {
+                        } else if (item[key] == 5.00 && (key != 'Section Rank' && key != 'Overall Rank')) {
 
                             contents += '<td data-color="red" class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
 
