@@ -97,11 +97,11 @@ $(document).ready(function() {
     function buildTermTable(term, data) {
 
         var contents = '<h4 class="text-start">' + term + '</h4>';
-        contents += '<table class="table table-bordered" id="gradeTable" style="display: table; overflow: auto;">';
+        contents += '<table class="table table-responsive" id="gradeTable" style="display: table; overflow: auto;">';
         contents += '<thead>';
         contents += '<tr id="headerLabels" class="bg-secondary">';
 
-        var keysToShow = ['Overall Rank','Email', 'Last Name', 'First Name', 'Lecture Quiz', 'Lecture Quiz Points (max = 30%)',
+        var keysToShow = ['Overall Rank', 'Email', 'Last Name', 'First Name', 'Lecture Quiz', 'Lecture Quiz Points (max = 30%)',
                         'Lecture Major Exam', 'Lecture Major Exam Points (max = 40%)',
                         'Lecture Performance', 'Lecture Performance Points (max = 30%)',
                         'Lab Activities', 'Lab Activities Points (max = 40%)',
