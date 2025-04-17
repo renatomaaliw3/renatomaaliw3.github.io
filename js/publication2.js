@@ -4,6 +4,7 @@ $(document).ready(function() {
       var industrialDesignCount = $("ol#industrialDesign > li").length;
       var booksCount = $("ol#books > li").length;
       var researchCount = $("#researchArticles > ol.research-list > li").length;
+      var researchPresCount = $("#researchPresentations > ol.research-list > li").length;
       var bookChapterCount = $("#bookChapters > li").length;
       var conferencePaperCount = $("#conferencePaper > li").length;
       var acceptedArticlesCount = $("#acceptedArticles > li").length;
@@ -15,6 +16,7 @@ $(document).ready(function() {
       $("#patentsCount").text("(" + patentCount + ")");
       $("#industrialDesignCount").text("(" + industrialDesignCount + ")");
       $("#booksCount").text("(" + booksCount + ")");
+      $("#researchPresentationsCount").text("(" + researchPresCount + ")");
       $("#researchArticlesCount").text("(" + researchCount + ")");
       $("#bookChapterCount").text("(" + bookChapterCount + ")");
       $("#conferencePaperCount").text("(" + conferencePaperCount + ")")
