@@ -10,6 +10,7 @@ $(document).ready(function() {
 
     const searchTerm = $('#emailInput').val();
     const dropDown = $('#courseMenu').val();
+
     var direct = 'checkpoint/';
     var graphs = 'checkpoint/graphs/';
 
@@ -58,7 +59,7 @@ $(document).ready(function() {
 
     function constructTable(data, exactMatch, searchTerm) {
 
-        var contents =  '<h3 class="text-primary text-left font-weight-bold">' + exactMatch['First Name'] + ' ' + exactMatch['Last Name'] + '</h3>';
+        var contents =  '<h3 class="text-primary text-left font-weight-bold">' + exactMatch['First Name'] + ' ' + exactMatch['Last Name'] + overallRating(exactMatch) + '</h3>';
         contents +=     '<table class="table table-bordered table-responsive" id="gradeTable" style="display: table;">';
     
         contents +=         '<thead>';
@@ -129,7 +130,7 @@ $(document).ready(function() {
         });
     
         contents +=         '</tbody>';
-        contents +=     '</table>';    
+        contents +=     '</table>';   
         contents +=     '<p style="text-align: left; font-size: 14px; margin-bottom: 2rem;"><em> Section and Overall Ranks are Lecture Grades only </em></p>'; 
     
         // Button for details
@@ -137,6 +138,20 @@ $(document).ready(function() {
     
         $('#searchResult').html(contents);
         highlight_na();
+
+    }
+
+    function overallRating(exactMatch) {
+
+        if (exactMatch['Overall Rating'] != '') {
+        
+            return " (" + exactMatch['Overall Rating'].toFixed(2) + ")";
+    
+        } else {
+
+            return "";
+
+        }
 
     }
 
