@@ -145,7 +145,7 @@ $(document).ready(function() {
 
         if (exactMatch['Overall Rating'] != '') {
         
-            return " (" + exactMatch['Overall Rating'].toFixed(2) + ")";
+            return " (" + parseFloat(exactMatch['Overall Rating']).toFixed(2) + ")";
     
         } else {
 
