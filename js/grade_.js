@@ -190,6 +190,7 @@ $(document).ready(function() {
     $('#courseMenu').on('change', function() {
 
             performSearch();
+            $('#img-container').html('');
             
     });
 
