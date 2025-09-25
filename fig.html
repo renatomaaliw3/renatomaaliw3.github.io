@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Overall System Diagram — Federated, Quality‑Adjusted Copra Price Oracle</title>
+<style>
+  :root {
+  --bg: #ffffff;
+  --panel: #ffffff;
+  --panel2: #ffffff;
+  --stroke: #000000;
+  --text: #000000;
+  --muted: #000000;
+  --accent: #000000;
+  --accent2: #000000;
+  --accent3: #000000;
+}
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+  .wrap { padding: 16px; }
+  .legend { max-width: 1200px; margin: 8px auto 0; font-size: 12.5px; color: var(--muted); line-height: 1.35; }
+  .legend strong { color: var(--text); }
+  .note { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  .export-tip { margin-top: 8px; font-size: 12px; color: var(--muted); }
+  svg { width: 100%; height: auto; display: block; background: #ffffff; border-radius: 0; box-shadow: none; }
+  .gbox { fill: #ffffff; stroke: var(--stroke); stroke-width: 1.3; rx: 0; ry: 0; }
+  .gboxAlt { fill: #ffffff; stroke: var(--stroke); stroke-opacity: 1; stroke-width: 1.1; rx: 0; ry: 0; }
+  .ibox { fill: #ffffff; stroke: #000000; stroke-width: 1; rx: 0; ry: 0; }
+  .cap { font-weight: 700; font-size: 14px; letter-spacing: 0.2px; }
+  .label { font-size: 12.3px; fill: var(--muted); }
+  .badge { font-size: 11px; fill: var(--accent2); }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+  .small { font-size: 11.3px; }
+  .wire { stroke: #000000; stroke-width: 1.8; }
+  .wire.dashed { stroke-dasharray: 4 3; }
+  .wire2 { stroke: #000000; stroke-width: 1.8; }
+  .wire3 { stroke: #000000; stroke-width: 1.8; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<svg viewBox="0 0 1200 900" role="img" aria-label="Overall System Diagram">
+  <defs>
+    <linearGradient id="panelGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#121a33"/>
+      <stop offset="100%" stop-color="#0f1730"/>
+    </linearGradient>
+    <linearGradient id="panelGrad2" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#141c3a"/>
+      <stop offset="100%" stop-color="#0f1730"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse">
+      <polygon points="0 0, 10 5, 0 10" fill="%23000"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse">
+      <polygon points="0 0, 10 5, 0 10" fill="%23000"/>
+    </marker>
+    <marker id="arrowY" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse">
+      <polygon points="0 0, 10 5, 0 10" fill="%23000"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="20" y="28" class="cap">Fig. 1 — Overall System Diagram: Federated, Quality‑Adjusted Copra Price Oracle</text>
+  <!-- <text x="20" y="46" class="label">Numbers in parentheses map to patent-style reference numerals.</text> -->
+
+  <!-- DATA SOURCES (100) -->
+  <g>
+    <rect x="20" y="70" width="320" height="620" class="gbox" />
+    <text x="180" y="95" text-anchor="middle" class="cap">Data Sources</text>
+
+    <g>
+      <rect x="36" y="115" width="288" height="54" class="ibox" />
+      <text x="50" y="135" class="label">Prices & Volumes</text>
+      <text x="50" y="151" class="small">Farmgate/Dealer/Miller, spreads, frequency, terms</text>
+    </g>
+    <g>
+      <rect x="36" y="175" width="288" height="54" class="ibox" />
+      <text x="50" y="195" class="label">Quality Signals</text>
+      <text x="50" y="211" class="small">Moisture, color, breakage, aflatoxin risk, NIR imaging</text>
+    </g>
+    <g>
+      <rect x="36" y="235" width="288" height="54" class="ibox" />
+      <text x="50" y="255" class="label">Weather & Hazards</text>
+      <text x="50" y="271" class="small">Rainfall, humidity, typhoon tracks, drought/flood indices</text>
+    </g>
+    <g>
+      <rect x="36" y="295" width="288" height="54" class="ibox" />
+      <text x="50" y="315" class="label">Crop & Land</text>
+      <text x="50" y="331" class="small"> Calendars, yield estimates</text>
+    </g>
+    <g>
+      <rect x="36" y="355" width="288" height="54" class="ibox" />
+      <text x="50" y="375" class="label">Logistics & Costs</text>
+      <text x="50" y="391" class="small">Fuel, routes, port congestion, trucking rates</text>
+    </g>
+    <g>
+      <rect x="36" y="415" width="288" height="54" class="ibox" />
+      <text x="50" y="435" class="label"> Macro & Related Markets</text>
+      <text x="50" y="451" class="small"> Inflation </text>
+    </g>
+    <g>
+      <rect x="36" y="475" width="288" height="54" class="ibox" />
+      <text x="50" y="495" class="label">Behavioral & Sentiment</text>
+      <text x="50" y="511" class="small">News/social signals, policy bulletins</text>
+    </g>
+    <g>
+      <rect x="36" y="535" width="288" height="54" class="ibox" />
+      <text x="50" y="555" class="label">Calendar & Region Context</text>
+      <text x="50" y="571" class="small">Holidays, festivals, admin region</text>
+    </g>
+    <g>
+      <rect x="36" y="595" width="288" height="54" class="ibox" />
+      <text x="50" y="615" class="label">Regional Graph</text>
+      <text x="50" y="631" class="small">Adjacency & transport corridors</text>
+    </g>
+  </g>
+
+  <!-- FEDERATED SITES (130) -->
+  <g>
+    <rect x="360" y="70" width="380" height="620" class="gbox" />
+    <text x="550" y="95" text-anchor="middle" class="cap">Federated Sites Cooperatives / Mills / Traders / Devices</text>
+
+    <!-- Edge & Feature Store -->
+    <rect x="380" y="120" width="340" height="70" class="ibox" />
+    <text x="550" y="142" text-anchor="middle" class="label">Edge Data Ingestion & Validation</text>
+    <text x="550" y="160" text-anchor="middle" class="small">Database Schema check </text>
+
+    <!-- Local Site Template A -->
+    <rect x="380" y="205" width="160" height="225" class="gboxAlt" />
+    <text x="460" y="225" text-anchor="middle" class="label">Site A </text>
+    <text x="390" y="245" class="small"> Local Feature Store</text>
+    <text x="390" y="263" class="small"> LSTM / Conformer</text>
+    <text x="390" y="281" class="small"> Prophet</text>
+    <text x="390" y="299" class="small"> GBDT Tabular</text>
+    <text x="390" y="317" class="small"> Graph NN (regional)</text>
+    <text x="390" y="335" class="small"> Convolutional NN quality imaging</text>
+    <text x="390" y="353" class="small"> Differentially Private Stochastic Gradient Descent </text>
+    <text x="390" y="371" class="small"> Secure Aggegation client</text>
+
+    <!-- Local Site Template B -->
+    <rect x="560" y="205" width="160" height="225" class="gboxAlt" />
+    <text x="640" y="225" text-anchor="middle" class="label">Site B </text>
+    <text x="570" y="245" class="small"> Local Feature Store</text>
+    <text x="570" y="263" class="small"> LSTM / Conformer </text>
+    <text x="570" y="281" class="small"> Prophet</text>
+    <text x="570" y="299" class="small"> Gradient-Boosted DT </text>
+    <text x="570" y="317" class="small"> GNN (regional)</text>
+    <text x="570" y="335" class="small"> CNN quality imaging</text>
+    <text x="570" y="353" class="small"> DP‑SGD</text>
+    <text x="570" y="371" class="small"> Secure Agg client</text>
+
+    <!-- Legend for sharing -->
+    <text x="550" y="445" text-anchor="middle" class="badge mono">Shares: encrypted params / out‑of‑fold predictions only</text>
+  </g>
+
+  <!-- AGGREGATION & ENSEMBLE (200) -->
+  <g>
+    <rect x="760" y="70" width="420" height="320" class="gbox" />
+    <text x="970" y="95" text-anchor="middle" class="cap">Aggregation & Ensemble </text>
+
+    <rect x="780" y="120" width="180" height="60" class="ibox" />
+    <text x="870" y="145" text-anchor="middle" class="label"> Secure Aggregation</text>
+    <text x="870" y="163" text-anchor="middle" class="small">Robust geometric‑median</text>
+
+    <rect x="980" y="120" width="180" height="60" class="ibox" />
+    <text x="1070" y="145" text-anchor="middle" class="label">Stacking Meta‑Learner</text>
+    <text x="1070" y="163" text-anchor="middle" class="small">Quantile head (τ 0.1/0.5/0.9)</text>
+
+    <rect x="780" y="190" width="180" height="60" class="ibox" />
+    <text x="870" y="214" text-anchor="middle" class="label"> Hierarchical Reconciliation</text>
+    <text x="870" y="232" text-anchor="middle" class="small">Barangay → Province → National</text>
+
+    <rect x="980" y="190" width="180" height="60" class="ibox" />
+    <text x="1070" y="214" text-anchor="middle" class="label"> Conformal Uncertainty</text>
+    <text x="1070" y="232" text-anchor="middle" class="small">Calibrated bands</text>
+
+    <rect x="780" y="260" width="180" height="60" class="ibox" />
+    <text x="870" y="284" text-anchor="middle" class="label"> QAVI</text>
+    <text x="870" y="302" text-anchor="middle" class="small"> Quality‑Adjusted Value Index</text>
+
+    <rect x="980" y="260" width="180" height="60" class="ibox" />
+    <text x="1070" y="284" text-anchor="middle" class="label"> Forecasts</text>
+    <text x="1070" y="302" text-anchor="middle" class="small">Point + Quantiles</text>
+  </g>
+
+  <!-- BLOCKCHAIN & ORACLE (300) -->
+  <g>
+    <rect x="760" y="400" width="420" height="250" class="gbox" />
+    <text x="970" y="425" text-anchor="middle" class="cap">Blockchain Oracle & Governance </text>
+
+    <rect x="780" y="445" width="180" height="52" class="ibox" />
+    <text x="870" y="465" text-anchor="middle" class="label">Smart Contracts</text>
+    <text x="870" y="481" text-anchor="middle" class="small">Oracle API</text>
+
+    <rect x="980" y="445" width="180" height="52" class="ibox" />
+    <text x="1070" y="465" text-anchor="middle" class="label">Records</text>
+    <text x="1070" y="481" text-anchor="middle" class="small">Model/Input hashes, proofs </text>
+
+    <rect x="780" y="505" width="180" height="52" class="ibox" />
+    <text x="870" y="525" text-anchor="middle" class="label">QAFP</text>
+    <text x="870" y="541" text-anchor="middle" class="small">Quality‑Adjusted Floor Price</text>
+
+    <rect x="980" y="505" width="180" height="52" class="ibox" />
+    <text x="1070" y="525" text-anchor="middle" class="label">PoDQ & Staking</text>
+    <text x="1070" y="541" text-anchor="middle" class="small">Rewards / Slashing</text>
+
+    <rect x="880" y="565" width="180" height="52" class="ibox" />
+    <text x="970" y="585" text-anchor="middle" class="label"> L2 → L1 Bridge</text>
+    <text x="970" y="601" text-anchor="middle" class="small">Permissioned to Public</text>
+  </g>
+
+  <!-- CONSUMERS (400) -->
+  <g>
+    <rect x="20" y="700" width="720" height="180" class="gbox" />
+    <text x="380" y="725" text-anchor="middle" class="cap">Downstream Consumers </text>
+
+    <rect x="36" y="740" width="160" height="54" class="ibox" />
+    <text x="116" y="760" text-anchor="middle" class="label">Floor‑Price Enforcement</text>
+    <text x="116" y="776" text-anchor="middle" class="small">Contracts</text>
+
+    <rect x="216" y="740" width="160" height="54" class="ibox" />
+    <text x="296" y="760" text-anchor="middle" class="label">Insurance</text>
+    <text x="296" y="776" text-anchor="middle" class="small">Parametric</text>
+
+    <rect x="396" y="740" width="160" height="54" class="ibox" />
+    <text x="476" y="760" text-anchor="middle" class="label">Credit</text>
+    <text x="476" y="776" text-anchor="middle" class="small">Working capital</text>
+
+    <rect x="576" y="740" width="160" height="54" class="ibox" />
+    <text x="656" y="760" text-anchor="middle" class="label">Dashboards</text>
+    <text x="656" y="776" text-anchor="middle" class="small">Explainability</text>
+
+    <text x="116" y="814" text-anchor="middle" class="small">Regulators</text>
+    <text x="296" y="814" text-anchor="middle" class="small">Market Participants</text>
+  </g>
+
+  <!-- MONITORING (500) -->
+  <g>
+    <rect x="760" y="670" width="420" height="210" class="gbox" />
+    <text x="970" y="695" text-anchor="middle" class="cap">Monitoring & Risk Controls</text>
+
+    <rect x="780" y="710" width="180" height="54" class="ibox" />
+    <text x="870" y="730" text-anchor="middle" class="label">Drift Detectors</text>
+    <text x="870" y="746" text-anchor="middle" class="small">Data & concept drift</text>
+
+    <rect x="980" y="710" width="180" height="54" class="ibox" />
+    <text x="1070" y="730" text-anchor="middle" class="label">Residual Monitors</text>
+    <text x="1070" y="746" text-anchor="middle" class="small">Tolerance bands</text>
+
+    <rect x="880" y="770" width="180" height="54" class="ibox" />
+    <text x="970" y="790" text-anchor="middle" class="label">Anomaly & Slash Proposals</text>
+    <text x="970" y="806" text-anchor="middle" class="small">Linked to PoDQ</text>
+  </g>
+
+  <!-- WIRES -->
+  <!-- Sources -> Edge -->
+  <line x1="340" y1="250" x2="360" y2="250" class="wire" marker-end="url(#arrow)"/>
+  <line x1="340" y1="420" x2="360" y2="420" class="wire" marker-end="url(#arrow)"/>
+
+  <!-- Sites -> Aggregation -->
+  <line x1="740" y1="318" x2="760" y2="318" class="wire" marker-end="url(#arrow)"/>
+  <text x="742" y="310" class="small mono">secure aggregation / DP</text>
+
+  <!-- Ensemble -> Blockchain -->
+  <line x1="970" y1="330" x2="970" y2="400" class="wire2" marker-end="url(#arrowG)"/>
+  <text x="982" y="368" class="small mono">forecasts + hashes</text>
+
+  <!-- Blockchain -> Consumers -->
+  <line x1="900" y1="625" x2="740" y2="760" class="wire3" marker-end="url(#arrowY)"/>
+  <text x="840" y="670" class="small mono">oracle API</text>
+
+  <!-- Monitoring feedback -->
+  <line x1="760" y1="740" x2="620" y2="600" class="wire dashed" marker-end="url(#arrow)"/>
+  <line x1="820" y1="710" x2="760" y2="250" class="wire dashed" marker-end="url(#arrow)"/>
+  <text x="650" y="610" class="small mono">re‑weight / retrain</text>
+
+</svg>
+
+<div class="legend">
+  <!-- <strong>Legend.</strong> (100–109) Data sources; (120) Edge ingestion/validation; (130) Federated sites; (132) Local feature store; (134–138) Base learners; (139) Differential privacy; (140) Secure aggregation client; (200–250) Aggregation/ensemble stack; (240) QAVI; (250) Forecasts; (300–319) Oracle & governance; (314) QAFP; (400–460) Consumers; (500–530) Monitoring. -->
+</div>
+</div>
+</body>
+</html>
