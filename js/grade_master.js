@@ -101,13 +101,13 @@ $(document).ready(function() {
         contents += '<thead>';
         contents += '<tr id="headerLabels" class="bg-secondary">';
 
-        var keysToShow = ['Overall Rank', 'Email', 'Last Name', 'First Name', 'Lecture Quiz', 'Lecture Quiz Points (max = 30%)',
-                        'Lecture Major Exam', 'Lecture Major Exam Points (max = 40%)',
-                        'Lecture Performance', 'Lecture Performance Points (max = 30%)',
-                        'Lab Activities', 'Lab Activities Points (max = 40%)',
-                        'Lab Major Exam','Lab Major Exam Points (max = 60%)',
-                        'Lecture Term Grade (60%)', 
-                        'Lab Term Grade (40%)', 'Lecture Term Grade (E)', 'Lab Term Grade (E)'];
+        var keysToShow = ['Overall Rank', 'Email', 'Last Name', 'First Name', 'Lecture Quiz', 'Lecture Quiz Points',
+                        'Lecture Major Exam', 'Lecture Major Exam Points',
+                        'Lecture Performance & Attendance', 'Lecture Performance & Attendance Points',
+                        'Lab Activities', 'Lab Activities Points',
+                        'Lab Major Exam','Lab Major Exam Points',
+                        'Lecture Term Grade', 
+                        'Lab Term Grade', 'Lecture Term Grade (E)', 'Lab Term Grade (E)'];
         
         keysToShow.forEach(function(key) {
 
@@ -251,8 +251,8 @@ $(document).ready(function() {
 
                 rows.sort(function(a, b) {
 
-                    const gradeA = parseFloat($(a).find('.LectureTermGrade60').text()) || 0;
-                    const gradeB = parseFloat($(b).find('.LectureTermGrade60').text()) || 0;
+                    const gradeA = parseFloat($(a).find('.LectureTermGrade').text()) || 0;
+                    const gradeB = parseFloat($(b).find('.LectureTermGrade').text()) || 0;
                     
                     return gradeB - gradeA;
 
