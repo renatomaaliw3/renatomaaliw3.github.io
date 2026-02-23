@@ -62814,32 +62814,36 @@ h3 > span > em {
 
 #gradeTable tr th:nth-child(n+2):nth-child(-n+8),
 #gradeTable tr td:nth-child(n+2):nth-child(-n+7),
-#gradeTable tr td:nth-last-child(6) {
+#gradeTable tr td:nth-last-child(7) {
 
-  background: #8cf2ea;
+  background: #8cf2ea; /* aqua */
+  /* background: black; */
 
 }
 
 #gradeTable tr th:nth-child(n+8):nth-child(-n+11), 
 #gradeTable tr td:nth-child(n+8):nth-child(-n+11), 
-#gradeTable tr td:nth-last-child(5) {
+#gradeTable tr td:nth-last-child(6) {
 
-  background: #a2ff8d;
+  background: #a2ff8d; /* light green */
+  /* background: black; */
 
 }
 
-#gradeTable tr th:nth-last-child(6), 
-#gradeTable tr th:nth-last-child(4) { /* Lecture Term Grade (E) */
+#gradeTable tr th:nth-last-child(5), 
+#gradeTable tr th:nth-last-child(7) { /* Lecture Term Grade (E) (header) */
 
-  background: #0e4944;
+  background: #0e4944; /* dark blue */
+  /* background: black; */
   color: white;
 
 }
 
-#gradeTable tr th:nth-last-child(3),
-#gradeTable tr th:nth-last-child(5) {
+#gradeTable tr th:nth-last-child(4),
+#gradeTable tr th:nth-last-child(6) { /* Lab Term Grade (E) (header) */
 
   background: #145904;
+  /* background: black; */
   color: white;
 
 }
