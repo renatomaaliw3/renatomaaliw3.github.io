@@ -71,11 +71,11 @@ $(document).ready(function() {
                         'Lab Activities', 'Lab Activities Points',
                         'Lab Major Exam','Lab Major Exam Points',
                         'Lecture Term Grade', 
-                        'Lab Term Grade', 'Lecture Term Grade (E)', 'Lab Term Grade (E)', 'Section Rank', 'Overall Rank'];
+                        'Lab Term Grade', 'Lecture Term Grade (E)', 'Lab Term Grade (E)', 'Section Rank', 'Overall Rank', 'Remarks'];
     
         keysToShow.forEach(function(key) {
 
-            if (key == 'Lecture Term Grade (E)' || key == 'Lab Term Grade (E)' || key == 'Term' || key == 'Section Rank' || key == 'Overall Rank') {
+            if (key == 'Lecture Term Grade (E)' || key == 'Lab Term Grade (E)' || key == 'Term' || key == 'Section Rank' || key == 'Overall Rank' || key == 'Remarks') {
 
                 contents += '<th class="' + clean_key(key) + '">' + key + '</th>'; // display specified keys as headers
 
@@ -101,7 +101,7 @@ $(document).ready(function() {
     
                 keysToShow.forEach(function(key) {
 
-                    if (key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)' || key === 'Term' || key == 'Section Rank' || key == 'Overall Rank') {
+                    if (key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)' || key === 'Term' || key == 'Section Rank' || key == 'Overall Rank' || key == 'Remarks') {
 
                         if (item[key] == 4.00 && (key != 'Section Rank' && key != 'Overall Rank'))  {
 
@@ -131,7 +131,7 @@ $(document).ready(function() {
     
         contents +=         '</tbody>';
         contents +=     '</table>';   
-        contents +=     '<p style="text-align: left; font-size: 14px; margin-bottom: 2rem;"><em> Section and Overall Ranks are Lecture Grades only </em></p>'; 
+        contents +=     '<p style="text-align: left; font-size: 14px; margin-bottom: 2rem;"><em> Section & Overall Ranks, and Remarks are for Lecture Grades only </em></p>'; 
     
         // Button for details
         contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>';
@@ -202,6 +202,7 @@ $(document).ready(function() {
 
             button.val('Hide Details')
             searchResult.find('th, td').show(); //Show all
+            searchResult.find('#gradeTable th.Remarks, #gradeTable td.Remarks').hide(); //Hide Remarks
             $('#gradeTable').css({'display':'block'});
             $('#gradeLegend').css({'display':'table'});
             $('#graphs').show();
@@ -211,6 +212,7 @@ $(document).ready(function() {
 
             button.val('Show Details');
             searchResult.find('#gradeTable th, #gradeTable td').not('.Term, .LectureTermGradeE, .LabTermGradeE , .SectionRank, .OverallRank').hide(); //Hide class except
+            searchResult.find('#gradeTable th.Remarks, #gradeTable td.Remarks').show(); //Show Remarks
             $('#gradeTable').css({'display':'table'});
             $('#gradeLegend').css({'display':'none'});
             $('#graphs').hide();

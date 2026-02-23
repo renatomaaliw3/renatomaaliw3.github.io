@@ -62868,17 +62868,23 @@ h3 > span > em {
 
 }
 
-#scoreData > td:nth-last-child(3) {
+#scoreData > td:nth-last-child(4) {
 
   background: #a2ff8d;
   font-weight: bold;
 
 }
 
-#scoreData > td:nth-last-child(4) {
+#scoreData > td:nth-last-child(5) {
 
   font-weight: bold;
   background: #8cf2ea;
+
+}
+
+#searchResult #scoreData > td:last-child {
+
+  font-size: 0.725em;
 
 }
 
