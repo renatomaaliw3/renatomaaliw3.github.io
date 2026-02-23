@@ -62886,9 +62886,22 @@ h3 > span > em {
 
 }
 
+#gradeTable th.Remarks {
+
+  width: 7.5%;
+
+}
+
+#gradeTable td.Remarks {
+
+  text-align: left;
+
+}
+
 #searchResult #scoreData > td:last-child {
 
   font-size: 0.75rem;
+
 
 }
 
