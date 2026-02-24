@@ -18,7 +18,6 @@
 body {
 
 	/* font-size: 62.5%; */
-	font-size: 100%;
 	line-height: 1.5;
 	font-family: 'Calibri','Arial','sans-serif','sans';
 	
@@ -206,6 +205,12 @@ a:hover, a:active {
 
 }
 
+.front-main {
+
+	font-size: 2rem;
+
+}
+
 .margin-left-adjust > li {
 
 	margin-left: 18px;
@@ -262,13 +267,14 @@ ul > li {
 	list-style: none;
 	color: brown;
 	font-weight: bold;
+
 }
 
 ol > li {
 
 	list-style: decimal;
 	margin-left: 40px;
-	font-size: 14px;
+	font-size: 1.5rem;
 	font-weight: normal;
 	color: #0a5292;
 
@@ -278,10 +284,16 @@ ul > li > span, ol > li > span, ul > li > strong {
 
 	display: inline-block;
 	margin-right: 5px;
-	font-size:  1.15rem;
+	font-size:  1.5rem;
 
 }
 
+
+ul ol > li > a {
+
+	font-size: 1.45rem;
+
+}
 
 .ppp-sections {
 
@@ -322,6 +334,32 @@ ul > li > span, ol > li > span, ul > li > strong {
 	color: white;
 	margin-top: 20px;
 	padding: 31px 10px 30px 10px;
+
+}
+
+.navigation {
+
+	padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+	background: green;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	display: none;
+
+}
+
+.navigation li {
+
+	list-style: none;
+	margin: 0;
+	padding: 0;
+
+}
+
+.navigation li > a:link,
+.navigation li > a:visited {
+
+	color: white;
 
 }
 
