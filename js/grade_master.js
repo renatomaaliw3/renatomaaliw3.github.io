@@ -258,6 +258,30 @@ $(document).ready(function() {
 
                 });
 
+            } else if (selectedSort === 'Sort by Lab Grade (DESC)') {
+
+                 rows.sort(function(a, b) {
+
+                    const nameA = $(a).find('.LastName').text().toUpperCase();
+                    const nameB = $(b).find('.LastName').text().toUpperCase();
+
+                    if (nameA < nameB) return -1;
+                    if (nameA > nameB) return 1;
+
+                    return 0;
+
+                });
+
+                 rows.sort(function(a, b) {
+
+                    const gradeA = parseFloat($(a).find('.LabTermGrade').text()) || 0;
+                    const gradeB = parseFloat($(b).find('.LabTermGrade').text()) || 0;
+                    
+                    return gradeB - gradeA;
+
+                });
+
+
             } else if (selectedSort === 'Sort by Overall Rank (DESC)') {
 
                 rows.sort(function(a, b) {
