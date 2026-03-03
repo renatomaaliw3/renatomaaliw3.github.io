@@ -75,7 +75,7 @@ $(document).ready(function() {
     
         keysToShow.forEach(function(key) {
 
-            if (key == 'Lecture Term Grade (E)' || key == 'Lab Term Grade (E)' || key == 'Term' || key == 'Section Rank' || key == 'Overall Rank' || key == 'Remarks') {
+            if (key == 'Lecture Term Grade (E)' || key == 'Lab Term Grade (E)' || key == 'Term' || key == 'Remarks') {
 
                 contents += '<th class="' + clean_key(key) + '">' + key + '</th>'; // display specified keys as headers
 
@@ -101,7 +101,7 @@ $(document).ready(function() {
     
                 keysToShow.forEach(function(key) {
 
-                    if (key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)' || key === 'Term' || key == 'Section Rank' || key == 'Overall Rank' || key == 'Remarks') {
+                    if (key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)' || key === 'Term' || key == 'Remarks') {
 
                         if (item[key] == 4.00 && (key != 'Section Rank' && key != 'Overall Rank'))  {
 
@@ -211,7 +211,7 @@ $(document).ready(function() {
         } else {
 
             button.val('Show Details');
-            searchResult.find('#gradeTable th, #gradeTable td').not('.Term, .LectureTermGradeE, .LabTermGradeE , .SectionRank, .OverallRank').hide(); //Hide class except
+            searchResult.find('#gradeTable th, #gradeTable td').not('.Term, .LectureTermGradeE, .LabTermGradeE').hide(); //Hide class except
             searchResult.find('#gradeTable th.Remarks, #gradeTable td.Remarks').show(); //Show Remarks
             $('#gradeTable').css({'display':'table'});
             $('#gradeLegend').css({'display':'none'});

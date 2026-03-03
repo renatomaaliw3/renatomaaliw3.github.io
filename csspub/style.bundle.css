@@ -62872,6 +62872,12 @@ h3 > span > em {
 
 }
 
+#scoreData {
+
+  text-align: center;
+
+}
+
 #scoreData > td:nth-last-child(4) {
 
   background: #a2ff8d;
