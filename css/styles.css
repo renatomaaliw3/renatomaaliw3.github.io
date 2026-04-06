@@ -340,7 +340,7 @@ ul ol > li > a {
 .navigation {
 
 	padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-	background: green;
+	background: rgba(34,122,10,0.90);
 	position: fixed;
 	bottom: 0;
 	right: 0;
@@ -360,6 +360,12 @@ ul ol > li > a {
 .navigation li > a:visited {
 
 	color: white;
+
+}
+
+.indent-left {
+
+	margin-left: 30px;
 
 }
 
