@@ -201,8 +201,8 @@
     }
     .score-value {
       position: absolute;
-      top: 8px;
-      left: 270px;
+      top: 5px;
+      left: 250px;
       width: 70px;
       font-size: 16px;
       font-weight: 800;
@@ -215,11 +215,11 @@
     }
     .paper-id {
       position: absolute;
-      top: 8px;
-      left: 515px;
+      top: 5px;
+      left: 504px;
       right: 0;
-      text-align: right;
-      font-size: 16px;
+      text-align: left;
+      font-size: 15px;
       font-weight: 800;
       white-space: nowrap;
     }
@@ -247,7 +247,7 @@
       text-align: center;
     }
     .signature-img {
-      width: 145px;
+      width: 80px;
       height: 126px;
       object-fit: contain;
       margin-left: -32px;
@@ -309,7 +309,7 @@
     <p>Enter the Turnitin OID number. Example: <strong>138749833</strong> or <strong>oid no:29310:138749833</strong>.</p>
     <div class="controls">
       <input id="oidInput" type="text" placeholder="Enter OID number" autocomplete="off" />
-      <button id="generateBtn">Generate PDF</button>
+      <button id="generateBtn">Download Certificate</button>
       <button id="previewBtn" class="secondary">Preview Only</button>
     </div>
     <div id="message"></div>
@@ -454,7 +454,7 @@
         console.error(err);
         setMessage('PDF generation failed. Check your browser console or CDN connection.', 'error');
       } finally {
-        $('#generateBtn').prop('disabled', false).text('Generate PDF');
+        $('#generateBtn').prop('disabled', false).text('Download Certificate');
       }
     }
 
