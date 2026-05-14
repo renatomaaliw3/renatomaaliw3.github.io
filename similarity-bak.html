@@ -393,8 +393,10 @@
 
   <script>
 
+    let manuscriptData = [];
+
     function setMessage(text, type) {
-      $('#message').removeClass('ok error').addClass(type || '').text(text || '');
+      $('#message').removeClass('ok error').addClass(type || '').html(text || '');
     }
 
     function cleanOid(rawValue) {
@@ -418,11 +420,8 @@
       $('#certOid').text(record.oid || '');
 
       if (showPreview) {
-        
         $('#certificateWrap').attr('style', '').show();
-
       } else {
-      
         $('#certificateWrap').css({
           display: 'block',
           position: 'fixed',
@@ -433,12 +432,29 @@
         });
       }
     }
-    
+
+    // function previewCertificate() {
+    //   const record = findRecord();
+    //   if (!record) {
+    //     $('#certificateWrap').hide();
+    //     setMessage('No matching record found.<br/>Please check the OID number or email plagiarismcheck.slsu@gmail.com', 'error');
+    //     return null;
+    //   }
+    //   renderCertificate(record, true);
+    //   setMessage('Record found. Certificate preview generated.', 'ok');
+    //   return record;
+    // }
+
     async function generatePDF() {
 
-      //const record = previewCertificate();
       const record = findRecord();
-      if (!record) return;
+      if (!record) {
+        $('#certificateWrap').hide();
+        setMessage('No matching record found.<br/>Please check the OID number or email plagiarismcheck.slsu@gmail.com', 'error');
+        return;
+      }
+
+      renderCertificate(record, false);
 
       $('#generateBtn').prop('disabled', true).text('Generating...');
       setMessage('Generating PDF. Please wait...', 'ok');
@@ -466,12 +482,12 @@
           .replace(/^_+|_+$/g, '')
           .substring(0, 60);
         pdf.save(`ITSSO_Certificate_${record.oid}_${safeTitle}.pdf`);
-        setMessage('PDF generated successfully.', 'ok');
+        setMessage('PDF generated successfully. Check your [Downloads] directory', 'ok');
       } catch (err) {
         console.error(err);
         setMessage('PDF generation failed. Check your browser console or CDN connection.', 'error');
       } finally {
-        $('#certificateWrap').hide(); // hide again after download
+        $('#certificateWrap').hide();
         $('#generateBtn').prop('disabled', false).text('Download Certificate');
       }
     }
@@ -490,7 +506,6 @@
         });
 
       $('#generateBtn').on('click', generatePDF);
-      $('#previewBtn').on('click', previewCertificate);
       $('#oidInput').on('keydown', function (e) {
         if (e.key === 'Enter') generatePDF();
       });
