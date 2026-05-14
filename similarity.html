@@ -480,7 +480,7 @@
           .replace(/[^a-z0-9]+/gi, '_')
           .replace(/^_+|_+$/g, '')
           .substring(0, 60);
-        pdf.save(`ITSSO_Certificate_${record.oid}_${safeTitle}.pdf`);
+        pdf.save(`ITSSO_Certificate_${record.oid}.pdf`);
         setMessage('PDF generated successfully. Check your [Downloads] directory', 'ok');
       } catch (err) {
         console.error(err);
