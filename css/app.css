@@ -284,7 +284,7 @@ body {
 .rv-result__head {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: baseline;
+	align-items: center;
 	gap: .4rem .75rem;
 	margin: 0 0 .9rem;
 }
@@ -300,16 +300,16 @@ body {
 }
 
 .rv-result__rating {
-	display: inline-flex;
-	align-items: center;
-	padding: .2rem .6rem;
-	/* font-size: .875rem; */
-	font-weight: 700;
-	font-variant-numeric: tabular-nums;
-	color: var(--rv-brand);
-	background: var(--rv-lec-soft);
-	border: 1px solid var(--rv-lec);
-	border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    padding: .2rem .6rem;
+    /* font-size: .875rem; */
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--rv-brand);
+    background: var(--rv-lec-soft);
+    border: 1px solid var(--rv-lec);
+    border-radius: 999px;
 }
 
 .rv-note {
