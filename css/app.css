@@ -1,0 +1,809 @@
+/* ==========================================================================
+   Rating Viewer — application layer
+   --------------------------------------------------------------------------
+   Loaded AFTER csspub/plugins.bundle.css and csspub/style.bundle.css so that
+   it wins the cascade. Everything is either namespaced (rv-*) or scoped to
+   the app's own ids, so nothing here leaks into the vendor theme.
+
+   Contents
+     1.  Design tokens
+     2.  Base + page shell
+     3.  Masthead
+     4.  Finder (course + pass key)
+     5.  Status messages
+     6.  Result header
+     7.  Grade table — shared
+     8.  Grade table — desktop / tablet
+     9.  Grade table — mobile (stacked cards)
+     10. Details toggle
+     11. Term statistics (select + chart)
+     12. Legend
+     13. Footer
+     14. Motion, print, misc
+   ========================================================================== */
+
+
+/* 1. Design tokens ========================================================= */
+
+:root {
+	--rv-ink:            #101418;
+	--rv-ink-soft:       #495260;
+	--rv-ink-muted:      #6b7480;
+	--rv-line:           #e6e9ee;
+	--rv-line-mid:       #d3d9e0;
+	--rv-line-strong:    #9aa5b1;
+	--rv-surface:        #ffffff;
+	--rv-surface-2:      #f7f9fb;
+	--rv-surface-3:      #eef2f6;
+	--rv-canvas:         #0b0e11;
+
+	--rv-brand:          #0e4944;   /* lecture — dark   */
+	--rv-brand-2:        #145904;   /* laboratory — dark */
+	--rv-lec:            #8cf2ea;   /* lecture — fill   */
+	--rv-lec-soft:       #e9fbf9;
+	--rv-lab:            #a2ff8d;   /* laboratory — fill */
+	--rv-lab-soft:       #eefced;
+	--rv-accent:         #ffe600;
+
+	--rv-danger:         #b42318;
+	--rv-warn:           #b54708;
+
+	--rv-radius:         16px;
+	--rv-radius-sm:      10px;
+	--rv-radius-xs:      8px;
+
+	--rv-shadow-sm:      0 1px 2px rgba(16, 20, 24, .06), 0 1px 3px rgba(16, 20, 24, .05);
+	--rv-shadow:         0 18px 48px rgba(2, 8, 16, .28);
+	--rv-focus:          0 0 0 3px rgba(14, 73, 68, .30);
+
+	--rv-gutter:         clamp(1.15rem, 5vw, 3.25rem);
+	--rv-font:           'Poppins', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+	--rv-tap:            44px;      /* minimum touch target */
+}
+
+
+/* 2. Base + page shell ===================================================== */
+
+/* The theme bundle forces html/body to 18px (16px under 1200px), which makes
+   every rem-based size in the app jump at an arbitrary breakpoint. Pin the
+   root so `rem` means the same thing everywhere, then size text explicitly. */
+html {
+	font-size: 16px !important;
+	-webkit-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}
+
+body {
+	font-size: 0.9375rem !important;   /* 15px */
+	font-family: var(--rv-font);
+	line-height: 1.55;
+	color: var(--rv-ink);
+	background: var(--rv-canvas);
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+	min-height: 100vh;
+	height: auto;
+	padding: 0;
+}
+
+.rv-shell {
+
+	width: 100%;
+	max-width: 1600px;
+	margin: 0 auto;
+	padding: clamp(0rem, 3vw, 2.5rem) clamp(0rem, 3vw, 2.5rem) 0;
+	flex: 1 0 auto;
+}
+
+.rv-card {
+	background: var(--rv-surface);
+	border-radius: clamp(0px, 2vw, var(--rv-radius));
+	box-shadow: var(--rv-shadow);
+	padding: var(--rv-gutter);
+	/* No `overflow: hidden` here on purpose: it would turn the card into a
+	   scroll container and stop the sticky mobile action bar from sticking. */
+}
+
+/* Consistent, predictable focus ring for every interactive element. */
+.rv-card :focus-visible,
+#btnDetails:focus-visible {
+	outline: 2px solid var(--rv-brand);
+	outline-offset: 2px;
+	box-shadow: var(--rv-focus);
+	border-radius: var(--rv-radius-xs);
+}
+
+.rv-visually-hidden {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+
+
+/* 3. Masthead ============================================================== */
+
+.rv-masthead {
+	border-bottom: 1px solid var(--rv-line);
+	padding-bottom: 1.25rem;
+	margin-bottom: 1.75rem;
+}
+
+.rv-eyebrow {
+	margin: 0 0 .35rem;
+	font-size: .6875rem;
+	font-weight: 600;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+	color: var(--rv-brand);
+}
+
+.rv-title {
+	margin: 0;
+	font-size: clamp(1.75rem, 7vw, 3rem);
+	line-height: 1.1;
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	color: var(--rv-ink);
+}
+
+.rv-updated {
+	margin: .5rem 0 0;
+	font-size: .75rem;
+	color: var(--rv-ink-muted);
+}
+
+
+/* 4. Finder ================================================================ */
+
+.rv-finder {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.15rem;
+	margin: 0 0 1.5rem;
+}
+
+.rv-field {
+	display: flex;
+	flex-direction: column;
+	gap: .4rem;
+	min-width: 0;
+}
+
+.rv-field__label {
+	margin: 0;
+	font-size: .8125rem;
+	font-weight: 600;
+	color: var(--rv-ink-soft);
+}
+
+.rv-field__help {
+	margin: 0;
+	font-size: .75rem;
+	color: var(--rv-ink-muted);
+}
+
+/* 16px keeps iOS from zooming the viewport when a field takes focus. */
+.rv-card .rv-control {
+	width: 100%;
+	min-height: var(--rv-tap);
+	padding: .6rem .85rem;
+	font-family: inherit;
+	font-size: 1rem;
+	line-height: 1.4;
+	color: var(--rv-ink);
+	background-color: var(--rv-surface);
+	border: 1px solid var(--rv-line-mid);
+	border-radius: var(--rv-radius-xs);
+	box-shadow: var(--rv-shadow-sm);
+	transition: border-color .15s ease, box-shadow .15s ease;
+	appearance: none;
+	-webkit-appearance: none;
+}
+
+.rv-card select.rv-control {
+	padding-right: 2.5rem;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23495260'%3E%3Cpath d='M8 11.2 3.2 6.4l1.13-1.13L8 8.94l3.67-3.67L12.8 6.4z'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right .85rem center;
+	background-size: 16px 16px;
+	text-overflow: ellipsis;
+}
+
+.rv-card .rv-control:hover {
+	border-color: var(--rv-line-strong);
+}
+
+.rv-card .rv-control:focus {
+	border-color: var(--rv-brand);
+	box-shadow: var(--rv-focus);
+	outline: none;
+}
+
+@media (min-width: 768px) {
+	.rv-finder {
+		grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+		gap: 1.25rem 1.5rem;
+	}
+}
+
+
+/* 5. Status messages ======================================================= */
+
+.rv-status {
+	display: none;
+	align-items: center;
+	gap: .55rem;
+	margin: 0 0 1.25rem;
+	padding: .7rem .9rem;
+	font-size: .875rem;
+	border-radius: var(--rv-radius-xs);
+	border: 1px solid var(--rv-line);
+	background: var(--rv-surface-2);
+	color: var(--rv-ink-soft);
+}
+
+.rv-status.is-shown {
+	display: flex;
+}
+
+.rv-status.is-error {
+	border-color: #f3c6c2;
+	background: #fdf3f2;
+	color: var(--rv-danger);
+	font-weight: 500;
+}
+
+.rv-status::before {
+	content: "";
+	flex: 0 0 auto;
+	width: .55rem;
+	height: .55rem;
+	border-radius: 50%;
+	background: currentColor;
+	opacity: .55;
+}
+
+
+/* 6. Result header ========================================================= */
+
+#searchResult {
+	padding: 0;
+	margin: 0;
+	color: var(--rv-ink);
+}
+
+.rv-result__head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: .4rem .75rem;
+	margin: 0 0 .9rem;
+}
+
+.rv-result__name {
+	margin: 0;
+	font-size: clamp(1.15rem, 4.5vw, 1.6rem);
+	font-weight: 700;
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+	color: var(--rv-brand);
+	overflow-wrap: anywhere;
+}
+
+.rv-result__rating {
+	display: inline-flex;
+	align-items: center;
+	padding: .2rem .6rem;
+	/* font-size: .875rem; */
+	font-weight: 700;
+	font-variant-numeric: tabular-nums;
+	color: var(--rv-brand);
+	background: var(--rv-lec-soft);
+	border: 1px solid var(--rv-lec);
+	border-radius: 999px;
+}
+
+.rv-note {
+	margin: .85rem 0 0;
+	font-size: .75rem;
+	font-style: italic;
+	color: var(--rv-ink-muted);
+}
+
+
+/* 7. Grade table — shared ================================================== */
+
+/* Column visibility is driven entirely by a single class on <body>, so no
+   inline styles are needed and the state can never drift out of sync. */
+.rv-col-detail { display: none; }
+.rv-col-brief  { display: table-cell; }
+
+body.rv-details-open .rv-col-detail { display: table-cell; }
+body.rv-details-open .rv-col-brief  { display: none; }
+
+.rv-table-scroll {
+	position: relative;
+	overflow-x: auto;
+	overflow-y: hidden;
+	-webkit-overflow-scrolling: touch;
+	overscroll-behavior-x: contain;
+	border: 1px solid var(--rv-line-mid);
+	border-radius: var(--rv-radius-sm);
+	background: var(--rv-surface);
+}
+
+#searchResult #gradeTable {
+	display: table;
+	width: 100%;
+	margin: 0;
+	border: 0;
+	border-collapse: separate;   /* required for sticky column borders */
+	border-spacing: 0;
+	color: var(--rv-ink);
+	background: var(--rv-surface);
+}
+
+#searchResult #gradeTable th,
+#searchResult #gradeTable td {
+	font-size: .8125rem;
+	padding: .6rem .55rem;
+	vertical-align: middle;
+	border: 0;
+	border-right: 1px solid var(--rv-line-mid);
+	border-bottom: 1px solid var(--rv-line-mid);
+	background-color: var(--rv-surface);
+}
+
+#searchResult #gradeTable tr > *:last-child { border-right: 0; }
+#searchResult #gradeTable tbody tr:last-child > * { border-bottom: 0; }
+
+#searchResult #gradeTable thead th {
+	position: relative;
+	font-size: .6875rem;
+	font-weight: 600;
+	line-height: 1.25;
+	letter-spacing: .01em;
+	text-align: center;
+	background-color: var(--rv-surface-3);
+	color: var(--rv-ink);
+}
+
+#searchResult #gradeTable tbody td {
+	text-align: center;
+	font-variant-numeric: tabular-nums;
+}
+
+/* Column groups — replaces the vendor bundle's positional nth-child colouring
+   so the palette survives columns being shown, hidden or restacked. */
+#searchResult #gradeTable thead th.rv-g-lec,
+#searchResult #gradeTable tbody td.rv-g-lec        { background-color: var(--rv-lec); }
+#searchResult #gradeTable thead th.rv-g-lab,
+#searchResult #gradeTable tbody td.rv-g-lab        { background-color: var(--rv-lab); }
+
+#searchResult #gradeTable thead th.rv-g-lec-total  { background-color: var(--rv-brand);   color: #fff; }
+#searchResult #gradeTable thead th.rv-g-lab-total  { background-color: var(--rv-brand-2); color: #fff; }
+
+#searchResult #gradeTable tbody td.rv-g-lec-total  { background-color: var(--rv-lec); font-weight: 700; }
+#searchResult #gradeTable tbody td.rv-g-lab-total  { background-color: var(--rv-lab); font-weight: 700; }
+
+#searchResult #gradeTable tbody td.rv-col-Term {
+	font-weight: 600;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#searchResult #gradeTable tbody td.rv-col-Remarks {
+	text-align: left;
+	font-size: .75rem;
+	line-height: 1.45;
+	min-width: 12rem;
+}
+
+.rv-cell__value { display: inline-block; }
+
+
+/* 8. Grade table — desktop / tablet ======================================== */
+
+@media (min-width: 768px) {
+
+	/* Wide, detailed view: keep the term label pinned while the rest scrolls. */
+	body.rv-details-open #searchResult #gradeTable { min-width: 62rem; }
+
+	body.rv-details-open #searchResult #gradeTable thead th.rv-col-Term,
+	body.rv-details-open #searchResult #gradeTable tbody td.rv-col-Term {
+		position: sticky;
+		left: 0;
+		z-index: 2;
+		box-shadow: 1px 0 0 var(--rv-line-mid);
+	}
+
+	body.rv-details-open #searchResult #gradeTable thead th.rv-col-Term {
+		z-index: 3;
+	}
+}
+
+
+/* 9. Grade table — mobile (stacked cards) ================================== */
+/* Below 768px the 18-column matrix is unusable sideways, so each term becomes
+   a self-contained card and every cell becomes a label / value row. */
+
+@media (max-width: 767.98px) {
+
+	.rv-table-scroll {
+		border: 0;
+		border-radius: 0;
+		overflow: visible;
+		background: none;
+	}
+
+	#searchResult #gradeTable,
+	body.rv-details-open #searchResult #gradeTable {
+		display: block;
+		width: 100%;
+		min-width: 0;
+		background: none;
+	}
+
+	/* Headers move into each cell via data-label, but stay for screen readers. */
+	#searchResult #gradeTable thead {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	#searchResult #gradeTable tbody {
+		display: flex;
+		flex-direction: column;
+		gap: .9rem;
+	}
+
+	#searchResult #gradeTable tbody tr {
+		display: block;
+		border: 1px solid var(--rv-line-mid);
+		border-radius: var(--rv-radius-sm);
+		background: var(--rv-surface);
+		box-shadow: var(--rv-shadow-sm);
+		overflow: hidden;
+	}
+
+	#searchResult #gradeTable tbody td,
+	body.rv-details-open #searchResult #gradeTable tbody td.rv-col-detail {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 1rem;
+		width: auto;
+		padding: .6rem .9rem;
+		border: 0;
+		border-top: 1px solid var(--rv-line);
+		background-color: var(--rv-surface);
+		font-size: .875rem;
+		text-align: right;
+	}
+
+	body.rv-details-open #searchResult #gradeTable tbody td.rv-col-brief,
+	#searchResult #gradeTable tbody td.rv-col-detail { display: none; }
+
+	#searchResult #gradeTable tbody td::before {
+		content: attr(data-label);
+		flex: 1 1 auto;
+		min-width: 0;
+		text-align: left;
+		font-size: .8125rem;
+		font-weight: 500;
+		line-height: 1.35;
+		color: var(--rv-ink-soft);
+	}
+
+	#searchResult #gradeTable tbody td .rv-cell__value {
+		flex: 0 0 auto;
+		font-weight: 600;
+		font-variant-numeric: tabular-nums;
+		white-space: nowrap;
+	}
+
+	/* Coloured rail keeps the lecture / laboratory grouping readable. */
+	#searchResult #gradeTable tbody td.rv-g-lec       { box-shadow: inset 4px 0 0 var(--rv-lec); }
+	#searchResult #gradeTable tbody td.rv-g-lab       { box-shadow: inset 4px 0 0 var(--rv-lab); }
+	#searchResult #gradeTable tbody td.rv-g-lec-total { box-shadow: inset 4px 0 0 var(--rv-brand);   background-color: var(--rv-lec-soft); }
+	#searchResult #gradeTable tbody td.rv-g-lab-total { box-shadow: inset 4px 0 0 var(--rv-brand-2); background-color: var(--rv-lab-soft); }
+
+	#searchResult #gradeTable tbody td.rv-g-lec-total .rv-cell__value,
+	#searchResult #gradeTable tbody td.rv-g-lab-total .rv-cell__value { font-size: 1rem; }
+
+	/* The term is the card's title, not a label / value pair. */
+	#searchResult #gradeTable tbody td.rv-col-Term {
+		display: block;
+		border-top: 0;
+		padding: .7rem .9rem;
+		background-color: var(--rv-brand);
+		color: #fff;
+		font-size: .95rem;
+		font-weight: 600;
+		letter-spacing: .01em;
+		text-align: left;
+		white-space: normal;
+	}
+
+	#searchResult #gradeTable tbody td.rv-col-Term::before { content: none; }
+	#searchResult #gradeTable tbody td.rv-col-Term .rv-cell__value { color: #fff; }
+
+	/* Remarks read as a paragraph, so stack the label above the value. */
+	#searchResult #gradeTable tbody td.rv-col-Remarks {
+		display: block;
+		text-align: left;
+		min-width: 0;
+	}
+
+	#searchResult #gradeTable tbody td.rv-col-Remarks::before {
+		display: block;
+		margin-bottom: .15rem;
+	}
+
+	#searchResult #gradeTable tbody td.rv-col-Remarks .rv-cell__value {
+		display: block;
+		white-space: normal;
+		font-weight: 500;
+		line-height: 1.5;
+	}
+}
+
+
+/* 10. Details toggle ======================================================= */
+
+.rv-actions {
+	display: flex;
+	margin-top: 1.1rem;
+}
+
+#btnDetails {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: .5rem;
+	min-height: var(--rv-tap);
+	padding: .6rem 1.15rem;
+	font-family: inherit;
+	font-size: .875rem;
+	font-weight: 600;
+	line-height: 1;
+	color: #fff;
+	background: var(--rv-brand);
+	border: 1px solid var(--rv-brand);
+	border-radius: 999px;
+	box-shadow: var(--rv-shadow-sm);
+	cursor: pointer;
+	transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+
+	/* Overrides the bundle's fixed positioning — on desktop the control now
+	   sits directly beneath the table it controls. */
+	position: static;
+	text-align: center;
+}
+
+#btnDetails:hover { background: #0b3b37; border-color: #0b3b37; }
+#btnDetails:active { transform: translateY(1px); }
+
+#btnDetails::after {
+	content: "";
+	width: .5rem;
+	height: .5rem;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: translateY(-2px) rotate(45deg);
+	transition: transform .18s ease;
+}
+
+#btnDetails[aria-expanded="true"]::after {
+	transform: translateY(1px) rotate(-135deg);
+}
+
+/* On phones the toggle becomes a full-width control that stays reachable at
+   the bottom of the viewport without covering the last row of content. */
+@media (max-width: 767.98px) {
+
+	.rv-actions {
+		position: sticky;
+		bottom: 0;
+		z-index: 20;
+		margin: 1.1rem calc(var(--rv-gutter) * -1) 0;
+		padding: .75rem var(--rv-gutter) calc(.75rem + env(safe-area-inset-bottom, 0px));
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 0), var(--rv-surface) 45%);
+	}
+
+	#btnDetails {
+		width: 100%;
+		min-height: 48px;
+		font-size: .9375rem;
+		border-radius: var(--rv-radius-xs);
+	}
+}
+
+
+/* 11. Term statistics ====================================================== */
+
+#graphs {
+	display: none;
+	margin-top: 1.75rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--rv-line);
+}
+
+body.rv-details-open #graphs { display: block; }
+#graphs:empty,
+#graphs[hidden] { display: none !important; }
+
+#graphs .rv-field { max-width: 34rem; }
+
+#img-container {
+	display: flex;
+	justify-content: center;
+	margin-top: 2rem;
+}
+
+#img-container:empty { margin-top: 0; }
+
+#img-container img {
+	min-width: 0;
+	width: 100%;
+	max-width: 46rem;
+	height: auto;
+	border: 1px solid var(--rv-line);
+	border-radius: var(--rv-radius-sm);
+	background: var(--rv-surface);
+}
+
+.rv-chart-msg {
+	margin: .5rem 0 0;
+	width: 100%;
+	text-align: center;
+	font-size: .875rem;
+	color: var(--rv-ink-muted);
+}
+
+.rv-chart-msg--empty {
+	color: var(--rv-danger);
+	font-weight: 500;
+}
+
+
+/* 12. Legend =============================================================== */
+
+#gradeLegend {
+	display: none;
+	width: 100%;
+	max-width: 30rem;
+	margin: 1.75rem auto 0;
+	font-size: .8125rem;
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 1px solid var(--rv-line);
+	border-radius: var(--rv-radius-sm);
+	overflow: hidden;
+}
+
+body.rv-details-open #gradeLegend { display: block; }
+#gradeLegend[hidden] { display: none !important; }
+
+#gradeLegend caption {
+	display: block;              /* the table itself is display:block here */
+	caption-side: top;
+	padding: .6rem .75rem;
+	font-size: .6875rem;
+	font-weight: 600;
+	letter-spacing: .08em;
+	text-transform: uppercase;
+	color: var(--rv-ink-soft);
+	background: var(--rv-surface-3);
+	text-align: center;
+}
+
+#gradeLegend thead,
+#gradeLegend tbody,
+#gradeLegend tfoot { display: table; width: 100%; table-layout: fixed; }
+
+#gradeLegend th,
+#gradeLegend td {
+	width: 50%;
+	padding: .4rem .5rem !important;
+	font-size: .8125rem;
+	font-weight: 500;
+	text-align: center;
+	color: var(--rv-ink-soft);
+	border: 0 !important;
+	border-top: 1px solid var(--rv-line) !important;
+}
+
+#gradeLegend tbody tr:nth-child(odd) td { background: var(--rv-surface-2); }
+#gradeLegend tbody tr.rv-legend--warn td   { color: var(--rv-warn); font-weight: 600; }
+#gradeLegend tbody tr.rv-legend--danger td { color: var(--rv-danger); font-weight: 600; }
+
+#gradeLegend tfoot td {
+	font-size: .6875rem;
+	font-style: italic;
+	line-height: 1.5;
+	width: 100%;
+	text-align: center;
+	color: var(--rv-ink-muted);
+	background: var(--rv-surface-2);
+}
+
+
+/* 13. Footer =============================================================== */
+
+#footer {
+	flex: 0 0 auto;
+	padding: 2.5rem var(--rv-gutter) calc(2.5rem + env(safe-area-inset-bottom, 0px));
+	text-align: center;
+}
+
+#footer p {
+	margin: 0;
+	font-size: .75rem;
+	line-height: 1.6;
+	color: rgba(255, 255, 255, .62);
+}
+
+#footer .rv-footer__name {
+	color: rgba(255, 255, 255, .92);
+	font-weight: 600;
+	margin-bottom: .15rem;
+}
+
+#footer .rv-footer__lead {
+	margin-bottom: .35rem;
+	letter-spacing: .06em;
+	text-transform: uppercase;
+	font-size: .6875rem;
+	color: rgba(255, 255, 255, .45);
+}
+
+
+/* 14. Motion, print, misc ================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: .01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: .01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+@media print {
+
+	body { background: #fff; display: block; }
+	.rv-shell { max-width: none; padding: 0; }
+	.rv-card { box-shadow: none; border-radius: 0; padding: 0; }
+	.rv-finder,
+	.rv-actions,
+	.rv-status { display: none !important; }
+
+	#footer p { color: #444; }
+
+	/* Print everything, whatever the on-screen toggle state is. */
+	.rv-col-detail { display: table-cell !important; }
+	.rv-col-brief  { display: table-cell !important; }
+
+	#searchResult #gradeTable th,
+	#searchResult #gradeTable td { border: 1px solid #999; font-size: 8pt; }
+
+	.rv-table-scroll { overflow: visible; border: 0; }
+	body.rv-has-result #gradeLegend { display: block !important; }
+}

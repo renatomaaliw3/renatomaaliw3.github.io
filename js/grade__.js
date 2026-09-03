@@ -1,287 +1,458 @@
-/* global variables */
+/* ==========================================================================
+   Rating Viewer
+   --------------------------------------------------------------------------
+   Renders a student's per-term ratings for the selected course.
 
-let typingTimer;
-const doneTypingInterval = 1350; // 1 second delay
+   Layout note: this script never writes inline `display` styles. Which
+   columns are visible is expressed with two classes (`rv-col-brief`,
+   `rv-col-detail`) plus a single `rv-details-open` class on <body>, so the
+   summary view, the detailed view and the mobile stacked-card view are all
+   driven from css/app.css and can never fall out of sync.
+   ========================================================================== */
 
-$(document).ready(function() {
+(function ($) {
 
-    const gradeTable = $('#gradeTable');
-    const searchResult = $('#searchResult')
+	'use strict';
 
-    const searchTerm = $('#emailInput').val();
-    const dropDown = $('#courseMenu').val();
+	var DATA_DIR       = 'checkpoint/';
+	var GRAPH_DIR      = 'checkpoint/graphs/';
+	var TYPING_DELAY   = 600;        // ms of silence before a lookup is fired
+	var CACHE_LIFETIME = 5 * 60000;  // how long a downloaded course file is reused
 
-    var direct = 'checkpoint/';
-    var graphs = 'checkpoint/graphs/';
+	/* Column model -------------------------------------------------------- */
+	/* mode: 'always' — shown in both views (and used as the mobile card title)
+	         'brief'  — shown only while the details are collapsed
+	         'detail' — shown only while the details are expanded
+	   group: drives the lecture / laboratory colour coding
+	   equiv: value is an equivalent rating, so 4.00 / 5.00 get flagged        */
 
-    // You can replace the URL with your external JSON file's location
-    var jsonScores = '';
+	var COLUMNS = [
+		{ key: 'Term',                                    mode: 'always', group: 'term' },
+		{ key: 'Lecture Quiz',                            mode: 'detail', group: 'lec' },
+		{ key: 'Lecture Quiz Points',                     mode: 'detail', group: 'lec' },
+		{ key: 'Lecture Major Exam',                      mode: 'detail', group: 'lec' },
+		{ key: 'Lecture Major Exam Points',               mode: 'detail', group: 'lec' },
+		{ key: 'Lecture Performance & Attendance',        mode: 'detail', group: 'lec' },
+		{ key: 'Lecture Performance & Attendance Points', mode: 'detail', group: 'lec' },
+		{ key: 'Lab Activities',                          mode: 'detail', group: 'lab' },
+		{ key: 'Lab Activities Points',                   mode: 'detail', group: 'lab' },
+		{ key: 'Lab Major Exam',                          mode: 'detail', group: 'lab' },
+		{ key: 'Lab Major Exam Points',                   mode: 'detail', group: 'lab' },
+		{ key: 'Lecture Term Grade',                      mode: 'detail', group: 'lec-total' },
+		{ key: 'Lab Term Grade',                          mode: 'detail', group: 'lab-total' },
+		{ key: 'Lecture Term Grade (E)',                  mode: 'always', group: 'lec-total', equiv: true },
+		{ key: 'Lab Term Grade (E)',                      mode: 'always', group: 'lab-total', equiv: true },
+		{ key: 'Section Rank',                            mode: 'detail', group: 'meta' },
+		{ key: 'Overall Rank',                            mode: 'detail', group: 'meta' },
+		{ key: 'Remarks',                                 mode: 'brief',  group: 'meta' }
+	];
 
-    function performSearch() {
+	$(document).ready(function () {
 
-        const searchTerm = $('#emailInput').val();
-        const dropDown = $('#courseMenu').val();
+		var $status    = $('#searchStatus');
+		var $result    = $('#searchResult');
+		var $graphs    = $('#graphs');
+		var $image     = $('#img-container');
+		var $input     = $('#emailInput');
+		var $course    = $('#courseMenu');
 
-        jsonScores = direct + dropDown;
-        jsonGraphs = graphs + dropDown;
+		var typingTimer  = null;
+		var requestToken = 0;      // guards against out-of-order responses
+		var scoreCache   = {};     // url -> { time, data }
 
-        $.getJSON(jsonScores, function(data) {
+		/* -- Search ------------------------------------------------------- */
 
-            var exactMatch = data.find(item => item['Email'] == searchTerm); // find a match between input and data (JSON)
+		function performSearch() {
 
-            if (exactMatch) {
+			var searchTerm = normalize($input.val());
+			var course     = $course.val();
+			var token      = ++requestToken;
 
-                if (searchTerm == '') {
+			setDetailsOpen(false);
 
-                    emailNotFound();
+			if (searchTerm === '') {
 
-                } else {
+				clearResults();
+				setStatus('');
+				return;
 
-                    constructTable(data, exactMatch, searchTerm);
-                    
-                }
+			}
 
-            } else {
+			setStatus('Looking up your rating…');
 
-                emailNotFound();
+			$.when(fetchJSON(DATA_DIR + course), fetchJSON(GRAPH_DIR + course, true))
+				.done(function (scores, terms) {
 
-            }
- 
-        });
+					if (token !== requestToken) { return; }   // a newer search won
 
-        $.getJSON(jsonGraphs, function(data) {
+					var matches = $.grep(scores || [], function (item) {
 
-            constructGraphMenu(data);
+						return normalize(item['Email']) === searchTerm;
 
-        });
+					});
 
-    }
+					if (!matches.length) {
 
-    function constructTable(data, exactMatch, searchTerm) {
+						clearResults();
+						setStatus('Pass key not found. Please check the key and the selected course.', true);
+						return;
 
-        var contents =  '<h3 class="text-primary text-left font-weight-bold">' + exactMatch['First Name'] + ' ' + exactMatch['Last Name'] + overallRating(exactMatch) + '</h3>';
-        contents +=     '<table class="table table-bordered table-responsive" id="gradeTable" style="display: table;">';
-    
-        contents +=         '<thead>';
-        contents +=             '<tr id="headerLabels" class="bg-secondary">';
-    
-        var keysToShow = ['Term', 'Lecture Quiz', 'Lecture Quiz Points',
-                        'Lecture Major Exam', 'Lecture Major Exam Points',
-                        'Lecture Performance & Attendance', 'Lecture Performance & Attendance Points',
-                        'Lab Activities', 'Lab Activities Points',
-                        'Lab Major Exam','Lab Major Exam Points',
-                        'Lecture Term Grade', 
-                        'Lab Term Grade', 'Lecture Term Grade (E)', 'Lab Term Grade (E)', 'Section Rank', 'Overall Rank', 'Remarks'];
-    
-        keysToShow.forEach(function(key) {
+					}
 
-            if (key == 'Lecture Term Grade (E)' || key == 'Lab Term Grade (E)' || key == 'Term' || key == 'Remarks') {
+					setStatus('');
+					renderResult(matches);
+					renderTermMenu(terms || []);
 
-                contents += '<th class="' + clean_key(key) + '">' + key + '</th>'; // display specified keys as headers
+				})
+				.fail(function () {
 
-            } else {
+					if (token !== requestToken) { return; }
 
-                contents += '<th class="' + clean_key(key) + '"' + ' style="display: none;">' + key + '</th>'; // display specified keys as headers
+					clearResults();
+					setStatus('The ratings for this course could not be loaded. Please try again.', true);
 
-            }
+				});
 
-        });
-    
-        contents +=             '</tr>';
-        contents +=         '</thead>';
-        contents +=         '<tbody>';
-            
-        data.forEach(function(item) {
+		}
 
-            var email = item['Email'].toLowerCase();
-    
-            if (email == searchTerm) {
+		function fetchJSON(url, optional) {
 
-                contents += '<tr id="scoreData">';
-    
-                keysToShow.forEach(function(key) {
+			var cached = scoreCache[url];
 
-                    if (key === 'Lecture Term Grade (E)' || key === 'Lab Term Grade (E)' || key === 'Term' || key == 'Remarks') {
+			/* Short-lived cache: keeps typing from re-downloading the whole
+			   course file, without serving a stale copy to a tab left open. */
+			if (cached && (Date.now() - cached.time) < CACHE_LIFETIME) {
 
-                        if (item[key] == 4.00 && (key != 'Section Rank' && key != 'Overall Rank'))  {
+				return $.Deferred().resolve(cached.data).promise();
 
-                            contents += '<td data-color="orange" class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
+			}
 
-                        } else if (item[key] == 5.00 && (key != 'Section Rank' && key != 'Overall Rank')) {
+			return $.getJSON(url).then(function (data) {
 
-                            contents += '<td data-color="red" class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
+				scoreCache[url] = { time: Date.now(), data: data };
+				return data;
 
-                        } else {
+			}, function (error) {
 
-                            contents += '<td class="' + clean_key(key) + '">' + decimal_places(item[key]) + '</td>';
+				/* A missing statistics file must not break the ratings table. */
+				if (optional) {
 
-                        }
+					return $.Deferred().resolve([]).promise();
 
-                    } else {
+				}
 
-                        contents += '<td class="' + clean_key(key) + '"' + ' style="display: none;">' + decimal_places(item[key]) + '</td>';
+				return $.Deferred().reject(error).promise();
 
-                    }
+			});
 
-                });
-    
-                contents += '</tr>';
-            }
-        });
-    
-        contents +=         '</tbody>';
-        contents +=     '</table>';   
-        contents +=     '<p style="text-align: left; font-size: 14px; margin-bottom: 2rem;"><em> Section & Overall Ranks, and Remarks are for Lecture Grades only </em></p>'; 
-    
-        // Button for details
-        contents += '<div style="display: flex;"><input type="button" value="Show Details" id="btnDetails"></div>';
-    
-        $('#searchResult').html(contents);
-        highlight_na();
+		}
 
-    }
+		/* -- Rendering ---------------------------------------------------- */
 
-    function overallRating(exactMatch) {
+		function renderResult(rows) {
 
-        if (exactMatch['Overall Rating'] != '') {
-        
-            return " (" + decimal_places(exactMatch['Overall Rating']) + ")";
-    
-        } else {
+			var student = rows[0];
+			var rating  = overallRating(rows);
+			var html    = '';
 
-            return "";
+			html += '<div class="rv-result__head">';
+			html +=     '<h2 class="rv-result__name">' + escapeHtml(fullName(student)) + '</h2>';
 
-        }
+			if (rating !== '') {
 
-    }
+				html += '<span class="rv-result__rating"' + colorAttr(rating) + '>Overall - ' + escapeHtml(rating) + '</span>';
 
-    function constructGraphMenu(data) {
+			}
 
-        var contents = '<form id="graphForm" class="form-group">';
+			html += '</div>';
 
-                contents += '<label for="graphOption"> Select Term Statistics: </label>';
-                contents += '<select id="graphOption" class="form-select form-control">';
-                contents += '<option disabled selected> [Select Term] </option>';
+			html += '<div class="rv-table-scroll">';
+			html +=     '<table id="gradeTable">';
+			html +=         '<thead><tr id="headerLabels">';
 
-                data.forEach(function(item){
+			$.each(COLUMNS, function (i, col) {
 
-                   var term = item['Term'];
-                   var graph = item['Graphs'];
+				html += '<th scope="col" class="' + columnClasses(col) + '">' + escapeHtml(col.key) + '</th>';
 
-                   contents += '<option value="' + graph + '">' + term  + '</option>';
+			});
 
-                });
-                    
-                contents += '</select>';
+			html +=         '</tr></thead>';
+			html +=         '<tbody>';
 
-            contents += '</form>';
+			$.each(rows, function (i, item) {
 
-        $('#graphs').html(contents);
+				html += '<tr class="rv-score-row">';
 
-    }
+				$.each(COLUMNS, function (j, col) {
 
-    $('#emailInput').on('keyup', function() {
+					var value = decimalPlaces(item[col.key]);
 
-            clearTimeout(typingTimer);
-            typingTimer = setTimeout(performSearch, doneTypingInterval);
-            
-    });
+					html += '<td class="' + columnClasses(col) + '" data-label="' + escapeHtml(col.key) + '"' + valueColorAttr(col, value) + '>';
+					html +=     '<span class="rv-cell__value">' + escapeHtml(value) + '</span>';
+					html += '</td>';
 
-    $('#courseMenu').on('change', function() {
+				});
 
-            performSearch();
-            $('#img-container').html('');
-            
-    });
+				html += '</tr>';
 
-    $('#searchResult').on('click', '#btnDetails', function() {
+			});
 
-        const button = $(this);
+			html +=         '</tbody>';
+			html +=     '</table>';
+			html += '</div>';
 
-        if (button.val() == 'Show Details') {
+			html += '<p class="rv-note"> Section &amp; Overall Ranks, and Remarks are for Lecture Grades only. </p>';
 
-            button.val('Hide Details')
-            searchResult.find('th, td').show(); //Show all
-            searchResult.find('#gradeTable th.Remarks, #gradeTable td.Remarks').hide(); //Hide Remarks
-            $('#gradeTable').css({'display':'block'});
-            $('#gradeLegend').css({'display':'table'});
-            $('#graphs').show();
+			html += '<div class="rv-actions">';
+			html +=     '<button type="button" id="btnDetails" aria-expanded="false" aria-controls="gradeTable"> Show Details </button>';
+			html += '</div>';
 
+			$result.html(html);
+			$('body').addClass('rv-has-result');
 
-        } else {
+			highlightNotApplicable();
 
-            button.val('Show Details');
-            searchResult.find('#gradeTable th, #gradeTable td').not('.Term, .LectureTermGradeE, .LabTermGradeE').hide(); //Hide class except
-            searchResult.find('#gradeTable th.Remarks, #gradeTable td.Remarks').show(); //Show Remarks
-            $('#gradeTable').css({'display':'table'});
-            $('#gradeLegend').css({'display':'none'});
-            $('#graphs').hide();
-            $('#graphOption option:first').prop('selected', true);
-            $('#img-container').html('');
-            
-        }
+		}
 
-    });
+		function renderTermMenu(terms) {
 
-    $('#graphs').on('change', '#graphOption', function() {
+			if (!terms.length) {
 
-        const optx = $(this);
+				$graphs.empty();
+				return;
 
-        var the_image = graphs + optx.val();
-        var img = new Image();
+			}
 
-        img.onload = function() {
+			var html = '';
 
-            $('#img-container').html('<img src="' + the_image + '">');
+			html += '<form id="graphForm" class="rv-field">';
+			html +=     '<label class="rv-field__label" for="graphOption"> Select Term Statistics </label>';
+			html +=     '<select id="graphOption" class="rv-control">';
+			html +=         '<option value="" disabled selected> [Select Term] </option>';
 
-        };
+			$.each(terms, function (i, item) {
 
-        img.onerror = function() {
+				html += '<option value="' + escapeHtml(item['Graphs']) + '">' + escapeHtml(item['Term']) + '</option>';
 
-            $('#img-container').html('<h6 style="text-align: center;" class="text-danger"> Not yet available </h6>');
+			});
 
-        };
+			html +=     '</select>';
+			html += '</form>';
 
-        // Start loading the image
-        img.src = the_image;
-        
-    });
+			$graphs.html(html);
 
-    // Functions
-    function emailNotFound() {
+		}
 
-        $('#searchResult').html('<h3 class="text-danger text-md">Pass Key Not Found</h3>');
-        $('#graphs').hide();
-        $('#img-container').html('');
+		function clearResults() {
 
-    }
+			$result.empty();
+			$graphs.empty();
+			$image.empty();
+			$('body').removeClass('rv-has-result');
 
-    function decimal_places(value) {
+		}
 
-        if (!isNaN(value)) {
+		/* -- Details toggle ----------------------------------------------- */
 
-            return parseFloat(value).toFixed(2);
+		function setDetailsOpen(open) {
 
-        } else {
+			$('body').toggleClass('rv-details-open', open);
 
-            return value;
+			$('#btnDetails')
+				.attr('aria-expanded', open ? 'true' : 'false')
+				.text(open ? ' Hide Details ' : ' Show Details ');
 
-        }
+			if (!open) {
 
-    }
+				$('#graphOption').prop('selectedIndex', 0);
+				$image.empty();
 
-    function clean_key(value) {
+			}
 
-        var the_key = value;
+		}
 
-        return the_key.replace(/[\s()=%/]+/g,''); //remove spaces and characters (special)
+		/* -- Events ------------------------------------------------------- */
 
-    }
+		$('#gradeForm').on('submit', function (event) {
 
-    function highlight_na() {
+			/* Mobile keyboards show a Go / Search key: never reload the page. */
+			event.preventDefault();
+			window.clearTimeout(typingTimer);
+			performSearch();
 
-        $("#searchResult td:contains('N/A')").attr("data-color", "muted");
+		});
 
-    }
+		$input.on('input', function () {
 
-});
+			window.clearTimeout(typingTimer);
+			typingTimer = window.setTimeout(performSearch, TYPING_DELAY);
+
+		});
+
+		$course.on('change', function () {
+
+			window.clearTimeout(typingTimer);
+			performSearch();
+
+		});
+
+		$result.on('click', '#btnDetails', function () {
+
+			setDetailsOpen($(this).attr('aria-expanded') !== 'true');
+
+		});
+
+		$graphs.on('change', '#graphOption', function () {
+
+			var source = GRAPH_DIR + $(this).val();
+			var image  = new Image();
+
+			$image.html('<p class="rv-chart-msg"> Loading chart… </p>');
+
+			image.onload = function () {
+
+				$image.html('<img src="' + escapeHtml(source) + '" alt="Class statistics for the selected term">');
+
+			};
+
+			image.onerror = function () {
+
+				$image.html('<p class="rv-chart-msg rv-chart-msg--empty"> Not yet available </p>');
+
+			};
+
+			image.src = source;
+
+		});
+
+		/* -- Helpers ------------------------------------------------------ */
+
+		function setStatus(message, isError) {
+
+			$status
+				.text(message)
+				.toggleClass('is-shown', message !== '')
+				.toggleClass('is-error', !!isError);
+
+		}
+
+		function columnClasses(col) {
+
+			var classes = ['rv-col-' + cleanKey(col.key), 'rv-g-' + col.group];
+
+			if (col.mode === 'brief')  { classes.push('rv-col-brief'); }
+			if (col.mode === 'detail') { classes.push('rv-col-detail'); }
+
+			return classes.join(' ');
+
+		}
+
+		function valueColorAttr(col, value) {
+
+			return col.equiv ? colorAttr(value) : '';
+
+		}
+
+		function colorAttr(value) {
+
+			var number = parseFloat(value);
+
+			if (number === 4) { return ' data-color="orange"'; }
+			if (number === 5) { return ' data-color="red"'; }
+
+			return '';
+
+		}
+
+		function fullName(student) {
+
+			return trim((student['First Name'] || '') + ' ' + (student['Last Name'] || ''));
+
+		}
+
+		function overallRating(rows) {
+
+			/* Only one term row carries the rating; every other row holds a
+			   placeholder ("-", "N/A", …). Scan backwards and skip those, so
+			   the badge shows the real figure no matter which term declares
+			   it — and stays hidden while the course is still incomplete.   */
+			for (var i = rows.length - 1; i >= 0; i--) {
+
+				var rating = rows[i]['Overall Rating'];
+
+				if (!isPlaceholder(rating)) {
+
+					return decimalPlaces(rating);
+
+				}
+
+			}
+
+			return '';
+
+		}
+
+		function isPlaceholder(value) {
+
+			if (value === undefined || value === null) { return true; }
+
+			/* A rating is always numeric; anything else ("-", "--", "N/A",
+			   "TBA", a blank cell) means "not published yet".               */
+			var text = trim(value);
+
+			return text === '' || isNaN(text);
+
+		}
+
+		function decimalPlaces(value) {
+
+			if (value === undefined || value === null || value === '') { return ''; }
+
+			if (!isNaN(value)) { return parseFloat(value).toFixed(2); }
+
+			return String(value);
+
+		}
+
+		function cleanKey(value) {
+
+			return String(value).replace(/[^A-Za-z0-9]+/g, '');
+
+		}
+
+		function normalize(value) {
+
+			return trim(value).toLowerCase();
+
+		}
+
+		function trim(value) {
+
+			return String(value === undefined || value === null ? '' : value).replace(/^\s+|\s+$/g, '');
+
+		}
+
+		function escapeHtml(value) {
+
+			return String(value === undefined || value === null ? '' : value)
+				.replace(/&/g, '&amp;')
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;')
+				.replace(/"/g, '&quot;')
+				.replace(/'/g, '&#39;');
+
+		}
+
+		function highlightNotApplicable() {
+
+			$result.find('td').filter(function () {
+
+				return trim($(this).text()) === 'N/A';
+
+			}).attr('data-color', 'muted');
+
+		}
+
+	});
+
+}(jQuery));
