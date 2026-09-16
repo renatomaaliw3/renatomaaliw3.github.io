@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 <meta name="robots" content="index, follow">
 <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="icon" type="image/png" href="mediapub/s-favicon.ico">
 <link rel=canonical href=http://renatomaaliw3.github.io/>
 
@@ -47,6 +47,385 @@
 <!--end::Layout Themes-->	<style>
 		body {color: #000; }
 		.text-break {white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
+
+		/* ============================================================
+		   CEN PUBLICATIONS PAGE — visual refresh (scoped to this page)
+		   ============================================================ */
+
+		:root {
+			--cen-green: #0c3a1e;
+			--cen-green-dk: #06210f;
+			--cen-maroon: #7f1919;
+			--cen-maroon-dk: #591212;
+			--cen-gold: #e6b84a;
+			--cen-ink: #232323;
+			--cen-muted: #666f6b;
+			--cen-line: #e3e0d8;
+			--cen-card: #ffffff;
+			--cen-page-bg: #eef1ee;
+			--cen-chip: #f4f1e9;
+			--cen-radius-lg: 16px;
+			--cen-radius-md: 10px;
+			--cen-shadow-sm: 0 1px 3px rgba(20,20,20,.08);
+			--cen-shadow-md: 0 10px 26px rgba(20,20,20,.10);
+		}
+
+		html {scroll-behavior: smooth;}
+
+		/* the shared bundle sets body{display:flex; flex-direction:column; justify-content:space-between}
+		   which strands the "Last Updated" footer paragraph off-screen. Restore normal block flow. */
+		body {display: block !important; background: var(--cen-page-bg);}
+
+		a[name] {scroll-margin-top: 140px;}
+		@media (max-width: 576px) {
+			a[name] {scroll-margin-top: 20px;}
+		}
+
+		/* ---------- Hero header ---------- */
+
+		#MBG-CV-BIO-HEADER.cen-hero {
+			text-align: center !important;
+			color: #fff;
+			background: radial-gradient(120% 160% at 15% 0%, #164a29 0%, var(--cen-green) 45%, var(--cen-green-dk) 100%);
+			border-radius: var(--cen-radius-lg) var(--cen-radius-lg) 0 0;
+			margin: -1.25rem -1.25rem 2rem -1.25rem;
+			padding: 2.5rem 1.25rem 2.25rem;
+		}
+		@media (min-width: 768px) {
+			#MBG-CV-BIO-HEADER.cen-hero {
+				margin: -2.5rem -2.5rem 2.75rem -2.5rem;
+				padding: 3.25rem 2.5rem 2.75rem;
+			}
+		}
+		.cen-hero-eyebrow {
+			margin: 0 0 .5rem;
+			font-size: .78rem;
+			font-weight: 600;
+			letter-spacing: .18em;
+			text-transform: uppercase;
+			color: var(--cen-gold);
+		}
+		.cen-hero .main-title {
+			color: #fff !important;
+			font-size: clamp(1.5rem, 4.6vw, 2.5rem);
+		}
+		.cen-hero .main-header {
+			color: var(--cen-gold) !important;
+			font-size: clamp(1.2rem, 3.6vw, 2.1rem);
+		}
+		.cen-hero-address {
+			margin-top: 0 !important;
+			font-size: clamp(.95rem, 2.2vw, 1.15rem);
+			font-weight: 400;
+			color: rgba(255,255,255,.8);
+		}
+		.cen-hero-tagline {
+			margin: 1.5rem 0 0;
+			font-size: .95rem;
+			color: rgba(255,255,255,.92);
+		}
+		.cen-badge {
+			display: inline-block;
+			padding: .5rem 1.1rem;
+			margin-bottom: .65rem;
+			background: rgba(255,255,255,.1);
+			border: 1px solid rgba(255,255,255,.22);
+			border-radius: 999px;
+			font-weight: 700;
+		}
+		.cen-hero-tagline a {
+			color: var(--cen-gold);
+			font-weight: 600;
+			text-decoration: underline;
+			text-underline-offset: .15em;
+		}
+		.cen-hero-tagline a:hover {color: #fff;}
+
+		/* ---------- Quick stats + search toolbar ---------- */
+
+		.cen-toolbar {
+			position: sticky;
+			top: 0;
+			z-index: 20;
+			background: var(--cen-card);
+			border: 1px solid var(--cen-line);
+			border-radius: var(--cen-radius-md);
+			padding: 1rem 1.1rem;
+			margin: 0 0 2rem;
+			box-shadow: var(--cen-shadow-sm);
+		}
+		@media (max-width: 576px) {
+			.cen-toolbar {position: static;}
+		}
+		.cen-stats {
+			display: flex;
+			flex-wrap: wrap;
+			gap: .5rem;
+			margin: 0 0 .85rem;
+			padding: 0;
+			list-style: none;
+		}
+		.cen-stats a {
+			display: inline-flex;
+			align-items: center;
+			gap: .4em;
+			padding: .35rem .8rem;
+			background: var(--cen-chip);
+			border: 1px solid var(--cen-line);
+			border-radius: 999px;
+			font-size: .8rem;
+			font-weight: 600;
+			color: var(--cen-green);
+			text-decoration: none;
+			transition: background .15s, color .15s, border-color .15s;
+		}
+		.cen-stats a .n {color: var(--cen-maroon); font-weight: 700;}
+		.cen-stats a:hover {background: var(--cen-green); border-color: var(--cen-green); color: #fff;}
+		.cen-stats a:hover .n {color: var(--cen-gold);}
+		.cen-search {position: relative;}
+		.cen-search input {
+			width: 100%;
+			padding: .65rem 2.5rem .65rem .95rem;
+			border: 1px solid var(--cen-line);
+			border-radius: 8px;
+			font-size: .95rem;
+			font-family: inherit;
+			color: var(--cen-ink);
+			background: #fff;
+		}
+		.cen-search input:focus {
+			outline: none;
+			border-color: var(--cen-green);
+			box-shadow: 0 0 0 3px rgba(12,58,30,.14);
+		}
+		.cen-search input[type="search"]::-webkit-search-cancel-button {
+			-webkit-appearance: none;
+			appearance: none;
+		}
+		.cen-search-clear {
+			position: absolute;
+			right: .4rem;
+			top: 50%;
+			transform: translateY(-50%);
+			border: none;
+			background: transparent;
+			font-size: 1.35rem;
+			line-height: 1;
+			color: var(--cen-muted);
+			cursor: pointer;
+			padding: .25rem .5rem;
+		}
+		.cen-search-clear:hover {color: var(--cen-maroon);}
+		.cen-search-status {
+			margin: .6rem 0 0;
+			font-size: .82rem;
+			color: var(--cen-muted);
+		}
+		.cen-no-results {
+			padding: 2rem 1rem;
+			text-align: center;
+			color: var(--cen-muted);
+			font-size: .95rem;
+			border: 1px dashed var(--cen-line);
+			border-radius: var(--cen-radius-md);
+		}
+
+		/* ---------- Section + sub-section headers ---------- */
+
+		h2.main-header.border-top {
+			border-top: 1px solid var(--cen-line) !important;
+			padding: 2.5rem 0 0 1rem !important;
+			margin: 0 0 1.75rem !important;
+			position: relative;
+			font-size: clamp(1.35rem, 3.2vw, 1.85rem);
+			letter-spacing: .03em;
+		}
+		h2.main-header.border-top::before {
+			content: "";
+			position: absolute;
+			left: 0; top: 2.5rem; bottom: 0;
+			width: 5px;
+			border-radius: 3px;
+			background: linear-gradient(var(--cen-green), var(--cen-maroon));
+		}
+		.sub-header {font-size: 1.3rem;}
+		.sub-header em {
+			font-style: normal;
+			font-size: .78rem;
+			font-weight: 700;
+			color: var(--cen-maroon);
+			background: var(--cen-chip);
+			padding: .15rem .6rem;
+			border-radius: 999px;
+			margin-left: .5rem;
+			vertical-align: middle;
+		}
+		#indexing {
+			display: inline-block !important;
+			margin: .1rem 0 1rem !important;
+			padding: .3rem .75rem;
+			background: #fff7e2;
+			border: 1px solid #ecd9a3;
+			border-radius: 8px;
+			font-size: .82rem;
+			color: #7a5210 !important;
+		}
+		h5.d-date {
+			background: var(--cen-chip);
+			border-left: 4px solid var(--cen-green);
+			padding: .55rem 1rem !important;
+			border-radius: 0 8px 8px 0;
+			margin: 2rem 0 1rem !important;
+			font-size: 1rem;
+		}
+		h5.d-date:first-of-type {margin-top: .5rem !important;}
+		.per-date-count {color: var(--cen-maroon);}
+
+		/* ---------- Publication list cards ---------- */
+
+		ol.research-list {
+			list-style: none;
+			counter-reset: cen-pub;
+			margin: 0 0 1.5rem;
+			padding-left: 0;
+		}
+		ol.research-list > li {
+			counter-increment: cen-pub;
+			position: relative;
+			background: var(--cen-card);
+			border: 1px solid var(--cen-line);
+			border-radius: var(--cen-radius-md);
+			padding: 1.1rem 1.15rem 1.25rem 3.35rem;
+			margin: 0 0 1rem;
+			box-shadow: var(--cen-shadow-sm);
+			transition: box-shadow .15s ease, transform .15s ease;
+		}
+		ol.research-list > li:hover {
+			box-shadow: var(--cen-shadow-md);
+			transform: translateY(-1px);
+		}
+		ol.research-list > li::before {
+			content: counter(cen-pub);
+			position: absolute;
+			left: 1rem; top: 1.1rem;
+			width: 2rem; height: 2rem;
+			border-radius: 50%;
+			background: var(--cen-green);
+			color: #fff;
+			font-weight: 700;
+			font-size: .82rem;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			box-shadow: var(--cen-shadow-sm);
+		}
+		.research-list p.mb-3 {
+			text-align: justify;
+			line-height: 1.65;
+			margin-bottom: .65rem;
+			overflow-wrap: anywhere;
+		}
+		.research-list .meta-label {
+			font-weight: 700;
+			color: var(--cen-maroon);
+		}
+		.research-list a[target="_blank"] {
+			display: inline-flex;
+			align-items: center;
+			padding: .15rem .7rem;
+			margin: .15rem .15rem .15rem 0;
+			background: var(--cen-chip);
+			border: 1px solid var(--cen-line);
+			border-radius: 999px;
+			color: var(--cen-green);
+			font-size: .82rem;
+			font-weight: 600;
+			text-decoration: none;
+			overflow-wrap: anywhere;
+			transition: background .15s, color .15s, box-shadow .15s;
+		}
+		.research-list a[target="_blank"]:hover {
+			background: var(--cen-green);
+			color: #fff;
+			box-shadow: var(--cen-shadow-sm);
+		}
+		.research-list .cen-nolink {
+			color: #9a9a9a;
+			font-style: italic;
+			font-size: .85rem;
+		}
+		.indexed, .indexed_ {
+			display: inline-block;
+			margin-top: .4rem;
+			padding: .22rem .7rem;
+			border-radius: 999px;
+			font-size: .78rem;
+			font-weight: 700;
+		}
+		.indexed {background: #e3f5e9; color: #1c6b3a;}
+		.indexed_ {background: #fdf1da; color: #8a5a12;}
+
+		/* ---------- SDGs ---------- */
+
+		.sdgs h6 {color: var(--cen-muted);}
+		.sdgs-icons > li > img {
+			width: 84px;
+			border-radius: 6px;
+			box-shadow: var(--cen-shadow-sm);
+		}
+		@media (max-width: 420px) {
+			.sdgs-icons > li > img {width: 68px;}
+		}
+
+		/* ---------- Floating section nav ---------- */
+
+		.navigation {
+			right: 1rem;
+			bottom: 1rem;
+			background: linear-gradient(165deg, var(--cen-green), var(--cen-green-dk));
+			padding: .55rem;
+			border-radius: 14px;
+			box-shadow: 0 12px 30px rgba(0,0,0,.28);
+		}
+		.cen-nav-toggle {
+			display: none;
+			width: 100%;
+			background: transparent;
+			border: none;
+			color: #fff;
+			font-size: 1.2rem;
+			padding: .35rem;
+			cursor: pointer;
+		}
+		.navigation a:link, .navigation a:visited {
+			display: block;
+			padding: .45rem .9rem;
+			border-radius: 8px;
+			font-size: .8rem;
+			font-weight: 500;
+			white-space: nowrap;
+			color: rgba(255,255,255,.88);
+		}
+		.navigation a:hover, .navigation a:active {
+			background: rgba(255,255,255,.12);
+			color: var(--cen-gold);
+		}
+		.navigation a.cen-active {
+			background: var(--cen-maroon);
+			color: #fff;
+		}
+		.navigation .cen-nav-top {
+			border-top: 1px solid rgba(255,255,255,.16);
+			margin-top: .2rem;
+			padding-top: .6rem !important;
+		}
+		@media (max-width: 576px) {
+			.cen-nav-toggle {display: block;}
+			.navigation {right: .65rem; bottom: .65rem; padding: .45rem;}
+			.navigation.cen-collapsed ol.toc {display: none;}
+		}
+
+		p.py-8.text-center {color: var(--cen-muted); font-size: .8rem !important;}
 	</style>
 </head>
 <body class="bg-secondary p-md-10">
@@ -55,11 +434,25 @@
 	<div class="bg-white mx-auto w-100 p-5 p-md-10" style="max-width: 960px">
 
 		<!------------------ HEADER ------------------>
-		<div id="MBG-CV-BIO-HEADER" class="text-left text-md-center">
-			<h1 class="mb-0 main-title font-weight-boldest" style="font-size: 2.5rem; margin: 0; padding: 0;">Southern Luzon State University</h1>
-			<h2 class="main-header font-weight-boldest" style="margin: 0; padding: 0; font-size: 2.25rem;"> College of Engineering </h2>
-			<h2 style="margin-top: 0; padding: 0; font-size: 1.25rem;"> Lucban, Quezon, 4328, Philippines </h2><br>
-			<span class="font-weight-boldest h6"> "We are open for research collaborations!"<br> Message us at <em style="color: blue;"> slsucen@slsu.edu.ph  or facebook/censlsu </em></span>
+		<div id="MBG-CV-BIO-HEADER" class="cen-hero text-left text-md-center">
+			<p class="cen-hero-eyebrow">Research &amp; Innovation</p>
+			<h1 class="mb-0 main-title font-weight-boldest">Southern Luzon State University</h1>
+			<h2 class="main-header font-weight-boldest">College of Engineering</h2>
+			<h2 class="cen-hero-address">Lucban, Quezon, 4328, Philippines</h2>
+			<p class="cen-hero-tagline">
+				<span class="cen-badge">"We are open for research collaborations!"</span><br>
+				Message us at <a href="mailto:slsucen@slsu.edu.ph">slsucen@slsu.edu.ph</a> or <a href="https://facebook.com/censlsu" target="_blank" rel="noopener">facebook/censlsu</a>
+			</p>
+		</div>
+
+		<!------------------ QUICK STATS + SEARCH ------------------>
+		<div class="cen-toolbar" id="cenToolbar">
+			<ul class="cen-stats" id="cenStats"></ul>
+			<div class="cen-search">
+				<input type="search" id="cenSearchInput" placeholder="Search publications by author, title, or keyword…" aria-label="Search publications">
+				<button type="button" id="cenSearchClear" class="cen-search-clear" aria-label="Clear search" hidden>&times;</button>
+			</div>
+			<p class="cen-search-status" id="cenSearchStatus" hidden></p>
 		</div>
 
 		<!------------------ PATENTS ------------------>
@@ -95,7 +488,7 @@
 
 						</article>
 						<div class="sdgs">
-							<h6> Sustainable Development Goals (SDGs) </h2>
+							<h6> Sustainable Development Goals (SDGs) </h6>
 							<ul class="sdgs-icons">
 								<li><img src="mediapub/goal-09.png"></li>
 								<li><img src="mediapub/goal-11.png"></li>
@@ -118,7 +511,7 @@
 
 						</article>
 						<div class="sdgs">
-							<h6> Sustainable Development Goals (SDGs) </h2>
+							<h6> Sustainable Development Goals (SDGs) </h6>
 							<ul class="sdgs-icons">
 								<li><img src="mediapub/goal-09.png"></li>
 								<li><img src="mediapub/goal-11.png"></li>
@@ -140,7 +533,7 @@
 
 						</article>
 						<div class="sdgs">
-							<h6> Sustainable Development Goals (SDGs) </h2>
+							<h6> Sustainable Development Goals (SDGs) </h6>
 							<ul class="sdgs-icons">
 								<li><img src="mediapub/goal-09.png"></li>
 								<li><img src="mediapub/goal-11.png"></li>
@@ -162,7 +555,7 @@
 
 						</article>
 						<div class="sdgs">
-							<h6> Sustainable Development Goals (SDGs) </h2>
+							<h6> Sustainable Development Goals (SDGs) </h6>
 							<ul class="sdgs-icons">
 								<li><img src="mediapub/goal-03.png"></li>
 								<li><img src="mediapub/goal-05.png"></li>
@@ -202,7 +595,7 @@
 
 						</article>
 						<div class="sdgs">
-							<h6> Sustainable Development Goals (SDGs) </h2>
+							<h6> Sustainable Development Goals (SDGs) </h6>
 							<ul class="sdgs-icons">
 								<li><img src="mediapub/goal-09.png"></li>
 								<li><img src="mediapub/goal-11.png"></li>
@@ -252,7 +645,7 @@
 
 					</article>
 					<div class="sdgs">
-						<h6> Sustainable Development Goals (SDGs) </h2>
+						<h6> Sustainable Development Goals (SDGs) </h6>
 						<ul class="sdgs-icons">
 							<li><img src="mediapub/goal-09.png"></li>
 						</ul>
@@ -300,7 +693,7 @@
 
 					 </article>
 					 <div class="sdgs">
-						<h6> Sustainable Development Goals (SDGs) </h2>
+						<h6> Sustainable Development Goals (SDGs) </h6>
 						<ul class="sdgs-icons">
 							<li><img src="mediapub/goal-03.png"></li>
 							<li><img src="mediapub/goal-04.png"></li>
@@ -326,7 +719,7 @@
 
 					 </article>
 					 <div class="sdgs">
-						 <h6> Sustainable Development Goals (SDGs) </h2>
+						 <h6> Sustainable Development Goals (SDGs) </h6>
 						 <ul class="sdgs-icons">
 							 <li><img src="mediapub/goal-04.png"></li>
 							 <li><img src="mediapub/goal-09.png"></li>
@@ -350,7 +743,7 @@
 
 					 </article>
 					 <div class="sdgs">
-						 <h6> Sustainable Development Goals (SDGs) </h2>
+						 <h6> Sustainable Development Goals (SDGs) </h6>
 						 <ul class="sdgs-icons">
 							 <li><img src="mediapub/goal-04.png"></li>
 							 <li><img src="mediapub/goal-09.png"></li>
@@ -374,7 +767,7 @@
 
 						</article>
 						<div class="sdgs">
-							<h6> Sustainable Development Goals (SDGs) </h2>
+							<h6> Sustainable Development Goals (SDGs) </h6>
 							<ul class="sdgs-icons">
 								<li><img src="mediapub/goal-04.png"></li>
 								<li><img src="mediapub/goal-09.png"></li>
@@ -397,7 +790,7 @@
 
 						</article>
 						<div class="sdgs">
-							<h6> Sustainable Development Goals (SDGs) </h2>
+							<h6> Sustainable Development Goals (SDGs) </h6>
 							<ul class="sdgs-icons">
 								<li><img src="mediapub/goal-03.png"></li>
 								<li><img src="mediapub/goal-09.png"></li>
@@ -422,7 +815,7 @@
 
 						</article>
 						<div class="sdgs">
-							<h6> Sustainable Development Goals (SDGs) </h2>
+							<h6> Sustainable Development Goals (SDGs) </h6>
 							<ul class="sdgs-icons">
 								<li><img src="mediapub/goal-04.png"></li>
 							</ul>
@@ -444,7 +837,7 @@
 
 						</article>
 						<div class="sdgs">
-							<h6> Sustainable Development Goals (SDGs) </h2>
+							<h6> Sustainable Development Goals (SDGs) </h6>
 							<ul class="sdgs-icons">
 								<li><img src="mediapub/goal-04.png"></li>
 								<li><img src="mediapub/goal-09.png"></li>
@@ -467,7 +860,7 @@
 
 						</article>
 						<div class="sdgs">
-							<h6> Sustainable Development Goals (SDGs) </h2>
+							<h6> Sustainable Development Goals (SDGs) </h6>
 							<ul class="sdgs-icons">
 								<li><img src="mediapub/goal-04.png"></li>
 								<li><img src="mediapub/goal-09.png"></li>
@@ -523,7 +916,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -550,7 +943,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-04.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -587,7 +980,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -614,7 +1007,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-03.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -651,7 +1044,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-02.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -679,7 +1072,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -708,7 +1101,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-02.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -738,7 +1131,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-08.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -777,7 +1170,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -806,7 +1199,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-04.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -836,7 +1229,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-04.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -866,7 +1259,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-04.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -896,7 +1289,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-04.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -926,7 +1319,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-02.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -967,7 +1360,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-04.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -1007,7 +1400,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -1039,7 +1432,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -1083,7 +1476,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -1127,7 +1520,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -1171,7 +1564,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-03.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -1205,7 +1598,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-05.png"></li>
 										<li><img src="mediapub/goal-09.png"></li>
@@ -1250,7 +1643,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-11.png"></li>
 										<li><img src="mediapub/goal-13.png"></li>
@@ -1292,7 +1685,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 									</ul>
@@ -1322,7 +1715,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -1354,7 +1747,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -1388,7 +1781,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -1432,7 +1825,7 @@
 
 								</p>
 								<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-09.png"></li>
 										<li><img src="mediapub/goal-11.png"></li>
@@ -1478,7 +1871,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -1511,7 +1904,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -1544,7 +1937,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -1587,7 +1980,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -1620,7 +2013,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -1653,7 +2046,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -1696,7 +2089,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -1729,7 +2122,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -1762,7 +2155,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -1795,7 +2188,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -1838,7 +2231,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -1881,7 +2274,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -1926,7 +2319,7 @@
 							</article>
 		
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -1961,7 +2354,7 @@
 							</article>
 		
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -1997,7 +2390,7 @@
 							</article>
 		
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2031,7 +2424,7 @@
 							</article>
 		
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2075,7 +2468,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2111,7 +2504,7 @@
 							</article>
 
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-17.png"></li>
@@ -2146,7 +2539,7 @@
 							</article>
 
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-17.png"></li>
@@ -2181,7 +2574,7 @@
 							</article>
 
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-17.png"></li>
@@ -2214,7 +2607,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -2248,7 +2641,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2283,7 +2676,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-17.png"></li>
@@ -2325,7 +2718,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2359,7 +2752,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2403,7 +2796,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-02.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -2438,7 +2831,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-02.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -2474,7 +2867,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -2511,7 +2904,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -2555,7 +2948,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-04.png"></li>
@@ -2589,7 +2982,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2637,7 +3030,7 @@
 
 
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2674,7 +3067,7 @@
 
 
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2718,7 +3111,7 @@
 									
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2753,7 +3146,7 @@
 									
 							</article>
 							<div class="sdgs">
-									<h6> Sustainable Development Goals (SDGs) </h2>
+									<h6> Sustainable Development Goals (SDGs) </h6>
 									<ul class="sdgs-icons">
 										<li><img src="mediapub/goal-03.png"></li>
 										<li><img src="mediapub/goal-04.png"></li>
@@ -2787,7 +3180,7 @@
 								
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -2820,7 +3213,7 @@
 							</article>
 
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2863,7 +3256,7 @@
 								
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2896,7 +3289,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -2927,7 +3320,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -2970,7 +3363,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3005,7 +3398,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3039,7 +3432,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3072,7 +3465,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3105,7 +3498,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3138,7 +3531,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3171,7 +3564,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3205,7 +3598,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3240,7 +3633,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3284,7 +3677,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3318,7 +3711,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3359,7 +3752,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 								</ul>
@@ -3391,7 +3784,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 								</ul>
@@ -3423,7 +3816,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3457,7 +3850,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-13.png"></li>
@@ -3501,7 +3894,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3536,7 +3929,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3570,7 +3963,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3604,7 +3997,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3637,7 +4030,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3681,7 +4074,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-05.png"></li>
@@ -3717,7 +4110,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-13.png"></li>
@@ -3761,7 +4154,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3795,7 +4188,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3828,7 +4221,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -3873,7 +4266,7 @@
 								
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3906,7 +4299,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-02.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3940,7 +4333,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -3973,7 +4366,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4006,7 +4399,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4049,7 +4442,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4084,7 +4477,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -4128,7 +4521,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -4163,7 +4556,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -4199,7 +4592,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4232,7 +4625,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4266,7 +4659,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4300,7 +4693,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4333,7 +4726,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-05.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4367,7 +4760,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-05.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4402,7 +4795,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -4445,7 +4838,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -4491,7 +4884,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-10.png"></li>
@@ -4526,7 +4919,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -4559,7 +4952,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4604,7 +4997,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4639,7 +5032,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -4672,7 +5065,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -4716,7 +5109,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-08.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4749,7 +5142,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 								</ul>
@@ -4791,7 +5184,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -4824,7 +5217,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4860,7 +5253,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-04.png"></li>
@@ -4905,7 +5298,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-02.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4941,7 +5334,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -4975,7 +5368,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5009,7 +5402,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5045,7 +5438,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5088,7 +5481,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5132,7 +5525,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5177,7 +5570,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-08.png"></li>
@@ -5212,7 +5605,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5255,7 +5648,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5298,7 +5691,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -5341,7 +5734,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 									<li><img src="mediapub/goal-11.png"></li>
@@ -5385,7 +5778,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5426,7 +5819,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5462,7 +5855,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-03.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5509,7 +5902,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5556,7 +5949,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5592,7 +5985,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5629,7 +6022,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-09.png"></li>
 								</ul>
@@ -5663,7 +6056,7 @@
 
 							</article>
 							<div class="sdgs">
-								<h6> Sustainable Development Goals (SDGs) </h2>
+								<h6> Sustainable Development Goals (SDGs) </h6>
 								<ul class="sdgs-icons">
 									<li><img src="mediapub/goal-04.png"></li>
 									<li><img src="mediapub/goal-09.png"></li>
@@ -5687,11 +6080,9 @@
 
 				<h3 class="d-lg-flex justify-content-between mb-3 align-items-center h4">
 					<span class="d-block font-weight-boldest sub-header"> C. Presentations <em id="researchPresentationsCount"></em></span> <!-- Research Presentations -->
-					
+
 				</h3>
 				<em> * CEN Faculty only * </em>
-				<br>
-				<span id="indexing" style="display: inline-block; margin-bottom: 10px; color: brown;"><!-- to be filled in JS --></span>
 
 			</div>
 
@@ -6840,16 +7231,18 @@
 
 	</div>
 
-	<div class="navigation">
-			
-		<ol class="toc">
+	<div class="navigation" id="cenNav">
+
+		<button type="button" id="cenNavToggle" class="cen-nav-toggle" aria-expanded="true" aria-controls="cenNavList" aria-label="Toggle section navigation">&#9776;</button>
+
+		<ol class="toc" id="cenNavList">
 
 			<li><a href="#patent"> Patents </a></li>
 			<li><a href="#ind-design"> Industrial Design </a></li>
 			<li><a href="#book"> Books </a></li>
 			<li><a href="#research"> Articles </a></li>
 			<li><a href="#presentation"> Presentations </a></li>
-			<li><a href="#b2top"> Back to Top </a></li>
+			<li><a href="#b2top" class="cen-nav-top"> &uarr; Back to Top </a></li>
 
 		</ol>
 
@@ -6860,4 +7253,5 @@
 <script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/jsPDF.debug.js"></script>
 <script src="js/publication2.js"></script>
+<script src="js/cen.js"></script>
 </html>
