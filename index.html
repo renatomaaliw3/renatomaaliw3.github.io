@@ -31,59 +31,84 @@
 <link rel=canonical href=http://renatomaaliw3.github.io/>
 
 <!--begin::Fonts-->
-<!--link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/-->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
 <!--end::Fonts-->
-
-<!--begin::Global Theme Styles(used by all pages)-->
-<link href="csspub/plugins.bundle.css" rel="stylesheet" type="text/css"/>
-<link href="csspub/style.bundle.css" rel="stylesheet" type="text/css"/>
-<!--end::Global Theme Styles-->
-
-<!--begin::Layout Themes(used by all pages)-->
-
-<!--end::Layout Themes-->	<style>
-		body {color: #000; }
-		.text-break {white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
-	</style>
+<link href="css/cv.css" rel="stylesheet" type="text/css"/>
+<meta name="color-scheme" content="light dark">
 </head>
+<body>
 <a name="b2top"></a>
-<body class="bg-secondary p-md-10">
+<a class="skip" href="#n-bio">Skip to content</a>
 
+<header class="topnav">
+	<div class="topnav-inner">
+		<a class="brand" href="#b2top">R. R. Maaliw III</a>
+		<nav aria-label="Sections"><ol class="toc">
+			<li><a href="#n-bio">Bio</a></li>
+			<li><a href="#n-profiles">Profiles</a></li>
+			<li><a href="#n-educ">Education</a></li>
+			<li><a href="#n-patents">Patents</a></li>
+			<li><a href="#n-id">Design</a></li>
+			<li><a href="#n-books">Books</a></li>
+			<li><a href="#n-journal">Journals</a></li>
+			<li><a href="#n-book-chapters">Chapters</a></li>
+			<li><a href="#n-conference-papers">Conferences</a></li>
+			<li><a href="#n-presentations">Presentations</a></li>
+			<li><a href="#n-awards">Awards</a></li>
+			<li><a href="#n-experience">Experience</a></li>
+			<li><a href="#n-editorial-services">Editorial</a></li>
+			<li><a href="#n-affiliations">Affiliations</a></li>
+		</ol></nav>
+		<!-- <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle theme">&#9790;</button> -->
+	</div>
+	<div class="progress" aria-hidden="true"></div>
+</header>
 
-	<div class="bg-white mx-auto w-100 p-5 p-md-10" style="max-width: 980px;">
-
-		
-		<!------------------ HEADER ------------------>
-		<div id="CV-BIO-HEADER" class="text-left text-md-center">
-			<h1 class="mb-0 text-uppercase display-4">
-				<span class="font-weight-boldest">RENATO R. MAALIW III <!--, <em>DIT</em> --></span> 
-
-				<!-- <span class="font-italic h2">DIT</span>, <span class="font-italic h2">LPT</span> -->
-
-			</h1>
-			<p class="mb-0"><strong> Professor I</strong> | College of Engineering | Southern Luzon State University (SLSU) </p>
-			<p class="mb-0"><strong> 2026 Top 2% Scientists </strong> | Stanford University & Elsevier (Scopus) </p>
-			<p class="mb-0"><strong> Senior Member </strong> | Institute of Electrical and Electronics Engineers (IEEE) </p>
-			<p class="mb-0"><strong> Regular Member </strong> | National Research Council of the Philippines (NRCP) </p>
-			<p class="mb-0"><strong> Licensed Professional Teacher</strong> | Professional Regulation Commission (PRC) </p>
-			<p class="mb-0"><strong> Former Dean </strong> | College of Engineering | SLSU </p>
-			<p class="mb-0"><strong> 8-Time IEEE-Sanctioned Conference Best Paper Awardee </strong> | IEEE </p>
-			<p class="mb-0"><strong> 4-Time SLSU Researcher of the Year (Hall of Famer)</strong> | SLSU </p>
-			<p class="mb-0"><strong> Huawei Certified ICT Associate in Artificial Intelligence </strong> | Huawei Technologies, Inc. </p>
-			<p class="mb-0"><strong> Huawei Certified Academy Instructor </strong> | Huawei Technologies, Inc. </p>
-			<p class="mb-0"><strong> Level 1 (Passport) IT Professional</strong> | Philippine National Information Technology Standards </p>
-
-			<br>
-
-			<p class="mb-0"> Office Address: Southern Luzon State University, Quezon Avenue, Brgy. Kulapi, Lucban, Quezon, Philippines</p>
-			<p class="mb-0">Website: https://renatomaaliw3.github.io | Email: rmaaliw@slsu.edu.ph</p>
-			<br>
-
-			<p style="font-size: 0.85rem; color: #1036fa;"></strong><em> "I am looking for collaborations in any domain, as I worked with a common entity in research - data." </em></strong></p>
-
+<section class="hero" id="CV-BIO-HEADER">
+	<div class="hero-inner">
+		<div class="monogram" aria-hidden="true">RM</div>
+		<div>
+			<h1>Renato R. Maaliw III</h1>
+			<p class="role"><strong>Professor I</strong> &middot; College of Engineering &middot; Southern Luzon State University</p>
+			<p class="role">Machine Learning &amp; Analytics &middot; Web Technologies &middot; Software Engineering</p>
+			<p class="quote">&ldquo;I am looking for collaborations in any domain, as I worked with a common entity in research &ndash; data.&rdquo;</p>
+			<div class="hero-actions">
+				<a class="btn primary" href="mailto:rmaaliw@slsu.edu.ph">Email me</a>
+				<a class="btn" href="https://scholar.google.com/citations?user=GGytuqAAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener">Google Scholar</a>
+				<a class="btn" href="https://orcid.org/0000-0002-7310-2708" target="_blank" rel="noopener">ORCID</a>
+				<a class="btn" href="#" onclick="window.print();return false;">Print / Save PDF</a>
+			</div>
 		</div>
+	</div>
+</section>
+
+<main class="cv">
+
+	<div class="stats" id="stats" aria-label="Output at a glance"></div>
+
+	<section class="credentials" aria-labelledby="hl">
+		<h2 id="hl">Highlights</h2>
+		<div class="cred-grid">
+				<div class="cred"><strong>Professor I</strong><span>College of Engineering · Southern Luzon State University (SLSU)</span></div>
+				<div class="cred"><strong>2026 Top 2% Scientists</strong><span>Stanford University &amp; Elsevier (Scopus)</span></div>
+				<div class="cred"><strong>Senior Member</strong><span>Institute of Electrical and Electronics Engineers (IEEE)</span></div>
+				<div class="cred"><strong>Regular Member</strong><span>National Research Council of the Philippines (NRCP)</span></div>
+				<div class="cred"><strong>Licensed Professional Teacher</strong><span>Professional Regulation Commission (PRC)</span></div>
+				<div class="cred"><strong>Former Dean</strong><span>College of Engineering · SLSU</span></div>
+				<div class="cred"><strong>8-Time IEEE-Sanctioned Conference Best Paper Awardee</strong><span>IEEE</span></div>
+				<div class="cred"><strong>4-Time SLSU Researcher of the Year (Hall of Famer)</strong><span>SLSU</span></div>
+				<div class="cred"><strong>Huawei Certified ICT Associate in Artificial Intelligence</strong><span>Huawei Technologies, Inc.</span></div>
+				<div class="cred"><strong>Huawei Certified Academy Instructor</strong><span>Huawei Technologies, Inc.</span></div>
+				<div class="cred"><strong>Level 1 (Passport) IT Professional</strong><span>Philippine National Information Technology Standards</span></div>
+		</div>
+		<div class="contact">
+			<div><b>Office</b>Southern Luzon State University, Quezon Avenue, Brgy. Kulapi, Lucban, Quezon, Philippines</div>
+			<div><b>Website</b><a href="https://renatomaaliw3.github.io">https://renatomaaliw3.github.io</a></div>
+			<div><b>Email</b><a href="mailto:rmaaliw@slsu.edu.ph">rmaaliw@slsu.edu.ph</a></div>
+		</div>
+	</section>
 
 		<a name="n-bio"></a>
 		<div id="CV-BIO-BODY">
@@ -4750,36 +4775,13 @@
 
 		</div>
 
-	</div>
+</main>
 
-	<div class="navigation">
-			
-		<ol class="toc">
+<p class="foot">Last Updated: <strong>October 12, 2026 (6:00 PM)</strong></p>
+<button class="to-top" type="button" aria-label="Back to top">&uarr;</button>
 
-			<li><a href="#n-bio"> Bio </a></li>
-			<li><a href="#n-profiles"> Online Profiles </a></li>
-			<li><a href="#n-educ"> Education </a></li>
-			<li><a href="#n-patents"> Patents </a></li>
-			<li><a href="#n-id"> Industrial Design </a></li>
-			<li><a href="#n-books"> Books </a></li>
-			<li><a href="#n-journal"> Journal Articles </a></li>
-			<li><a href="#n-book-chapters"> Book Chapters </a></li>
-			<li><a href="#n-conference-papers"> Conference Papers </a></li>
-			<li><a href="#n-presentations"> Presentations </a></li>
-			<li><a href="#n-awards"> Awards </a></li>
-			<li><a href="#n-experience"> Experience </a></li>
-			<li><a href="#n-editorial-services"> Editorial Services </a></li>
-			<li><a href="#n-affiliations"> Affiliations </a></li>
-			<li><a href="#b2top"> Back to Top </a></li>
-
-		</ol>
-
-	</div>
-
-	<p class="py-8 text-center" style="font-size: 0.75rem;"> Last Updated: <span class="font-weight-boldest"> October 8, 2026 (11:00 AM) </span></p>
-
-</body>
 <script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/jsPDF.debug.js"></script>
 <script src="js/publication2.js"></script>
+<script src="js/cv.js"></script>
+</body>
 </html>
