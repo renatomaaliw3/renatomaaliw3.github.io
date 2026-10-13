@@ -1,4 +1,4 @@
-﻿/* Renato R. Maaliw III — CV redesign. Styles the existing markup (article.row, ol.research-list, h2/h3). */
+/* Renato R. Maaliw III — CV redesign. Styles the existing markup (article.row, ol.research-list, h2/h3). */
 :root {
 	/* SLSU seal palette: green (hope/life), gold (light/joy), blue (truth/wisdom), red */
 	--bg: #f3f6f2;
@@ -295,4 +295,54 @@ ol.research-list > li, .section, .credentials, .stat { min-width: 0; }
 	.cv { padding-left: 8px; padding-right: 8px; }
 	.credentials, .section { padding-left: 14px; padding-right: 14px; }
 	h2 { font-size: 20px; gap: 10px; }
+}
+
+/* ================= v4: mobile hamburger navigation ================= */
+.nav-toggle { display: none; }
+@media (max-width: 1024px) {
+	.brand { display: inline-flex; font-size: 14.5px; }
+	.topnav-inner { justify-content: space-between; }
+	.nav-toggle {
+		display: inline-flex; align-items: center; gap: 10px; margin-left: auto; min-height: 40px;
+		padding: 0 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+		color: var(--ink); font: 500 13.5px "Inter", sans-serif; cursor: pointer; max-width: 55%;
+	}
+	.nav-toggle:hover { background: var(--accent-soft); }
+	.nav-cur { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	.burger, .burger::before, .burger::after { display: block; width: 18px; height: 2px; background: currentColor; border-radius: 2px; transition: transform .2s, opacity .2s; }
+	.burger { position: relative; flex: none; }
+	.burger::before, .burger::after { content: ""; position: absolute; left: 0; }
+	.burger::before { top: -6px; } .burger::after { top: 6px; }
+	.menu-open .burger { background: transparent; }
+	.menu-open .burger::before { transform: translateY(6px) rotate(45deg); }
+	.menu-open .burger::after { transform: translateY(-6px) rotate(-45deg); }
+
+	.topnav-inner > nav {
+		position: absolute; left: 0; right: 0; top: 100%; flex: none;
+		background: var(--surface); border-bottom: 1px solid var(--line); box-shadow: var(--shadow);
+		max-height: calc(100vh - 60px); max-height: calc(100dvh - 60px); overflow-y: auto; overscroll-behavior: contain;
+		visibility: hidden; opacity: 0; transform: translateY(-8px); pointer-events: none;
+		transition: opacity .18s, transform .18s, visibility 0s .18s;
+	}
+	.menu-open .topnav-inner > nav { visibility: visible; opacity: 1; transform: none; pointer-events: auto; transition: opacity .18s, transform .18s; }
+	.toc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 12px 14px 16px; overflow: visible; }
+	.toc li { min-width: 0; }
+	.toc a { padding: 12px 14px; border-radius: 10px; font-size: 14.5px; white-space: normal; background: var(--bg); }
+}
+@media (max-width: 380px) { .brand { font-size: 13.5px; } .toc { grid-template-columns: minmax(0, 1fr); } }
+@media print { .nav-toggle { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { .topnav-inner > nav, .burger, .burger::before, .burger::after { transition: none !important; } }
+
+/* desktop: let the section links wrap onto a second row instead of clipping */
+@media (min-width: 1025px) {
+	.topnav-inner { height: auto; min-height: 60px; padding-top: 6px; padding-bottom: 6px; align-items: center; }
+	.topnav-inner > nav { flex: 1; min-width: 0; }
+	.toc { flex-wrap: wrap; overflow: visible; justify-content: flex-end; gap: 2px 2px; }
+	a[name] { top: -130px; }
+}
+/* desktop: 14 links as an even 7 x 2 grid */
+@media (min-width: 1025px) {
+	.topnav-inner > nav { flex: 0 1 780px; margin-left: auto; }
+	.toc { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; justify-content: stretch; }
+	.toc a { text-align: center; padding: 6px 8px; }
 }

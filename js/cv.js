@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
 	var $ = function (s, r) { return (r || document).querySelector(s); };
 	var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
@@ -69,6 +69,20 @@
 		st.appendChild(d);
 	});
 
+	// Mobile menu
+	var navBtn = $('#navBtn'), topnav = $('.topnav'), navCur = $('.nav-cur');
+	function setMenu(open) {
+		topnav.classList.toggle('menu-open', open);
+		navBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+	}
+	if (navBtn) {
+		navBtn.addEventListener('click', function (e) { e.stopPropagation(); setMenu(!topnav.classList.contains('menu-open')); });
+		$$('.toc a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+		document.addEventListener('click', function (e) { if (!topnav.contains(e.target)) setMenu(false); });
+		document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { setMenu(false); navBtn.focus(); } });
+		window.addEventListener('resize', function () { if (window.innerWidth > 1024) setMenu(false); });
+	}
+
 	// Scroll spy, progress bar, back-to-top
 	var links = $$('.toc a'), prog = $('.progress'), top = $('.to-top');
 	var targets = links.map(function (a) { return $(a.getAttribute('href')); });
@@ -78,6 +92,7 @@
 		if (top) top.classList.toggle('show', y > 700);
 		var cur = -1;
 		targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top < 140) cur = i; });
+		if (navCur) navCur.textContent = cur > -1 ? links[cur].textContent : 'Menu';
 		links.forEach(function (a, i) {
 			var on = i === cur; a.classList.toggle('active', on);
 			if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
