@@ -250,3 +250,49 @@ ol.research-list li:hover::before { background: var(--accent); color: #fff; }
 	ol.research-list > li { padding-left: 46px; }
 	ol.research-list > li + li::after { left: 46px; }
 }
+
+/* ================= v3: mobile responsiveness fixes ================= */
+body { overflow-x: clip; max-width: 100%; }
+img { max-width: 100%; height: auto; }
+.topnav-inner > nav { flex: 1; min-width: 0; }
+.toc { -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
+.toc li { flex: none; }
+.hero-inner > div { min-width: 0; }
+.hero h1, .hero .role, .hero .quote, h2, h3 { overflow-wrap: anywhere; }
+article.row, ol.research-list p, .cred, .contact div { overflow-wrap: anywhere; }
+ol.research-list > li, .section, .credentials, .stat { min-width: 0; }
+
+@media (max-width: 900px) {
+	.credentials, .section { padding-left: 24px; padding-right: 24px; }
+	article.row { grid-template-columns: 150px minmax(0, 1fr); gap: 6px 24px; }
+	.cred-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+@media (max-width: 760px) {
+	.hero-inner { grid-template-columns: minmax(0, 1fr); }
+	article.row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+	.credentials, .section { padding: 6px 16px 20px; border-radius: 14px; }
+	.cred-grid { grid-template-columns: minmax(0, 1fr); }
+	.contact { grid-template-columns: minmax(0, 1fr); }
+	.stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+	.stat { padding: 14px 14px 14px 16px; }
+	.stat b { font-size: 28px; }
+	.stat span { font-size: 11.5px; letter-spacing: .04em; }
+	.hero h1 { font-size: clamp(28px, 9vw, 38px); }
+	.hero .role { font-size: 16px; }
+	.hero-actions { gap: 8px; }
+	.btn { padding: 10px 16px; font-size: 13.5px; }
+	#CV-PROFILE-BODY .text-break { white-space: normal !important; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; }
+	ol.research-list > li { margin: 0 -6px; padding: 16px 6px 16px 42px; }
+	ol.research-list > li::before { left: 6px; width: 30px; }
+	ol.research-list > li + li::after { left: 42px; right: 6px; }
+	ol.research-list p { font-size: 14.5px; }
+	.list-collapsed { max-height: 460px; }
+	.more-btn { width: 100%; }
+	.to-top { right: 14px; bottom: 14px; }
+	.toc a { padding: 8px 12px; }
+}
+@media (max-width: 380px) {
+	.cv { padding-left: 8px; padding-right: 8px; }
+	.credentials, .section { padding-left: 14px; padding-right: 14px; }
+	h2 { font-size: 20px; gap: 10px; }
+}
