@@ -1,4 +1,4 @@
-/* Renato R. Maaliw III — CV redesign. Styles the existing markup (article.row, ol.research-list, h2/h3). */
+﻿/* Renato R. Maaliw III â€” CV redesign. Styles the existing markup (article.row, ol.research-list, h2/h3). */
 :root {
 	/* SLSU seal palette: green (hope/life), gold (light/joy), blue (truth/wisdom), red */
 	--bg: #f3f6f2;
@@ -346,3 +346,7 @@ ol.research-list > li, .section, .credentials, .stat { min-width: 0; }
 	.toc { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; justify-content: stretch; }
 	.toc a { text-align: center; padding: 6px 8px; }
 }
+
+/* hero portrait inside the circular monogram frame */
+.monogram { overflow: hidden; padding: 0; flex: none; background: #3a3d44; }
+.monogram img { width: 100%; height: 100%; margin: 0; border-radius: 0; display: block; object-fit: cover; object-position: 50% 0; transform: scale(1.7); transform-origin: 50.5% 0; }
