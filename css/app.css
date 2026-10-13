@@ -658,7 +658,7 @@ body.rv-details-open #graphs { display: block; }
 #img-container:empty { margin-top: 0; }
 
 #img-container img {
-	min-width: 0;
+	min-width: 100%;
 	width: 100%;
 	max-width: 46rem;
 	height: auto;
